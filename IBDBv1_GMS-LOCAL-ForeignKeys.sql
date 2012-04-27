@@ -1,0 +1,188 @@
+--
+-- FOREIGN KEY CONSTRAINTS FOR ICIS GMS v5.6/ IBDB GMS v1
+-- (Central)
+--
+
+
+ALTER TABLE atributs ADD CONSTRAINT FOREIGN KEY atributs_ibfk1(gid) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+ALTER TABLE atributs ADD CONSTRAINT FOREIGN KEY atributs_ibfk2(atype) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE atributs ADD CONSTRAINT FOREIGN KEY atributs_ibfk3(auid) REFERENCES users(userid) ON UPDATE CASCADE;
+ALTER TABLE atributs ADD CONSTRAINT FOREIGN KEY atributs_ibfk4(alocn) REFERENCES location(locid) ON UPDATE CASCADE;
+ALTER TABLE atributs ADD CONSTRAINT FOREIGN KEY atributs_ibfk5(aref) REFERENCES bibrefs(refid) ON UPDATE CASCADE;
+
+
+ALTER TABLE bibrefs ADD CONSTRAINT FOREIGN KEY bibrefs_ibfk1(pubtype) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+
+
+ALTER TABLE filelink ADD CONSTRAINT FOREIGN KEY filelink_ibfk1(filecat) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+
+
+ALTER TABLE georef ADD CONSTRAINT FOREIGN KEY georef_ibfk1(llsource) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE georef ADD CONSTRAINT FOREIGN KEY georef_ibfk2(ll_fmt) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE georef ADD CONSTRAINT FOREIGN KEY georef_ibfk3(ll_datum) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE georef ADD CONSTRAINT FOREIGN KEY georef_ibfk4(llref) REFERENCES bibrefs(refid) ON UPDATE CASCADE;
+ALTER TABLE georef ADD CONSTRAINT FOREIGN KEY georef_ibfk5(lluid) REFERENCES users(userid) ON UPDATE CASCADE;
+
+
+
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk1(methn) REFERENCES methods(mid) ON UPDATE CASCADE;
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk2(gpid1) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk3(gpid2) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk4(germuid) REFERENCES users(userid) ON UPDATE CASCADE;
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk5(gref) REFERENCES bibrefs(refid) ON UPDATE CASCADE;
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk6(glocn) REFERENCES location(locid) ON UPDATE CASCADE;
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk7(mgid) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+ALTER TABLE germplsm ADD CONSTRAINT FOREIGN KEY germplsm_ibfk8(grplce) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+
+
+
+ALTER TABLE listdata ADD CONSTRAINT FOREIGN KEY listdata_ibfk1(gid) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+ALTER TABLE listdata ADD CONSTRAINT FOREIGN KEY listdata_ibfk2(listid) REFERENCES listnms(listid) ON UPDATE CASCADE;
+
+
+ALTER TABLE listnms ADD CONSTRAINT FOREIGN KEY listnms_ibfk1(listuid) REFERENCES users(userid) ON UPDATE CASCADE;
+ALTER TABLE listnms ADD CONSTRAINT FOREIGN KEY listnms_ibfk2(listlocn) REFERENCES location(locid) ON UPDATE CASCADE;
+ALTER TABLE listnms ADD CONSTRAINT FOREIGN KEY listnms_ibfk3(listref) REFERENCES bibrefs(refid) ON UPDATE CASCADE;
+ALTER TABLE listnms ADD CONSTRAINT FOREIGN KEY listnms_ibfk4(listid) REFERENCES listnms(listid) ON UPDATE CASCADE;
+
+
+ALTER TABLE location ADD CONSTRAINT FOREIGN KEY location_ibfk1(ltype) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE location ADD CONSTRAINT FOREIGN KEY location_ibfk2(cntryid) REFERENCES cntry(cntryid) ON UPDATE CASCADE;
+ALTER TABLE location ADD CONSTRAINT FOREIGN KEY location_ibfk3(nnpid) REFERENCES location(locid) ON UPDATE CASCADE;
+
+
+ALTER TABLE locdes ADD CONSTRAINT FOREIGN KEY locdes_ibfk1(locid) REFERENCES location(locid) ON UPDATE CASCADE;
+ALTER TABLE locdes ADD CONSTRAINT FOREIGN KEY locdes_ibfk2(dtype) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE locdes ADD CONSTRAINT FOREIGN KEY locdes_ibfk3(duid) REFERENCES users(userid) ON UPDATE CASCADE;
+ALTER TABLE locdes ADD CONSTRAINT FOREIGN KEY locdes_ibfk4(dref) REFERENCES bibrefs(refid) ON UPDATE CASCADE;
+
+
+ALTER TABLE methods ADD CONSTRAINT FOREIGN KEY methods_ibfk1(mref) REFERENCES bibrefs(refid) ON UPDATE CASCADE;
+ALTER TABLE methods ADD CONSTRAINT FOREIGN KEY methods_ibfk2(mattr) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE methods ADD CONSTRAINT FOREIGN KEY methods_ibfk3(muid) REFERENCES users(userid) ON UPDATE CASCADE;
+
+
+ALTER TABLE names ADD CONSTRAINT FOREIGN KEY names_ibfk1(gid) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+ALTER TABLE names ADD CONSTRAINT FOREIGN KEY names_ibfk2(ntype) REFERENCES udflds(fldno) ON UPDATE CASCADE;
+ALTER TABLE names ADD CONSTRAINT FOREIGN KEY names_ibfk3(nuid) REFERENCES users(userid) ON UPDATE CASCADE;
+ALTER TABLE names ADD CONSTRAINT FOREIGN KEY names_ibfk4(nlocn) REFERENCES location(locid) ON UPDATE CASCADE;
+ALTER TABLE names ADD CONSTRAINT FOREIGN KEY names_ibfk5(nref) REFERENCES bibrefs(refid) ON UPDATE CASCADE;
+
+
+ALTER TABLE progntrs ADD CONSTRAINT FOREIGN KEY progntrs_ibfk1(gid) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+ALTER TABLE progntrs ADD CONSTRAINT FOREIGN KEY progntrs_ibfk2(pid) REFERENCES germplsm(gid) ON UPDATE CASCADE;
+
+
+ALTER TABLE reflinks ADD CONSTRAINT FOREIGN KEY reflinks_ibfk1(refuid) REFERENCES users(userid) ON UPDATE CASCADE;
+
+
+ALTER TABLE udflds ADD CONSTRAINT FOREIGN KEY udflds_ibfk1(fuid) REFERENCES users(userid) ON UPDATE CASCADE;
+
+
+ALTER TABLE users ADD CONSTRAINT FOREIGN KEY users_ibfk1(personid) REFERENCES persons(personid) ON UPDATE CASCADE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
