@@ -286,5 +286,5 @@ INSERT INTO tool (name, title, tool_type, path) VALUES
  ('germplasm_browser', 'Browse Germplasm Information', 'WEB', 'http://localhost:8081/GermplasmBrowser/')
 ,('germplasm_phenotypic', 'Retrieve Germplasm by Phenotypic Data', 'WEB', 'http://localhost:8081/GermplasmBrowser2/')
 ,('gdms', 'GDMS', 'WEB', 'http://localhost:8080/GDMS/login.do')
-,('fieldbook', 'FieldBook', 'NATIVE', 'D:/inbox/efficio/gcp/fieldbook/netbeans_dist/ibfb/bin/ibfb.exe')
+,('fieldbook', 'FieldBook', 'NATIVE', 'C:/IBFIELDBOOK/IBFb/bin/ibfb.exe')
 ;
