@@ -27,3 +27,7 @@ INSERT INTO transaction (`transaction_id`,`user_id`,`lot_id`,`transaction_date`,
 VALUES (-8,1,-1,20120410,0,-500,'sample transaction',NULL,NULL,NULL,NULL,253);
 INSERT INTO transaction (`transaction_id`,`user_id`,`lot_id`,`transaction_date`,`status`,`quantity`,`comments`,`source_type`,`source_id`,`source_record_id`,`previous_amount`,`person_id`)
 VALUES (-9,1,-1,20120408,1,-200,'sample transaction',NULL,NULL,NULL,NULL,253);
+INSERT INTO transaction (`transaction_id`,`user_id`,`lot_id`,`transaction_date`,`status`,`quantity`,`comments`,`source_type`,`source_id`,`source_record_id`,`previous_amount`,`person_id`)
+VALUES (-10,1,-2,20120408,1,-1000,'sample transaction',NULL,NULL,NULL,NULL,253);
+INSERT INTO transaction (`transaction_id`,`user_id`,`lot_id`,`transaction_date`,`status`,`quantity`,`comments`,`source_type`,`source_id`,`source_record_id`,`previous_amount`,`person_id`)
+VALUES (-11,1,-3,20120408,1,-850,'sample transaction',NULL,NULL,NULL,NULL,253);
