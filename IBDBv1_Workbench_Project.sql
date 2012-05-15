@@ -287,4 +287,5 @@ INSERT INTO workbench_tool (name, title, tool_type, path) VALUES
 ,('germplasm_phenotypic', 'Retrieve Germplasm by Phenotypic Data', 'WEB', 'http://localhost:8081/GermplasmBrowser2/')
 ,('gdms', 'GDMS', 'WEB', 'http://localhost:8080/GDMS/login.do')
 ,('fieldbook', 'FieldBook', 'NATIVE', 'C:/IBFIELDBOOK/IBFb/bin/ibfb.exe')
+,('optimas', 'OptiMAS', 'NATIVE', 'C:/Workbench/Optimas/optimas.exe')
 ;
