@@ -1,15 +1,15 @@
 DROP TABLE IF EXISTS
-project_member
-,project_workflow_step
-,project
-,workflow_step_tool
-,workflow_template_step
-,tool_transform
-,tool_output
-,tool_input
-,tool
-,workflow_step
-,workflow_template
+workbench_project_member
+,workbench_project_workflow_step
+,workbench_project
+,workbench_workflow_step_tool
+,workbench_workflow_template_step
+,workbench_tool_transform
+,workbench_tool_output
+,workbench_tool_input
+,workbench_tool
+,workbench_workflow_step
+,workbench_workflow_template
 ;
 
 /**
@@ -34,7 +34,7 @@ project_member
  * table.
  * This table is actually a clone of "workflow_template_step" table.
  */
-CREATE TABLE workflow_template (
+CREATE TABLE workbench_workflow_template (
      template_id            INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(256) NOT NULL
     ,user_defined           BOOL NOT NULL DEFAULT FALSE
@@ -45,7 +45,7 @@ ENGINE=InnoDB;
 /**
  * A "Step" in a workflow.
  */
-CREATE TABLE workflow_step (
+CREATE TABLE workbench_workflow_step (
      step_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(64) NOT NULL
     ,title                  VARCHAR(256) NOT NULL
@@ -62,7 +62,7 @@ ENGINE=InnoDB;
  * - Maybe we need to record information about the tool's input/output.
  *   For example, do we need to pass a file? or a named parameter?
  */
-CREATE TABLE tool (
+CREATE TABLE workbench_tool (
      tool_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(128) NOT NULL
     ,title                  VARCHAR(256) NOT NULL
@@ -77,25 +77,25 @@ ENGINE=InnoDB;
  * "input_label" is the parameter name we could use as labels in screens.
  * "input_name" is the official paramter name (for web or commandline tools).
  */
-CREATE TABLE tool_input (
+CREATE TABLE workbench_tool_input (
      tool_input_id          INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,tool_id                INT UNSIGNED NOT NULL
     ,input_label            VARCHAR(256)
     ,input_name             VARCHAR(128)
     ,input_type             ENUM('NUMBER', 'TEXT', 'DATE', 'FILE')
     ,PRIMARY KEY(tool_input_id)
-    ,CONSTRAINT fk_tool_input_1 FOREIGN KEY(tool_id) REFERENCES tool(tool_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_tool_input_1 FOREIGN KEY(tool_id) REFERENCES workbench_tool(tool_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
-CREATE TABLE tool_output (
+CREATE TABLE workbench_tool_output (
      tool_output_id         INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,tool_id                INT UNSIGNED NOT NULL
     ,output_label           VARCHAR(256)
     ,output_name            VARCHAR(128)
     ,output_type            ENUM('NUMBER', 'TEXT', 'DATE', 'FILE')
     ,PRIMARY KEY(tool_output_id)
-    ,CONSTRAINT fk_tool_output_1 FOREIGN KEY(tool_id) REFERENCES tool(tool_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_tool_output_1 FOREIGN KEY(tool_id) REFERENCES workbench_tool(tool_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
@@ -103,7 +103,7 @@ ENGINE=InnoDB;
  * A "Tool Transform" represents an implementation that could
  * transform an "output" of a certain tool to an "input" of another tool.
  */
-CREATE TABLE tool_transform (
+CREATE TABLE workbench_tool_transform (
      tool_transform_id              INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,input_tool_id                  INT UNSIGNED NOT NULL
     ,output_tool_id                 INT UNSIGNED NOT NULL
@@ -112,8 +112,8 @@ CREATE TABLE tool_transform (
     ,PRIMARY KEY(tool_transform_id)
     ,UNIQUE(transform_label)
     ,UNIQUE(transform_name)
-    ,CONSTRAINT fk_tool_transform_1 FOREIGN KEY(input_tool_id) REFERENCES tool(tool_id) ON UPDATE CASCADE
-    ,CONSTRAINT fk_tool_transform_2 FOREIGN KEY(output_tool_id) REFERENCES tool(tool_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_tool_transform_1 FOREIGN KEY(input_tool_id) REFERENCES workbench_tool(tool_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_tool_transform_2 FOREIGN KEY(output_tool_id) REFERENCES workbench_tool(tool_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
@@ -124,15 +124,15 @@ ENGINE=InnoDB;
  * it might be hard to support the UI mockup provided by douglas.
  * See Note 20120330_workflow_steps
  */
-CREATE TABLE workflow_template_step (
+CREATE TABLE workbench_workflow_template_step (
      workflow_template_step_id          INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,template_id                        INT UNSIGNED NOT NULL
     ,step_number                        VARCHAR(16)
     ,step_id                            INT UNSIGNED NOT NULL
     ,PRIMARY KEY(workflow_template_step_id)
     ,UNIQUE(template_id, step_number)
-    ,CONSTRAINT fk_workflow_template_step_1 FOREIGN KEY(template_id) REFERENCES workflow_template(template_id) ON UPDATE CASCADE
-    ,CONSTRAINT fk_workflow_template_step_2 FOREIGN KEY(step_id) REFERENCES workflow_step(step_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_workflow_template_step_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_workflow_template_step_2 FOREIGN KEY(step_id) REFERENCES workbench_workflow_step(step_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
@@ -141,7 +141,7 @@ ENGINE=InnoDB;
  * 
  * "tool_number" is added so we can set a tool order.
  */
-CREATE TABLE workflow_step_tool (
+CREATE TABLE workbench_workflow_step_tool (
      workflow_step_tool_id              INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,template_id                        INT UNSIGNED NOT NULL
     ,step_id                            INT UNSIGNED NOT NULL
@@ -149,9 +149,9 @@ CREATE TABLE workflow_step_tool (
     ,tool_id                            INT UNSIGNED NOT NULL
     ,PRIMARY KEY(workflow_step_tool_id)
     ,UNIQUE(template_id, step_id, tool_id)
-    ,CONSTRAINT fk_workflow_step_tool_1 FOREIGN KEY(template_id) REFERENCES workflow_template(template_id) ON UPDATE CASCADE
-    ,CONSTRAINT fk_workflow_step_tool_2 FOREIGN KEY(step_id) REFERENCES workflow_step(step_id) ON UPDATE CASCADE
-    ,CONSTRAINT fk_workflow_step_tool_3 FOREIGN KEY(tool_id) REFERENCES tool(tool_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_workflow_step_tool_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_workflow_step_tool_2 FOREIGN KEY(step_id) REFERENCES workbench_workflow_step(step_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_workflow_step_tool_3 FOREIGN KEY(tool_id) REFERENCES workbench_tool(tool_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
@@ -207,14 +207,14 @@ ENGINE=InnoDB;
  * CONFIRM:
  * - what are datasets?
  */
-CREATE TABLE project (
+CREATE TABLE workbench_project (
      project_id                 INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,project_name               VARCHAR(256) NOT NULL
     ,target_due_date            DATE
     ,template_id                INT UNSIGNED NOT NULL
     ,template_modified          BOOL NOT NULL DEFAULT FALSE
     ,PRIMARY KEY(project_id)
-    ,CONSTRAINT fk_project_1 FOREIGN KEY(template_id) REFERENCES workflow_template(template_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
@@ -222,7 +222,7 @@ ENGINE=InnoDB;
  * A "step" in a Project Workflow represents an "activity".
  * It can be assigned to a user (Contact), have a Due Date and a Status.
  */
-CREATE TABLE project_workflow_step (
+CREATE TABLE workbench_project_workflow_step (
      project_workflow_step_id           INT UNSIGNED NOT NULL
     ,project_id                         INT UNSIGNED NOT NULL
     ,step_number                        VARCHAR(16) NOT NULL
@@ -232,8 +232,8 @@ CREATE TABLE project_workflow_step (
     ,status                             VARCHAR(255)
     ,PRIMARY KEY(project_workflow_step_id)
     ,UNIQUE(project_id, step_number)
-    ,CONSTRAINT fk_project_workflow_step_1 FOREIGN KEY(project_id) REFERENCES project(project_id) ON UPDATE CASCADE
-    ,CONSTRAINT fk_project_workflow_step_2 FOREIGN KEY(step_id) REFERENCES workflow_step(step_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_workflow_step_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_workflow_step_2 FOREIGN KEY(step_id) REFERENCES workbench_workflow_step(step_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
@@ -244,10 +244,10 @@ ENGINE=InnoDB;
  *   We might need to create a separate table if we support it (I hope we don't).
  */
 
-CREATE TABLE project_member (
+CREATE TABLE workbench_project_member (
      project_id             INT UNSIGNED
     ,contact_id             INT UNSIGNED
-    ,CONSTRAINT fk_project_member_1 FOREIGN KEY(project_id) REFERENCES project(project_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_member_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
@@ -255,10 +255,10 @@ ENGINE=InnoDB;
 /**
  * Add initial data.
  */
-INSERT INTO workflow_template (template_id, name, user_defined) VALUES
+INSERT INTO workbench_workflow_template (template_id, name, user_defined) VALUES
 (1, 'MARS', FALSE);
 
-INSERT INTO workflow_step (step_id, name, title) VALUES
+INSERT INTO workbench_workflow_step (step_id, name, title) VALUES
  (1, 'project_planning', 'Project Planning')
 ,(2, 'population_management', 'Population Management')
 ,(3, 'field_trial_management', 'Field Trial Management')
@@ -270,7 +270,7 @@ INSERT INTO workflow_step (step_id, name, title) VALUES
 ,(9, 'project_completion', 'Project Completion')
 ;
 
-INSERT INTO workflow_template_step (template_id, step_number, step_id) VALUES
+INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id) VALUES
 (1, 1, 1)
 ,(1, 2, 2)
 ,(1, 3, 3)
@@ -282,7 +282,7 @@ INSERT INTO workflow_template_step (template_id, step_number, step_id) VALUES
 ,(1, 9, 9)
 ;
 
-INSERT INTO tool (name, title, tool_type, path) VALUES
+INSERT INTO workbench_tool (name, title, tool_type, path) VALUES
  ('germplasm_browser', 'Browse Germplasm Information', 'WEB', 'http://localhost:8081/GermplasmBrowser/')
 ,('germplasm_phenotypic', 'Retrieve Germplasm by Phenotypic Data', 'WEB', 'http://localhost:8081/GermplasmBrowser2/')
 ,('gdms', 'GDMS', 'WEB', 'http://localhost:8080/GDMS/login.do')
