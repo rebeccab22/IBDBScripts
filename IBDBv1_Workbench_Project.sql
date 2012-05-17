@@ -12,28 +12,28 @@ workbench_project_member
 ,workbench_workflow_template
 ;
 
-/**
- * A template of a Workflow.
- * 
- * To represent a workflow (such as MARS) in the DB,
- * we will be adding records on the following tables:
- *      workflow_template
- *      workflow_step
- *      tool
- *      tool_input
- *      tool_output
- *      tool_transform
- *      workflow_template_step
- *      workflow_step_tool
- * 
- * When creating a new project, the user selects a workflow template,
- * and we "clone" the template's steps by adding entries to:
- *      project_workflow_step
- * from the
- *      workflow_template_step
- * table.
- * This table is actually a clone of "workflow_template_step" table.
- */
+-- 
+--  A template of a Workflow.
+--  
+--  To represent a workflow (such as MARS) in the DB,
+--  we will be adding records on the following tables:
+--       workflow_template
+--       workflow_step
+--       tool
+--       tool_input
+--       tool_output
+--       tool_transform
+--       workflow_template_step
+--       workflow_step_tool
+--  
+--  When creating a new project, the user selects a workflow template,
+--  and we "clone" the template's steps by adding entries to:
+--       project_workflow_step
+--  from the
+--       workflow_template_step
+--  table.
+--  This table is actually a clone of "workflow_template_step" table.
+-- 
 CREATE TABLE workbench_workflow_template (
      template_id            INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(256) NOT NULL
@@ -42,9 +42,9 @@ CREATE TABLE workbench_workflow_template (
 )
 ENGINE=InnoDB;
 
-/**
- * A "Step" in a workflow.
- */
+-- 
+--  A "Step" in a workflow.
+-- 
 CREATE TABLE workbench_workflow_step (
      step_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(64) NOT NULL
@@ -54,14 +54,14 @@ CREATE TABLE workbench_workflow_step (
 )
 ENGINE=InnoDB;
 
-/**
- * Tools such as "Germplasm Browser" and "Field Book"
- * will be registered here.
- * 
- * TODO:
- * - Maybe we need to record information about the tool's input/output.
- *   For example, do we need to pass a file? or a named parameter?
- */
+-- 
+--  Tools such as "Germplasm Browser" and "Field Book"
+--  will be registered here.
+--  
+--  TODO:
+--  - Maybe we need to record information about the tool's input/output.
+--    For example, do we need to pass a file? or a named parameter?
+-- 
 CREATE TABLE workbench_tool (
      tool_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(128) NOT NULL
@@ -72,11 +72,11 @@ CREATE TABLE workbench_tool (
     ,UNIQUE(name)
 )
 ENGINE=InnoDB;
-/**
- * A list of named "input" of a tool.
- * "input_label" is the parameter name we could use as labels in screens.
- * "input_name" is the official paramter name (for web or commandline tools).
- */
+-- 
+--  A list of named "input" of a tool.
+--  "input_label" is the parameter name we could use as labels in screens.
+--  "input_name" is the official paramter name (for web or commandline tools).
+-- 
 CREATE TABLE workbench_tool_input (
      tool_input_id          INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,tool_id                INT UNSIGNED NOT NULL
@@ -99,10 +99,10 @@ CREATE TABLE workbench_tool_output (
 )
 ENGINE=InnoDB;
 
-/**
- * A "Tool Transform" represents an implementation that could
- * transform an "output" of a certain tool to an "input" of another tool.
- */
+-- 
+--  A "Tool Transform" represents an implementation that could
+--  transform an "output" of a certain tool to an "input" of another tool.
+-- 
 CREATE TABLE workbench_tool_transform (
      tool_transform_id              INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,input_tool_id                  INT UNSIGNED NOT NULL
@@ -117,13 +117,13 @@ CREATE TABLE workbench_tool_transform (
 )
 ENGINE=InnoDB;
 
-/**
- * The steps associated with a Workflow Template.
- * 
- * NOTE: If we are going to save the "prev/next step" of a "step",
- * it might be hard to support the UI mockup provided by douglas.
- * See Note 20120330_workflow_steps
- */
+-- 
+--  The steps associated with a Workflow Template.
+--  
+--  NOTE: If we are going to save the "prev/next step" of a "step",
+--  it might be hard to support the UI mockup provided by douglas.
+--  See Note 20120330_workflow_steps
+-- 
 CREATE TABLE workbench_workflow_template_step (
      workflow_template_step_id          INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,template_id                        INT UNSIGNED NOT NULL
@@ -136,11 +136,11 @@ CREATE TABLE workbench_workflow_template_step (
 )
 ENGINE=InnoDB;
 
-/**
- * The tools associated with a Workflow Step.
- * 
- * "tool_number" is added so we can set a tool order.
- */
+-- 
+--  The tools associated with a Workflow Step.
+--  
+--  "tool_number" is added so we can set a tool order.
+-- 
 CREATE TABLE workbench_workflow_step_tool (
      workflow_step_tool_id              INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,template_id                        INT UNSIGNED NOT NULL
@@ -155,22 +155,22 @@ CREATE TABLE workbench_workflow_step_tool (
 )
 ENGINE=InnoDB;
 
-/* NOTE:
- * - maybe we need to record the tools related to an activity?
- * TODO:
- * - confirm whether an activity is a breakdown of a workflow step
- * - can users register their own "activity/task"?
- */
-/*
+--  NOTE:
+--  - maybe we need to record the tools related to an activity?
+--  TODO:
+--  - confirm whether an activity is a breakdown of a workflow step
+--  - can users register their own "activity/task"?
+-- 
+-- 
 CREATE TABLE activity (
      activity_id            INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(256) NOT NULL
     ,PRIMARY KEY(activity_id)
 )
 ENGINE=InnoDB;
-*/
+-- 
 
-/*
+-- 
 CREATE TABLE contact (
      contact_id             INT UNSIGNED
     ,title                  VARCHAR(32)
@@ -187,26 +187,26 @@ CREATE TABLE contact (
     ,PRIMARY KEY(contact_id)
 )
 ENGINE=InnoDB;
-*/
+-- 
 
-/**
- * A project uses an instance of a "Workflow Template".
- * A project has one and only one workflow, which could be modified
- * later even after a project has made progress.
- * 
- * A project has an instance of a "Workflow Template" to ensure that
- * a project's workflow can be modified without affecting all other
- * projects that followed the same template.
- * 
- * "template_id" is the ID of the Workflow being used by the project.
- * "template_modified" specifies whether modifications on the original
- * Workflow steps has been made.
- * 
- * TODO:
- * - a project has a data set
- * CONFIRM:
- * - what are datasets?
- */
+-- 
+--  A project uses an instance of a "Workflow Template".
+--  A project has one and only one workflow, which could be modified
+--  later even after a project has made progress.
+--  
+--  A project has an instance of a "Workflow Template" to ensure that
+--  a project's workflow can be modified without affecting all other
+--  projects that followed the same template.
+--  
+--  "template_id" is the ID of the Workflow being used by the project.
+--  "template_modified" specifies whether modifications on the original
+--  Workflow steps has been made.
+--  
+--  TODO:
+--  - a project has a data set
+--  CONFIRM:
+--  - what are datasets?
+-- 
 CREATE TABLE workbench_project (
      project_id                 INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,project_name               VARCHAR(256) NOT NULL
@@ -218,10 +218,10 @@ CREATE TABLE workbench_project (
 )
 ENGINE=InnoDB;
 
-/**
- * A "step" in a Project Workflow represents an "activity".
- * It can be assigned to a user (Contact), have a Due Date and a Status.
- */
+-- 
+--  A "step" in a Project Workflow represents an "activity".
+--  It can be assigned to a user (Contact), have a Due Date and a Status.
+-- 
 CREATE TABLE workbench_project_workflow_step (
      project_workflow_step_id           INT UNSIGNED NOT NULL
     ,project_id                         INT UNSIGNED NOT NULL
@@ -237,12 +237,12 @@ CREATE TABLE workbench_project_workflow_step (
 )
 ENGINE=InnoDB;
 
-/**
- * CONFIRM:
- * - If we have a Workflow Step known to be associated with two tools, Tool A and Tool B,
- *   can a project that has that Workflow Step declare that it will not use Tool B?
- *   We might need to create a separate table if we support it (I hope we don't).
- */
+-- 
+--  CONFIRM:
+--  - If we have a Workflow Step known to be associated with two tools, Tool A and Tool B,
+--    can a project that has that Workflow Step declare that it will not use Tool B?
+--    We might need to create a separate table if we support it (I hope we don't).
+-- 
 
 CREATE TABLE workbench_project_member (
      project_id             INT UNSIGNED
@@ -252,9 +252,9 @@ CREATE TABLE workbench_project_member (
 ENGINE=InnoDB;
 
 
-/**
- * Add initial data.
- */
+-- 
+--  Add initial data.
+-- 
 INSERT INTO workbench_workflow_template (template_id, name, user_defined) VALUES
 (1, 'MARS', FALSE);
 
