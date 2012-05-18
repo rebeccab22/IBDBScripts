@@ -789,8 +789,8 @@ CREATE INDEX tmsscales_idx01 ON tmsscales (scname);
 DROP TABLE IF EXISTS tmstraits;
 
 CREATE TABLE tmstraits (
-  tid INT NOT NULL,
-  traitid INT NOT NULL,
+  tid INT NOT NULL DEFAULT 0,
+  traitid INT NOT NULL DEFAULT 0,
   trname varchar(50) DEFAULT NULL,
   trabbr varchar(10) DEFAULT NULL,			-- increase length from 8 to 10
   trdesc varchar(255) DEFAULT NULL,
@@ -798,6 +798,7 @@ CREATE TABLE tmstraits (
   traitgroup varchar(50) DEFAULT NULL,
   ontology varchar(50) DEFAULT NULL,
   isolanguage VARCHAR(2) NOT NULL DEFAULT 'en',		-- new column, indicates language used  
+  traittype VARCHAR(1) NOT NULL DEFAULT '-',                -- new column added may 2012
   PRIMARY KEY (tid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
@@ -806,6 +807,40 @@ CREATE INDEX tmstraits_idx02 ON tmstraits (trname);
 CREATE INDEX tmstraits_idx03 ON tmstraits (trabbr);
 CREATE INDEX tmstraits_idx04 on tmstraits (isolanguage);
 --
+
+
+--
+-- table structure for table 'tmsscalecon'		-- new table, may 2012
+--
+DROP TABLE IF EXISTS tmsscalecon; 
+CREATE TABLE tmsscalecon (
+  scaleid INT NOT NULL DEFAULT 0,
+  slevel DOUBLE PRECISION NOT NULL DEFAULT 0,
+  elevel DOUBLE PRECISION NOT NULL DEFAULT 0,
+  scaleconid INT NOT NULL AUTO_INCREMENT PRIMARY KEY           
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+CREATE INDEX tmsscalecon_idx01 ON tmsscalecon (scaleid);
+CREATE INDEX tmsscalecon_idx02 on tmsscalecon (scaleid,slevel,elevel); 
+--
+
+--
+-- table structure for table 'tmsscaledis'		-- new table, may 2012
+--
+DROP TABLE IF EXISTS tmsscaledis; 
+CREATE TABLE tmsscaledis (
+  scaleid INT NOT NULL DEFAULT 0,
+  `value` VARCHAR(20) NOT NULL DEFAULT '-',
+  valdesc VARCHAR(255) NOT NULL DEFAULT '-',
+  scaledisid INT NOT NULL AUTO_INCREMENT PRIMARY KEY   		
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+CREATE INDEX tmsscaledis_idx01 ON tmsscaledis (scaleid);
+CREATE INDEX tmsscaledis_idx02 ON tmsscaledis (scaleid,value); 
+--
+
+
+
 
 
 
@@ -862,23 +897,3 @@ CREATE INDEX grplevelval_idx01 on grplevelval (valueid);
 CREATE INDEX grplevelval_idx02 on grplevelval (valueabbr);
 CREATE INDEX grplevelval_idx03 on grplevelval (valuename);
 --
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
