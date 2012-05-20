@@ -282,10 +282,13 @@ INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id)
 ,(1, 9, 9)
 ;
 
+-- Notes on paths:
+-- WEB tools should use the release port.
+-- NATIVE tools should use a path relative to Tomcat's bin folder.
 INSERT INTO workbench_tool (name, title, tool_type, path) VALUES
- ('germplasm_browser', 'Browse Germplasm Information', 'WEB', 'http://localhost:8081/GermplasmBrowser/')
-,('germplasm_phenotypic', 'Retrieve Germplasm by Phenotypic Data', 'WEB', 'http://localhost:8081/GermplasmBrowser2/')
-,('gdms', 'GDMS', 'WEB', 'http://localhost:8080/GDMS/login.do')
-,('fieldbook', 'FieldBook', 'NATIVE', 'C:/IBFIELDBOOK/IBFb/bin/ibfb.exe')
-,('optimas', 'OptiMAS', 'NATIVE', 'C:/Workbench/Optimas/optimas.exe')
+ ('germplasm_browser', 'Browse Germplasm Information', 'WEB', 'http://localhost:18080/GermplasmBrowser/')
+,('germplasm_phenotypic', 'Retrieve Germplasm by Phenotypic Data', 'WEB', 'http://localhost:18080/GermplasmBrowser2/')
+,('gdms', 'GDMS', 'WEB', 'http://localhost:18080/GDMS/login.do')
+,('fieldbook', 'FieldBook', 'NATIVE', '../../tools/fieldbook/IBFb/bin/ibfb.exe')
+,('optimas', 'OptiMAS', 'NATIVE', '../../tools/optimas/optimas.exe')
 ;
