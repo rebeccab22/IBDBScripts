@@ -814,14 +814,13 @@ CREATE INDEX tmstraits_idx04 on tmstraits (isolanguage);
 --
 DROP TABLE IF EXISTS tmsscalecon; 
 CREATE TABLE tmsscalecon (
-  scaleid INT NOT NULL DEFAULT 0,
-  slevel DOUBLE PRECISION NOT NULL DEFAULT 0,
-  elevel DOUBLE PRECISION NOT NULL DEFAULT 0,
-  scaleconid INT NOT NULL AUTO_INCREMENT PRIMARY KEY           
+ tmsscaleconid int(11) NOT NULL DEFAULT 0,
+ measuredinid int(11) NOT NULL DEFAULT 0,
+ slevel double NOT NULL DEFAULT 0,
+ elevel double NOT NULL DEFAULT 0      
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
-CREATE INDEX tmsscalecon_idx01 ON tmsscalecon (scaleid);
-CREATE INDEX tmsscalecon_idx02 on tmsscalecon (scaleid,slevel,elevel); 
+CREATE INDEX tmsscalecon_idx01 ON tmsscalecon (tmsscaleconid);
 --
 
 --
@@ -829,14 +828,13 @@ CREATE INDEX tmsscalecon_idx02 on tmsscalecon (scaleid,slevel,elevel);
 --
 DROP TABLE IF EXISTS tmsscaledis; 
 CREATE TABLE tmsscaledis (
-  scaleid INT NOT NULL DEFAULT 0,
-  `value` VARCHAR(20) NOT NULL DEFAULT '-',
-  valdesc VARCHAR(255) NOT NULL DEFAULT '-',
-  scaledisid INT NOT NULL AUTO_INCREMENT PRIMARY KEY   		
+ tmsscaledisid int(11) NOT NULL DEFAULT 0,
+ measuredinid int(11) NOT NULL DEFAULT 0,
+ valuename varchar(20) NOT NULL DEFAULT '-',
+ valdesc varchar(255) NOT NULL DEFAULT '-'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
-CREATE INDEX tmsscaledis_idx01 ON tmsscaledis (scaleid);
-CREATE INDEX tmsscaledis_idx02 ON tmsscaledis (scaleid,value); 
+CREATE INDEX tmsscaledis_idx01 ON tmsscaledis (tmsscaledisid);
 --
 
 
