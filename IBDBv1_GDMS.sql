@@ -21,7 +21,8 @@ Generation Challenge Programme (GCP)
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -357,6 +358,99 @@ CREATE TABLE `track_makers` (
   CONSTRAINT `fk_trackmarker_markerid` FOREIGN KEY (`marker_id`) REFERENCES `marker` (`marker_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_trackmarker_trackid` FOREIGN KEY (`track_id`) REFERENCES `track_data` (`track_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+/*Table structure for table `dataset_size` */
+
+DROP TABLE IF EXISTS `dataset_size`;
+
+/*!50001 DROP VIEW IF EXISTS `dataset_size` */;
+/*!50001 DROP TABLE IF EXISTS `dataset_size` */;
+
+/*!50001 CREATE TABLE  `dataset_size`(
+ `dataset_id` varchar(11) ,
+ `marker_count` bigint(21) ,
+ `gid_count` bigint(21) 
+)*/;
+
+/*Table structure for table `genotypes_count` */
+
+DROP TABLE IF EXISTS `genotypes_count`;
+
+/*!50001 DROP VIEW IF EXISTS `genotypes_count` */;
+/*!50001 DROP TABLE IF EXISTS `genotypes_count` */;
+
+/*!50001 CREATE TABLE  `genotypes_count`(
+ `marker_id` varchar(11) ,
+ `genotypes_count` bigint(21) 
+)*/;
+
+/*Table structure for table `mapping_data` */
+
+DROP TABLE IF EXISTS `mapping_data`;
+
+/*!50001 DROP VIEW IF EXISTS `mapping_data` */;
+/*!50001 DROP TABLE IF EXISTS `mapping_data` */;
+
+/*!50001 CREATE TABLE  `mapping_data`(
+ `marker_id` int(11) ,
+ `linkage_group` varchar(50) ,
+ `start_position` float ,
+ `map_unit` char(4) ,
+ `map_name` char(30) ,
+ `marker_name` char(40) 
+)*/;
+
+/*Table structure for table `marker_retrieval_info` */
+
+DROP TABLE IF EXISTS `marker_retrieval_info`;
+
+/*!50001 DROP VIEW IF EXISTS `marker_retrieval_info` */;
+/*!50001 DROP TABLE IF EXISTS `marker_retrieval_info` */;
+
+/*!50001 CREATE TABLE  `marker_retrieval_info`(
+ `marker_id` int(11) ,
+ `marker_type` char(10) ,
+ `marker_name` char(40) ,
+ `species` char(25) ,
+ `accession_id` varchar(50) ,
+ `reference` varchar(255) ,
+ `genotype` char(40) ,
+ `ploidy` varchar(25) ,
+ `principal_investigator` char(50) ,
+ `contact` varchar(200) ,
+ `institute` varchar(100) ,
+ `genotypes_count` bigint(21) 
+)*/;
+
+/*View structure for view dataset_size */
+
+/*!50001 DROP TABLE IF EXISTS `dataset_size` */;
+/*!50001 DROP VIEW IF EXISTS `dataset_size` */;
+
+/*!50001 CREATE VIEW `dataset_size` AS (select ucase(`char_values`.`dataset_id`) AS `dataset_id`,count(distinct `char_values`.`marker_id`) AS `marker_count`,count(distinct `char_values`.`gid`) AS `gid_count` from `char_values` group by ucase(`char_values`.`dataset_id`)) */;
+
+/*View structure for view genotypes_count */
+
+/*!50001 DROP TABLE IF EXISTS `genotypes_count` */;
+/*!50001 DROP VIEW IF EXISTS `genotypes_count` */;
+
+/*!50001 CREATE VIEW `genotypes_count` AS (select ucase(`marker_metadataset`.`marker_id`) AS `marker_id`,count(distinct `acc_metadataset`.`gid`) AS `genotypes_count` from (`marker_metadataset` join `acc_metadataset` on((`marker_metadataset`.`dataset_id` = `acc_metadataset`.`dataset_id`))) group by ucase(`marker_metadataset`.`marker_id`)) */;
+
+/*View structure for view mapping_data */
+
+/*!50001 DROP TABLE IF EXISTS `mapping_data` */;
+/*!50001 DROP VIEW IF EXISTS `mapping_data` */;
+
+/*!50001 CREATE VIEW `mapping_data` AS (select `markers_onmap`.`marker_id` AS `marker_id`,`markers_onmap`.`linkage_group` AS `linkage_group`,`markers_onmap`.`start_position` AS `start_position`,`markers_onmap`.`map_unit` AS `map_unit`,`map`.`map_name` AS `map_name`,`marker`.`marker_name` AS `marker_name` from ((`markers_onmap` join `map` on((`markers_onmap`.`map_id` = `map`.`map_id`))) join `marker` on((`markers_onmap`.`marker_id` = `marker`.`marker_id`)))) */;
+
+/*View structure for view marker_retrieval_info */
+
+/*!50001 DROP TABLE IF EXISTS `marker_retrieval_info` */;
+/*!50001 DROP VIEW IF EXISTS `marker_retrieval_info` */;
+
+/*!50001 CREATE VIEW `marker_retrieval_info` AS (select `marker`.`marker_id` AS `marker_id`,`marker`.`marker_type` AS `marker_type`,`marker`.`marker_name` AS `marker_name`,`marker`.`species` AS `species`,`marker`.`db_accession_id` AS `accession_id`,`marker`.`reference` AS `reference`,`marker`.`genotype` AS `genotype`,`marker`.`ploidy` AS `ploidy`,`marker_user_info`.`principal_investigator` AS `principal_investigator`,`marker_user_info`.`contact` AS `contact`,`marker_user_info`.`institute` AS `institute`,coalesce(`genotypes_count`.`genotypes_count`,0) AS `genotypes_count` from ((`marker` left join `marker_user_info` on((`marker`.`marker_id` = `marker_user_info`.`marker_id`))) left join `genotypes_count` on((`marker_user_info`.`marker_id` = `genotypes_count`.`marker_id`)))) */;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
