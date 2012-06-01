@@ -292,4 +292,5 @@ INSERT INTO workbench_tool (name, title, tool_type, path) VALUES
 ,('fieldbook', 'FieldBook', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe')
 ,('optimas', 'OptiMAS', 'NATIVE', 'tools/optimas/optimas.exe')
 ,('breeding_manager', 'Breeding Manager', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe')
+,('breeding_view', 'Breeding View', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe')
 ;
