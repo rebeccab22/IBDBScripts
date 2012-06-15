@@ -162,31 +162,31 @@ ENGINE=InnoDB;
 --  - can users register their own "activity/task"?
 -- 
 -- 
-CREATE TABLE activity (
-     activity_id            INT UNSIGNED AUTO_INCREMENT NOT NULL
-    ,name                   VARCHAR(256) NOT NULL
-    ,PRIMARY KEY(activity_id)
-)
-ENGINE=InnoDB;
+-- CREATE TABLE activity (
+--      activity_id            INT UNSIGNED AUTO_INCREMENT NOT NULL
+--     ,name                   VARCHAR(256) NOT NULL
+--     ,PRIMARY KEY(activity_id)
+-- )
+-- ENGINE=InnoDB;
 -- 
 
 -- 
-CREATE TABLE contact (
-     contact_id             INT UNSIGNED
-    ,title                  VARCHAR(32)
-    ,first_name             VARCHAR(256) NOT NULL
-    ,last_name              VARCHAR(256) NOT NULL
-    ,email                  VARCHAR(256)
-    ,phone_number           VARCHAR(32)
-    ,institution            VARCHAR(256)
-    ,address_1              VARCHAR(256)
-    ,address_2              VARCHAR(256)
-    ,skype_id               VARCHAR(64)
-    ,notes                  TEXT
-    ,picture                BLOB
-    ,PRIMARY KEY(contact_id)
-)
-ENGINE=InnoDB;
+-- CREATE TABLE contact (
+--      contact_id             INT UNSIGNED
+--     ,title                  VARCHAR(32)
+--     ,first_name             VARCHAR(256) NOT NULL
+--     ,last_name              VARCHAR(256) NOT NULL
+--     ,email                  VARCHAR(256)
+--     ,phone_number           VARCHAR(32)
+--     ,institution            VARCHAR(256)
+--     ,address_1              VARCHAR(256)
+--     ,address_2              VARCHAR(256)
+--     ,skype_id               VARCHAR(64)
+--     ,notes                  TEXT
+--     ,picture                BLOB
+--     ,PRIMARY KEY(contact_id)
+-- )
+-- ENGINE=InnoDB;
 -- 
 
 -- 
