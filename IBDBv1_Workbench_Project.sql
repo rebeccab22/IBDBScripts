@@ -286,8 +286,8 @@ INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id)
 -- WEB tools should use the release port.
 -- NATIVE tools should use a path relative to Tomcat's bin folder.
 INSERT INTO workbench_tool (name, title, tool_type, path) VALUES
- ('germplasm_browser', 'Browse Germplasm Information', 'WEB', 'http://localhost:18080/GermplasmBrowser/germplasm/')
-,('germplasm_phenotypic', 'Retrieve Germplasm by Phenotypic Data', 'WEB', 'http://localhost:18080/GermplasmBrowser/study/study-browser')
+ ('germplasm_browser', 'Browse Germplasm Information', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasm/')
+,('germplasm_phenotypic', 'Retrieve Germplasm by Phenotypic Data', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/study/')
 ,('gdms', 'GDMS', 'WEB', 'http://localhost:18080/ibpworkbench/VAADIN/themes/gcp-default/layouts/load_gdms.html')
 ,('fieldbook', 'FieldBook', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe')
 ,('optimas', 'OptiMAS', 'NATIVE', 'tools/optimas/optimas.exe')
