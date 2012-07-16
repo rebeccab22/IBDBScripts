@@ -213,6 +213,7 @@ CREATE TABLE workbench_project (
     ,target_due_date            DATE
     ,template_id                INT UNSIGNED NOT NULL
     ,template_modified          BOOL NOT NULL DEFAULT FALSE
+    ,crop_type                  ENUM('CHICKPEA', 'COWPEA', 'MAIZE', 'RICE', 'WHEAT', 'CASSAVA')
     ,PRIMARY KEY(project_id)
     ,CONSTRAINT fk_project_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
 )
@@ -294,3 +295,57 @@ INSERT INTO workbench_tool (name, title, tool_type, path) VALUES
 ,('breeding_manager', 'Breeding Manager', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe')
 ,('breeding_view', 'Breeding View', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe')
 ;
+
+
+
+--
+-- table structure for table 'persons'
+--
+DROP TABLE IF EXISTS persons; 
+CREATE TABLE persons (
+  personid INT NOT NULL DEFAULT 0,
+  fname VARCHAR(20) NOT NULL DEFAULT '-',
+  lname VARCHAR(50) NOT NULL DEFAULT '-',
+  ioname VARCHAR(15) NOT NULL DEFAULT '-',
+  institid INT NOT NULL DEFAULT 0,
+  ptitle VARCHAR(25) NOT NULL DEFAULT '-',
+  poname VARCHAR(50) NOT NULL DEFAULT '-',
+  plangu INT NOT NULL DEFAULT 0,
+  pphone VARCHAR(20) NOT NULL DEFAULT '-',
+  pextent VARCHAR(20) NOT NULL DEFAULT '-',
+  pfax VARCHAR(20) NOT NULL DEFAULT '-',
+  pemail VARCHAR(40) NOT NULL DEFAULT '-',
+  prole INT NOT NULL DEFAULT 0,
+  sperson INT NOT NULL DEFAULT 0,
+  eperson INT NOT NULL DEFAULT 0,
+  pstatus INT NOT NULL DEFAULT 0,
+  pnotes VARCHAR(255) NOT NULL DEFAULT '-',
+  contact VARCHAR(255) NOT NULL DEFAULT '-',
+  PRIMARY KEY (personid) 
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+CREATE INDEX persons_idx01 ON persons (institid);
+CREATE INDEX persons_idx02 ON persons (personid);  
+
+--
+-- table structure for table 'users'
+--
+DROP TABLE IF EXISTS users; 
+CREATE TABLE users (
+  userid INT NOT NULL DEFAULT 0,
+  instalid INT NOT NULL DEFAULT 0,
+  ustatus INT NOT NULL DEFAULT 0,
+  uaccess INT NOT NULL DEFAULT 0,
+  utype INT NOT NULL DEFAULT 0,
+  uname VARCHAR(30) NOT NULL DEFAULT '-',
+  upswd VARCHAR(30) NOT NULL DEFAULT '-',   -- increase length to 30: 20100422 mhabito
+  personid INT NOT NULL DEFAULT 0,
+  adate INT NOT NULL DEFAULT 0,
+  cdate INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (userid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+CREATE INDEX users_idx01 ON users (instalid);
+CREATE INDEX users_idx02 ON users (personid);
+CREATE INDEX users_idx03 on users (userid);    -- added 20091103 mhabito: define regular index on column(s) with UNIQUE KEY constraint
+--
