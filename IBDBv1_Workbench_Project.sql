@@ -10,6 +10,7 @@ workbench_project_member
 ,workbench_tool
 ,workbench_workflow_step
 ,workbench_workflow_template
+,workbench_dataset
 ;
 
 -- 
@@ -253,6 +254,18 @@ CREATE TABLE workbench_project_member (
 ENGINE=InnoDB;
 
 
+
+CREATE TABLE workbench_dataset (
+     dataset_id             INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,name					VARCHAR(128) NOT NULL
+    ,description			TEXT
+    ,creation_date			DATE
+    ,project_id				INT UNSIGNED NOT NULL
+    ,type					ENUM('STUDY', 'GERMPLASM_LIST')
+    ,PRIMARY KEY(dataset_id)
+    ,CONSTRAINT fk_workbench_dataset_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+)
+ENGINE=InnoDB;
 -- 
 --  Add initial data.
 -- 
@@ -349,3 +362,4 @@ CREATE INDEX users_idx01 ON users (instalid);
 CREATE INDEX users_idx02 ON users (personid);
 CREATE INDEX users_idx03 on users (userid);    -- added 20091103 mhabito: define regular index on column(s) with UNIQUE KEY constraint
 --
+
