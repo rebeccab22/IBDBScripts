@@ -37,7 +37,7 @@ workbench_project_member
 -- 
 CREATE TABLE workbench_workflow_template (
      template_id            INT UNSIGNED AUTO_INCREMENT NOT NULL
-    ,name                   VARCHAR(256) NOT NULL
+    ,name                   VARCHAR(255) NOT NULL
     ,user_defined           BOOL NOT NULL DEFAULT FALSE
     ,PRIMARY KEY(template_id)
 )
@@ -49,7 +49,7 @@ ENGINE=InnoDB;
 CREATE TABLE workbench_workflow_step (
      step_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(64) NOT NULL
-    ,title                  VARCHAR(256) NOT NULL
+    ,title                  VARCHAR(255) NOT NULL
     ,PRIMARY KEY(step_id)
     ,UNIQUE(name)
 )
@@ -66,7 +66,7 @@ ENGINE=InnoDB;
 CREATE TABLE workbench_tool (
      tool_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(128) NOT NULL
-    ,title                  VARCHAR(256) NOT NULL
+    ,title                  VARCHAR(255) NOT NULL
     ,tool_type              ENUM('WEB', 'NATIVE')
     ,path                   TEXT
     ,PRIMARY KEY(tool_id)
@@ -81,7 +81,7 @@ ENGINE=InnoDB;
 CREATE TABLE workbench_tool_input (
      tool_input_id          INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,tool_id                INT UNSIGNED NOT NULL
-    ,input_label            VARCHAR(256)
+    ,input_label            VARCHAR(255)
     ,input_name             VARCHAR(128)
     ,input_type             ENUM('NUMBER', 'TEXT', 'DATE', 'FILE')
     ,PRIMARY KEY(tool_input_id)
@@ -92,7 +92,7 @@ ENGINE=InnoDB;
 CREATE TABLE workbench_tool_output (
      tool_output_id         INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,tool_id                INT UNSIGNED NOT NULL
-    ,output_label           VARCHAR(256)
+    ,output_label           VARCHAR(255)
     ,output_name            VARCHAR(128)
     ,output_type            ENUM('NUMBER', 'TEXT', 'DATE', 'FILE')
     ,PRIMARY KEY(tool_output_id)
@@ -108,8 +108,8 @@ CREATE TABLE workbench_tool_transform (
      tool_transform_id              INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,input_tool_id                  INT UNSIGNED NOT NULL
     ,output_tool_id                 INT UNSIGNED NOT NULL
-    ,transform_label                VARCHAR(256) NOT NULL
-    ,transform_name                 VARCHAR(256) NOT NULL
+    ,transform_label                VARCHAR(255) NOT NULL
+    ,transform_name                 VARCHAR(255) NOT NULL
     ,PRIMARY KEY(tool_transform_id)
     ,UNIQUE(transform_label)
     ,UNIQUE(transform_name)
@@ -165,7 +165,7 @@ ENGINE=InnoDB;
 -- 
 -- CREATE TABLE activity (
 --      activity_id            INT UNSIGNED AUTO_INCREMENT NOT NULL
---     ,name                   VARCHAR(256) NOT NULL
+--     ,name                   VARCHAR(255) NOT NULL
 --     ,PRIMARY KEY(activity_id)
 -- )
 -- ENGINE=InnoDB;
@@ -175,13 +175,13 @@ ENGINE=InnoDB;
 -- CREATE TABLE contact (
 --      contact_id             INT UNSIGNED
 --     ,title                  VARCHAR(32)
---     ,first_name             VARCHAR(256) NOT NULL
---     ,last_name              VARCHAR(256) NOT NULL
---     ,email                  VARCHAR(256)
+--     ,first_name             VARCHAR(255) NOT NULL
+--     ,last_name              VARCHAR(255) NOT NULL
+--     ,email                  VARCHAR(255)
 --     ,phone_number           VARCHAR(32)
---     ,institution            VARCHAR(256)
---     ,address_1              VARCHAR(256)
---     ,address_2              VARCHAR(256)
+--     ,institution            VARCHAR(255)
+--     ,address_1              VARCHAR(255)
+--     ,address_2              VARCHAR(255)
 --     ,skype_id               VARCHAR(64)
 --     ,notes                  TEXT
 --     ,picture                BLOB
@@ -189,6 +189,24 @@ ENGINE=InnoDB;
 -- )
 -- ENGINE=InnoDB;
 -- 
+
+--
+-- table structure for table 'users'
+--
+DROP TABLE IF EXISTS users; 
+CREATE TABLE users (
+  userid INT NOT NULL DEFAULT 0,
+  instalid INT NOT NULL DEFAULT 0,
+  ustatus INT NOT NULL DEFAULT 0,
+  uaccess INT NOT NULL DEFAULT 0,
+  utype INT NOT NULL DEFAULT 0,
+  uname VARCHAR(30) NOT NULL DEFAULT '-',
+  upswd VARCHAR(30) NOT NULL DEFAULT '-',   -- increase length to 30: 20100422 mhabito
+  personid INT NOT NULL DEFAULT 0,
+  adate INT NOT NULL DEFAULT 0,
+  cdate INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (userid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 
 --  A project uses an instance of a "Workflow Template".
@@ -210,7 +228,8 @@ ENGINE=InnoDB;
 -- 
 CREATE TABLE workbench_project (
      project_id                 INT UNSIGNED AUTO_INCREMENT NOT NULL
-    ,project_name               VARCHAR(256) NOT NULL
+    ,user_id                 	INT UNSIGNED NOT NULL
+    ,project_name               VARCHAR(255) NOT NULL
     ,target_due_date            DATE
     ,template_id                INT UNSIGNED NOT NULL
     ,template_modified          BOOL NOT NULL DEFAULT FALSE
@@ -340,23 +359,6 @@ CREATE TABLE persons (
 CREATE INDEX persons_idx01 ON persons (institid);
 CREATE INDEX persons_idx02 ON persons (personid);  
 
---
--- table structure for table 'users'
---
-DROP TABLE IF EXISTS users; 
-CREATE TABLE users (
-  userid INT NOT NULL DEFAULT 0,
-  instalid INT NOT NULL DEFAULT 0,
-  ustatus INT NOT NULL DEFAULT 0,
-  uaccess INT NOT NULL DEFAULT 0,
-  utype INT NOT NULL DEFAULT 0,
-  uname VARCHAR(30) NOT NULL DEFAULT '-',
-  upswd VARCHAR(30) NOT NULL DEFAULT '-',   -- increase length to 30: 20100422 mhabito
-  personid INT NOT NULL DEFAULT 0,
-  adate INT NOT NULL DEFAULT 0,
-  cdate INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (userid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
 CREATE INDEX users_idx01 ON users (instalid);
 CREATE INDEX users_idx02 ON users (personid);
