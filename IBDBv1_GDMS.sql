@@ -158,7 +158,7 @@ CREATE TABLE `mapping_pop` (
   `mapdata_desc` varchar(150) DEFAULT NULL,
   `scoring_scheme` varchar(150) DEFAULT NULL,
   `map_id` int(11) DEFAULT '0',
-  `mapping_pop_type` varchar(20) DEFAULT NULL,
+  `mapping_type` varchar(20) DEFAULT NULL,
   KEY `fk_mappop_datasetid` (`dataset_id`),
   CONSTRAINT `fk_mappop_datasetid` FOREIGN KEY (`dataset_id`) REFERENCES `dataset` (`dataset_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
