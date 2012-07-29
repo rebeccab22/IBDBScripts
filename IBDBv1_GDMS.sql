@@ -32,6 +32,50 @@ Generation Challenge Programme (GCP)
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+/*Table structure for table `marker` */
+
+DROP TABLE IF EXISTS `marker`;
+
+CREATE TABLE `marker` (
+  `marker_id` int(11) NOT NULL DEFAULT '0',
+  `marker_type` char(10) NOT NULL,
+  `marker_name` char(40) NOT NULL,
+  `species` char(25) NOT NULL,
+  `db_accession_id` varchar(50) DEFAULT NULL,
+  `reference` varchar(255) DEFAULT NULL,
+  `genotype` char(40) DEFAULT NULL,
+  `ploidy` varchar(25) DEFAULT NULL,
+  `primer_id` varchar(40) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `assay_type` varchar(50) DEFAULT NULL,
+  `motif` varchar(250) DEFAULT NULL,
+  `forward_primer` varchar(30) DEFAULT NULL,
+  `reverse_primer` varchar(30) DEFAULT NULL,
+  `product_size` varchar(20) DEFAULT NULL,
+  `annealing_temp` float DEFAULT NULL,
+  `amplification` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`marker_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `dataset` */
+
+DROP TABLE IF EXISTS `dataset`;
+
+CREATE TABLE `dataset` (
+  `dataset_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dataset_name` char(30) NOT NULL,
+  `dataset_desc` varchar(255) DEFAULT NULL,
+  `dataset_type` char(10) NOT NULL,
+  `genus` char(25) NOT NULL,
+  `species` char(25) DEFAULT NULL,
+  `upload_template_date` date DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `datatype` enum('int','char','map') NOT NULL DEFAULT 'int',
+  `missing_data` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`dataset_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
 /*Table structure for table `acc_metadataset` */
 
 DROP TABLE IF EXISTS `acc_metadataset`;
@@ -82,46 +126,6 @@ CREATE TABLE `char_values` (
   CONSTRAINT `fk_charval_markerid` FOREIGN KEY (`marker_id`) REFERENCES `marker` (`marker_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `dart_values` */
-
-DROP TABLE IF EXISTS `dart_values`;
-
-CREATE TABLE `dart_values` (
-  `ad_id` int(11) NOT NULL,
-  `dataset_id` int(11) NOT NULL,
-  `marker_id` int(11) DEFAULT NULL,
-  `clone_id` int(11) DEFAULT NULL,
-  `qvalue` float DEFAULT NULL,
-  `reproducibility` float DEFAULT NULL,
-  `call_rate` float DEFAULT NULL,
-  `pic_value` float DEFAULT NULL,
-  `discordance` float DEFAULT NULL,
-  PRIMARY KEY (`ad_id`),
-  KEY `fk_dartval_datasetid` (`dataset_id`),
-  KEY `fk_dartval_markerid` (`marker_id`),
-  KEY `ind_dartval_dm` (`dataset_id`,`marker_id`),
-  CONSTRAINT `fk_dartval_datasetid` FOREIGN KEY (`dataset_id`) REFERENCES `dataset` (`dataset_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_dartval_markerid` FOREIGN KEY (`marker_id`) REFERENCES `marker` (`marker_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Table structure for table `dataset` */
-
-DROP TABLE IF EXISTS `dataset`;
-
-CREATE TABLE `dataset` (
-  `dataset_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dataset_name` char(30) NOT NULL,
-  `dataset_desc` varchar(255) DEFAULT NULL,
-  `dataset_type` char(10) NOT NULL,
-  `genus` char(25) NOT NULL,
-  `species` char(25) DEFAULT NULL,
-  `upload_template_date` date DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  `datatype` enum('int','char','map') NOT NULL DEFAULT 'int',
-  `missing_data` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`dataset_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
 /*Table structure for table `dataset_users` */
 
 DROP TABLE IF EXISTS `dataset_users`;
@@ -163,6 +167,28 @@ CREATE TABLE `mapping_pop` (
   CONSTRAINT `fk_mappop_datasetid` FOREIGN KEY (`dataset_id`) REFERENCES `dataset` (`dataset_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*Table structure for table `dart_values` */
+
+DROP TABLE IF EXISTS `dart_values`;
+
+CREATE TABLE `dart_values` (
+  `ad_id` int(11) NOT NULL,
+  `dataset_id` int(11) NOT NULL,
+  `marker_id` int(11) DEFAULT NULL,
+  `clone_id` int(11) DEFAULT NULL,
+  `qvalue` float DEFAULT NULL,
+  `reproducibility` float DEFAULT NULL,
+  `call_rate` float DEFAULT NULL,
+  `pic_value` float DEFAULT NULL,
+  `discordance` float DEFAULT NULL,
+  PRIMARY KEY (`ad_id`),
+  KEY `fk_dartval_datasetid` (`dataset_id`),
+  KEY `fk_dartval_markerid` (`marker_id`),
+  KEY `ind_dartval_dm` (`dataset_id`,`marker_id`),
+  CONSTRAINT `fk_dartval_datasetid` FOREIGN KEY (`dataset_id`) REFERENCES `dataset` (`dataset_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_dartval_markerid` FOREIGN KEY (`marker_id`) REFERENCES `marker` (`marker_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*Table structure for table `mapping_pop_values` */
 
 DROP TABLE IF EXISTS `mapping_pop_values`;
@@ -178,31 +204,6 @@ CREATE TABLE `mapping_pop_values` (
   KEY `fk_mappopval_markerid` (`marker_id`),
   CONSTRAINT `fk_mappopval_datasetid` FOREIGN KEY (`dataset_id`) REFERENCES `dataset` (`dataset_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mappopval_markerid` FOREIGN KEY (`marker_id`) REFERENCES `marker` (`marker_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Table structure for table `marker` */
-
-DROP TABLE IF EXISTS `marker`;
-
-CREATE TABLE `marker` (
-  `marker_id` int(11) NOT NULL DEFAULT '0',
-  `marker_type` char(10) NOT NULL,
-  `marker_name` char(40) NOT NULL,
-  `species` char(25) NOT NULL,
-  `db_accession_id` varchar(50) DEFAULT NULL,
-  `reference` varchar(255) DEFAULT NULL,
-  `genotype` char(40) DEFAULT NULL,
-  `ploidy` varchar(25) DEFAULT NULL,
-  `primer_id` varchar(40) DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  `assay_type` varchar(50) DEFAULT NULL,
-  `motif` varchar(250) DEFAULT NULL,
-  `forward_primer` varchar(30) DEFAULT NULL,
-  `reverse_primer` varchar(30) DEFAULT NULL,
-  `product_size` varchar(20) DEFAULT NULL,
-  `annealing_temp` float DEFAULT NULL,
-  `amplification` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`marker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `marker_alias` */
@@ -324,17 +325,6 @@ CREATE TABLE `qtl_details` (
   CONSTRAINT `fk_qtl_mapid` FOREIGN KEY (`map_id`) REFERENCES `map` (`map_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `track_acc` */
-
-DROP TABLE IF EXISTS `track_acc`;
-
-CREATE TABLE `track_acc` (
-  `track_id` int(11) NOT NULL DEFAULT '0',
-  `gid` int(11) DEFAULT '0',
-  KEY `fk_trackacc_trackkid` (`track_id`),
-  CONSTRAINT `fk_trackacc_trackkid` FOREIGN KEY (`track_id`) REFERENCES `track_data` (`track_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 /*Table structure for table `track_data` */
 
 DROP TABLE IF EXISTS `track_data`;
@@ -344,6 +334,17 @@ CREATE TABLE `track_data` (
   `track_name` char(30) NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`track_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `track_acc` */
+
+DROP TABLE IF EXISTS `track_acc`;
+
+CREATE TABLE `track_acc` (
+  `track_id` int(11) NOT NULL DEFAULT '0',
+  `gid` int(11) DEFAULT '0',
+  KEY `fk_trackacc_trackkid` (`track_id`),
+  CONSTRAINT `fk_trackacc_trackkid` FOREIGN KEY (`track_id`) REFERENCES `track_data` (`track_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `track_makers` */
