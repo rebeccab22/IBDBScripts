@@ -368,3 +368,29 @@ CREATE INDEX users_idx02 ON users (personid);
 CREATE INDEX users_idx03 on users (userid);    -- added 20091103 mhabito: define regular index on column(s) with UNIQUE KEY constraint
 --
 
+-- 
+--  The breeding method/s associated to a workbench project
+-- 
+CREATE TABLE workbench_project_method (
+     project_method_id           INT UNSIGNED AUTO_INCREMENT NOT NULL 
+    ,project_id                  INT UNSIGNED NOT NULL
+    ,method_id                   INT(11) NOT NULL
+    ,PRIMARY KEY(project_method_id)
+    ,UNIQUE(project_id, method_id)
+    ,CONSTRAINT fk_project_method_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+)
+ENGINE=InnoDB;
+
+-- 
+--  The users/s associated to a workbench project
+-- 
+CREATE TABLE workbench_project_user (
+     project_user_id           INT UNSIGNED AUTO_INCREMENT NOT NULL 
+    ,project_id                  INT UNSIGNED NOT NULL
+    ,user_id                   INT(11) NOT NULL
+    ,PRIMARY KEY(project_user_id)
+    ,UNIQUE(project_id, user_id)
+    ,CONSTRAINT fk_project_user_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_user_2 FOREIGN KEY(user_id) REFERENCES users(userid) ON UPDATE CASCADE
+)
+ENGINE=InnoDB;
