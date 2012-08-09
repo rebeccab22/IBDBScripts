@@ -391,6 +391,5 @@ CREATE TABLE workbench_project_user (
     ,PRIMARY KEY(project_user_id)
     ,UNIQUE(project_id, user_id)
     ,CONSTRAINT fk_project_user_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
-    ,CONSTRAINT fk_project_user_2 FOREIGN KEY(user_id) REFERENCES users(userid) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
