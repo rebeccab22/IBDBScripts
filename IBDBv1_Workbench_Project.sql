@@ -405,3 +405,55 @@ CREATE TABLE workbench_project_loc_map (
     PRIMARY KEY(id),
     CONSTRAINT fk_workbench_project_loc_map_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
 ) ENGINE=InnoDB;
+
+
+-- 
+-- MAS Data into workflow tables
+-- 
+
+-- Insert MAS into workbench_workflow_template
+
+INSERT IGNORE INTO workbench_workflow_template(name, user_defined)
+VALUES('MAS', 0);
+
+-- Insert steps used in MAS into workbench_workflow_step
+
+INSERT IGNORE INTO workbench_workflow_step(name, title) VALUES
+('project_planning','Project Planning')
+,('population_development','Population Development')
+,('field_trial_management','Field Trial Management')
+,('marker_trait_selection','Marker Trait Selection')
+,('progeny_selection','Progeny Selection')
+,('project_completion','Project Completion');
+
+-- Insert actual MAS steps into workbench_workflow_template_step
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 1, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MAS' AND step.name = 'project_planning';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 2, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MAS' AND step.name = 'population_development';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 3, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MAS' AND step.name = 'field_trial_management';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 4, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MAS' AND step.name = 'marker_trait_selection';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 5, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MAS' AND step.name = 'progeny_selection';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 6, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MAS' AND step.name = 'project_completion';
