@@ -291,6 +291,7 @@ CREATE TABLE workbench_dataset (
     ,CONSTRAINT fk_workbench_dataset_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
+
 -- 
 --  Add initial data.
 -- 
@@ -408,6 +409,24 @@ CREATE TABLE workbench_project_loc_map (
     PRIMARY KEY(id),
     CONSTRAINT fk_workbench_project_loc_map_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
 ) ENGINE=InnoDB;
+
+
+
+DROP TABLE IF EXISTS workbench_project_activity; 
+CREATE TABLE workbench_project_activity (
+     project_activity_id	INT UNSIGNED AUTO_INCREMENT NOT NULL 
+    ,project_id				INT UNSIGNED NOT NULL
+    ,name					VARCHAR(128) NOT NULL
+    ,description			TEXT
+    ,user_id				INT(11) NOT NULL
+    ,date			DATE
+    ,PRIMARY KEY(project_activity_id)
+    ,CONSTRAINT fk_project_activity_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_activity_2 FOREIGN KEY(user_id) REFERENCES users(userid) ON UPDATE CASCADE
+)
+ENGINE=InnoDB;
+
+
 
 
 -- 
