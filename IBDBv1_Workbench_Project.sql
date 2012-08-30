@@ -398,6 +398,9 @@ CREATE TABLE workbench_project_user (
 )
 ENGINE=InnoDB;
 
+--
+-- The mapping of workbench users with corresponding ibdb local user.
+--
 DROP TABLE IF EXISTS workbench_ibdb_user_map;
 CREATE TABLE workbench_ibdb_user_map (
      ibdb_user_map_id           INT UNSIGNED AUTO_INCREMENT NOT NULL
