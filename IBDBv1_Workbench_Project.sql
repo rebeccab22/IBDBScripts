@@ -206,7 +206,7 @@ CREATE TABLE users (
   uaccess INT NOT NULL DEFAULT 0,
   utype INT NOT NULL DEFAULT 0,
   uname VARCHAR(30) NOT NULL DEFAULT '-',
-  upswd VARCHAR(30) NOT NULL DEFAULT '-',   -- increase length to 30: 20100422 mhabito
+  upswd VARCHAR(30) NOT NULL DEFAULT '-',
   personid INT NOT NULL DEFAULT 0,
   adate INT NOT NULL DEFAULT 0,
   cdate INT NOT NULL DEFAULT 0,
@@ -389,12 +389,22 @@ ENGINE=InnoDB;
 --  The users/s associated to a workbench project
 -- 
 CREATE TABLE workbench_project_user (
-     project_user_id           INT UNSIGNED AUTO_INCREMENT NOT NULL 
-    ,project_id                  INT UNSIGNED NOT NULL
-    ,user_id                   INT(11) NOT NULL
+     project_user_id            INT UNSIGNED AUTO_INCREMENT NOT NULL 
+    ,project_id                 INT UNSIGNED NOT NULL
+    ,user_id                    INT(11) NOT NULL
     ,PRIMARY KEY(project_user_id)
     ,UNIQUE(project_id, user_id)
     ,CONSTRAINT fk_project_user_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+)
+ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS workbench_ibdb_user_map;
+CREATE TABLE workbench_ibdb_user_map (
+     ibdb_user_map_id           INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,workbench_user_id          INT(11) NOT NULL
+    ,project_id                 INT UNSIGNED NOT NULL
+    ,ibdb_user_id               INT(11) NOT NULL
+    ,PRIMARY KEY(ibdb_user_map_id)
 )
 ENGINE=InnoDB;
 
