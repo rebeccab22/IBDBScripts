@@ -403,11 +403,11 @@ ENGINE=InnoDB;
 --
 DROP TABLE IF EXISTS workbench_project_loc_map;
 CREATE TABLE workbench_project_loc_map (
-    id                      INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    project_id              INT UNSIGNED NOT NULL,
-    location_id             INT UNSIGNED NOT NULL,                
-    PRIMARY KEY(id),
-    CONSTRAINT fk_workbench_project_loc_map_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+     id                      INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,project_id              INT UNSIGNED NOT NULL
+    ,location_id             INT UNSIGNED NOT NULL                
+    ,PRIMARY KEY(id)
+    ,CONSTRAINT fk_workbench_project_loc_map_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 
@@ -479,3 +479,17 @@ INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, st
 SELECT template_id, 6, step_id 
 FROM workbench_workflow_template template, workbench_workflow_step step
 WHERE template.name = 'MAS' AND step.name = 'project_completion';
+
+--
+-- Tool Configuration table
+--
+DROP TABLE IF EXISTS workbench_tool_config;
+CREATE TABLE workbench_tool_config(
+     config_id               INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,tool_id                 INT UNSIGNED NOT NULL
+    ,config_key              VARCHAR(255) NOT NULL
+    ,config_value            VARCHAR(255) NOT NULL
+    ,PRIMARY KEY(config_id)
+    ,UNIQUE KEY(tool_id, config_key)
+    ,CONSTRAINT fk_tool_config_1 FOREIGN KEY(tool_id) REFERENCES workbench_tool(tool_id) ON UPDATE CASCADE
+) ENGINE=InnoDB;
