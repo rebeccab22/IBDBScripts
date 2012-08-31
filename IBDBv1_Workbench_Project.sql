@@ -238,10 +238,11 @@ CREATE TABLE workbench_project (
     ,target_due_date            DATE
     ,template_id                INT UNSIGNED NOT NULL
     ,template_modified          BOOL NOT NULL DEFAULT FALSE
-    ,crop_type                  ENUM('CHICKPEA', 'COWPEA', 'MAIZE', 'RICE', 'WHEAT', 'CASSAVA')
+    ,crop_type                  varchar(32)
     ,last_open_date             TIMESTAMP NULL
     ,PRIMARY KEY(project_id)
     ,CONSTRAINT fk_project_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_2 FOREIGN KEY(crop_type) REFERENCES workbench_crops(crop_name) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
