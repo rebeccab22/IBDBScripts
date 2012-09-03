@@ -507,3 +507,12 @@ CREATE TABLE workbench_tool_config(
     ,UNIQUE KEY(tool_id, config_key)
     ,CONSTRAINT fk_tool_config_1 FOREIGN KEY(tool_id) REFERENCES workbench_tool(tool_id) ON UPDATE CASCADE
 ) ENGINE=InnoDB;
+
+--
+-- Workbench Runtime Data
+DROP TABLE IF EXISTS workbench_runtime_data;
+CREATE TABLE workbench_runtime_data (
+     id                     INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,user_id                INT(11)
+    ,PRIMARY KEY(id)
+) ENGINE=InnoDB;
