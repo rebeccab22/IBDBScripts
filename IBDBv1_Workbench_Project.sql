@@ -235,7 +235,7 @@ CREATE TABLE workbench_project (
      project_id                 INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,user_id                    INT UNSIGNED NOT NULL
     ,project_name               VARCHAR(255) NOT NULL
-    ,target_due_date            DATE
+    ,start_date                 DATE
     ,template_id                INT UNSIGNED NOT NULL
     ,template_modified          BOOL NOT NULL DEFAULT FALSE
     ,crop_type                  varchar(32)
