@@ -13,10 +13,25 @@ workbench_project_member
 ,workbench_dataset
 ;
 
-CREATE TABLE IF NOT EXISTS workbench_crops(
+-- 
+-- workbench crops
+--
+
+DROP TABLE IF EXISTS workbench_crop;
+CREATE TABLE IF NOT EXISTS workbench_crop(
      crop_name VARCHAR(32) NOT NULL
+    ,central_db_name VARCHAR(64)
     ,PRIMARY KEY(crop_name)
 ) ENGINE=InnoDB;
+
+-- initial values for crops
+INSERT INTO workbench_crop(crop_name) VALUES ('Cassava');
+INSERT INTO workbench_crop(crop_name) VALUES ('Chickpea');
+INSERT INTO workbench_crop(crop_name) VALUES ('Cowpea');
+INSERT INTO workbench_crop(crop_name) VALUES ('Maize');
+INSERT INTO workbench_crop(crop_name) VALUES ('Rice');
+INSERT INTO workbench_crop(crop_name) VALUES ('Wheat');
+
 
 -- 
 --  A template of a Workflow.
@@ -238,11 +253,13 @@ CREATE TABLE workbench_project (
     ,start_date                 DATE
     ,template_id                INT UNSIGNED NOT NULL
     ,template_modified          BOOL NOT NULL DEFAULT FALSE
-    ,crop_type                  varchar(32)
+    ,crop_type                  VARCHAR(32)
+    ,local_db_name              VARCHAR(64)
+    ,central_db_name            VARCHAR(64)
     ,last_open_date             TIMESTAMP NULL
     ,PRIMARY KEY(project_id)
     ,CONSTRAINT fk_project_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
-    ,CONSTRAINT fk_project_2 FOREIGN KEY(crop_type) REFERENCES workbench_crops(crop_name) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_2 FOREIGN KEY(crop_type) REFERENCES workbench_crop(crop_name) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
 
