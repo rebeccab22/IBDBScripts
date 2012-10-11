@@ -386,18 +386,7 @@ CREATE TABLE workbench_project_method (
 )
 ENGINE=InnoDB;
 
--- 
---  The users/s associated to a workbench project
--- 
-CREATE TABLE workbench_project_user (
-     project_user_id            INT UNSIGNED AUTO_INCREMENT NOT NULL 
-    ,project_id                 INT UNSIGNED NOT NULL
-    ,user_id                    INT(11) NOT NULL
-    ,PRIMARY KEY(project_user_id)
-    ,UNIQUE(project_id, user_id)
-    ,CONSTRAINT fk_project_user_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
-)
-ENGINE=InnoDB;
+
 
 --
 -- The mapping of workbench users with corresponding ibdb local user.
@@ -493,6 +482,77 @@ INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, st
 SELECT template_id, 6, step_id 
 FROM workbench_workflow_template template, workbench_workflow_step step
 WHERE template.name = 'MAS' AND step.name = 'project_completion';
+
+
+--
+-- Insert MABC and Manager templates into workbench_workflow_template 
+--
+
+INSERT INTO workbench_workflow_template(name, user_defined)
+SELECT DISTINCT('MABC'), 0 FROM workbench_workflow_template
+WHERE NOT EXISTS (SELECT template_id FROM workbench_workflow_template WHERE name = 'MABC');
+
+INSERT INTO workbench_workflow_template(name, user_defined)
+SELECT DISTINCT('Manager'), 0 FROM workbench_workflow_template
+WHERE NOT EXISTS (SELECT template_id FROM workbench_workflow_template WHERE name = 'Manager');
+
+
+--
+-- WORKBENCH_ROLE and data
+-- 
+
+DROP TABLE IF EXISTS workbench_role;
+CREATE TABLE workbench_role (
+     role_id INT UNSIGNED AUTO_INCREMENT
+    ,name    VARCHAR(255)
+    ,workflow_template_id INT UNSIGNED NOT NULL
+    ,CONSTRAINT workbench_role_pk PRIMARY KEY(role_id)
+    ,CONSTRAINT fk_workbench_role_1 FOREIGN KEY(workflow_template_id) REFERENCES workbench_workflow_template(template_id) 
+)ENGINE=InnoDB;
+
+INSERT INTO workbench_role(name, workflow_template_id) 
+SELECT 'Manager', template_id from workbench_workflow_template WHERE name = 'Manager'
+AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'Manager' 
+                    AND workflow_template_id = (SELECT DISTINCT template_id 
+                                                FROM workbench_workflow_template WHERE name = 'Manager'));
+
+INSERT INTO workbench_role(name, workflow_template_id) 
+SELECT 'MARS Breeder', template_id from workbench_workflow_template WHERE name = 'MARS'
+AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'MARS Breeder' 
+                    AND workflow_template_id = (SELECT DISTINCT template_id 
+                                                FROM workbench_workflow_template WHERE name = 'MARS'));
+
+INSERT INTO workbench_role(name, workflow_template_id) 
+SELECT 'MAS Breeder', template_id from workbench_workflow_template WHERE name = 'MAS'
+AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'MAS Breeder' 
+                    AND workflow_template_id = (SELECT DISTINCT template_id 
+                                                FROM workbench_workflow_template WHERE name = 'MAS'));
+
+INSERT INTO workbench_role(name, workflow_template_id) 
+SELECT 'MABC Breeder', template_id from workbench_workflow_template WHERE name = 'MABC'
+AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'MABC Breeder' 
+                    AND workflow_template_id = (SELECT DISTINCT template_id 
+                                                FROM workbench_workflow_template WHERE name = 'MABC'));
+
+-- 
+--  The users/s associated to a workbench project
+-- 
+DROP TABLE IF EXISTS workbench_project_user;
+CREATE TABLE workbench_project_user (
+     project_user_id            INT UNSIGNED AUTO_INCREMENT NOT NULL 
+    ,project_id                 INT UNSIGNED NOT NULL
+    ,user_id                    INT(11) NOT NULL
+    ,role_id 					INT UNSIGNED NOT NULL
+    ,PRIMARY KEY(project_user_id)
+    ,UNIQUE(project_id, user_id, role_id)
+    ,CONSTRAINT fk_project_user_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_user_2 FOREIGN KEY(role_id) REFERENCES workbench_role(role_id) ON UPDATE CASCADE
+)
+ENGINE=InnoDB;
 
 --
 -- Tool Configuration table
