@@ -515,6 +515,48 @@ INSERT INTO workbench_workflow_template(name, user_defined)
 SELECT DISTINCT('Manager'), 0 FROM workbench_workflow_template
 WHERE NOT EXISTS (SELECT template_id FROM workbench_workflow_template WHERE name = 'Manager');
 
+-- Insert steps used in MABC into workbench_workflow_step
+
+INSERT IGNORE INTO workbench_workflow_step(name, title) VALUES
+('project_planning','Project Planning')
+,('backcrossing','Backcrossing')
+,('genotyping','Genotyping')
+,('field_trial_management','Field Trial Management')
+,('statistical_analysis','Statistical Analysis')
+,('breeding_decision','Breeding Decision');
+
+-- Insert actual MABC steps into workbench_workflow_template_step
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 1, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MABC' AND step.name = 'project_planning';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 2, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MABC' AND step.name = 'backcrossing';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 3, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MABC' AND step.name = 'genotyping';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 4, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MABC' AND step.name = 'field_trial_management';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 5, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MABC' AND step.name = 'statistical_analysis';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 6, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'MABC' AND step.name = 'breeding_decision';
+
 
 --
 -- WORKBENCH_ROLE and data
