@@ -557,6 +557,48 @@ SELECT template_id, 6, step_id
 FROM workbench_workflow_template template, workbench_workflow_step step
 WHERE template.name = 'MABC' AND step.name = 'breeding_decision';
 
+-- Insert steps used in the Manager Workflow into workbench_workflow_step
+
+INSERT IGNORE INTO workbench_workflow_step(name, title) VALUES
+('project_planning','Project Planning')
+,('administration','Administration')
+,('analysis_pipeline','Analysis Pipeline')
+,('configuration','Configuration')
+,('breeding_management','Breeding Management')
+,('decision_support','Decision Support');
+
+-- Insert actual Manager Workflow steps into workbench_workflow_template_step
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 1, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'Manager' AND step.name = 'administration';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 2, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'Manager' AND step.name = 'configuration';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 3, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'Manager' AND step.name = 'project_planning';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 4, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'Manager' AND step.name = 'breeding_management';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 5, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'Manager' AND step.name = 'analysis_pipeline';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 6, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'Manager' AND step.name = 'decision_support';
+
 
 --
 -- WORKBENCH_ROLE and data
