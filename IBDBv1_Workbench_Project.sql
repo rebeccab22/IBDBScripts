@@ -23,13 +23,13 @@ CREATE TABLE IF NOT EXISTS workbench_crop(
     ,PRIMARY KEY(crop_name)
 ) ENGINE=InnoDB;
 
--- initial values for crops
-INSERT INTO workbench_crop(crop_name) VALUES ('Cassava');
-INSERT INTO workbench_crop(crop_name) VALUES ('Chickpea');
-INSERT INTO workbench_crop(crop_name) VALUES ('Cowpea');
-INSERT INTO workbench_crop(crop_name) VALUES ('Maize');
-INSERT INTO workbench_crop(crop_name) VALUES ('Rice');
-INSERT INTO workbench_crop(crop_name) VALUES ('Wheat');
+-- initial values for crops. REPLEACE WITH YOUR CENTRAL DB NAMES
+INSERT INTO workbench_crop(crop_name, central_db_name) VALUES ('Cassava', 'ibdb_cassava_central');
+INSERT INTO workbench_crop(crop_name, central_db_name) VALUES ('Chickpea', 'ibdb_chickpea_central');
+INSERT INTO workbench_crop(crop_name, central_db_name) VALUES ('Cowpea', 'ibdb_cowpea_central');
+INSERT INTO workbench_crop(crop_name, central_db_name) VALUES ('Maize', 'ibdb_maize_central');
+INSERT INTO workbench_crop(crop_name, central_db_name) VALUES ('Rice', 'ibdb_rice_central');
+INSERT INTO workbench_crop(crop_name, central_db_name) VALUES ('Wheat', 'ibdb_wheat_central');
 
 
 -- 
