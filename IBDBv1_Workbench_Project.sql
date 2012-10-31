@@ -91,7 +91,8 @@ CREATE TABLE workbench_tool (
     ,PRIMARY KEY(tool_id)
     ,UNIQUE(name)
 )
-ENGINE=InnoDB;
+ENGINE=InnoDB;
+
 -- 
 --  A list of named "input" of a tool.
 --  "input_label" is the parameter name we could use as labels in screens.
