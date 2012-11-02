@@ -386,6 +386,7 @@ CREATE INDEX users_idx03 on users (userid);    -- added 20091103 mhabito: define
 -- 
 --  The breeding method/s associated to a workbench project
 -- 
+DROP TABLE IF EXISTS workbench_project_method;
 CREATE TABLE workbench_project_method (
      project_method_id           INT UNSIGNED AUTO_INCREMENT NOT NULL 
     ,project_id                  INT UNSIGNED NOT NULL
