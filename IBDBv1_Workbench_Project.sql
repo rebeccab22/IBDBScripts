@@ -420,7 +420,7 @@ DROP TABLE IF EXISTS workbench_project_loc_map;
 CREATE TABLE workbench_project_loc_map (
      id                      INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,project_id              INT UNSIGNED NOT NULL
-    ,location_id             INT UNSIGNED NOT NULL                
+    ,location_id             INT(11) NOT NULL               
     ,PRIMARY KEY(id)
     ,CONSTRAINT fk_workbench_project_loc_map_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
 ) ENGINE=InnoDB;
