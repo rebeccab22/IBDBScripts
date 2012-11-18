@@ -87,7 +87,7 @@ CREATE TABLE workbench_tool (
     ,name                   VARCHAR(128) NOT NULL
     ,title                  VARCHAR(255) NOT NULL
     ,version                VARCHAR(16) NOT NULL
-    ,tool_type              ENUM('WEB', 'NATIVE')
+    ,tool_type              ENUM('WEB', 'WEB_WITH_LOGIN', 'NATIVE')
     ,path                   TEXT
     ,PRIMARY KEY(tool_id)
     ,UNIQUE(name)
@@ -339,7 +339,7 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path) VALUES
  ('germplasm_browser', 'Browse Germplasm Information', '1.1.1', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasm/')
 ,('study_browser', 'Browse Studies and Datasets', '1.1.1', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/study/')
 ,('germplasm_list_browser', 'Browse Germplasm Lists', '1.1.1', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasmlist/')
-,('gdms', 'GDMS', '1.0', 'WEB', 'http://localhost:18080/ibpworkbench/VAADIN/themes/gcp-default/layouts/load_gdms.html')
+,('gdms', 'GDMS', '1.0', 'WEB_WITH_LOGIN', 'http://localhost:18080/GDMS/login.do')
 ,('fieldbook', 'FieldBook', '2.0.0', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe')
 ,('optimas', 'OptiMAS', '1.3', 'NATIVE', 'tools/optimas/optimas.exe')
 ,('breeding_manager', 'Breeding Manager', '2.0.0', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe')
