@@ -442,7 +442,50 @@ CREATE TABLE workbench_project_activity (
 ENGINE=InnoDB;
 
 
+-- 
+-- Conventional Breeding Data into workflow tables
+-- 
 
+-- Insert Conventional Breeding (CB) into workbench_workflow_template
+
+INSERT IGNORE INTO workbench_workflow_template(name, user_defined)
+VALUES('CB', 0);
+
+-- Insert steps used in MAS into workbench_workflow_step
+
+INSERT IGNORE INTO workbench_workflow_step(name, title) VALUES
+('project_planning','Project Planning')
+,('population_development','Population Development')
+,('field_trial_management','Field Trial Management')
+,('statistical_analysis','Statistical Analysis')
+,('breeding_decision','Breeding Decision');
+
+-- Insert actual CB steps into workbench_workflow_template_step
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 1, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'CB' AND step.name = 'project_planning';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 2, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'CB' AND step.name = 'population_development';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 4, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'CB' AND step.name = 'field_trial_management';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 5, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'CB' AND step.name = 'statistical_analysis';
+
+INSERT IGNORE INTO workbench_workflow_template_step(template_id, step_number, step_id)
+SELECT template_id, 6, step_id 
+FROM workbench_workflow_template template, workbench_workflow_step step
+WHERE template.name = 'CB' AND step.name = 'breeding_decision';
 
 -- 
 -- MAS Data into workflow tables
@@ -634,6 +677,12 @@ AND NOT EXISTS (SELECT role_id FROM workbench_role
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MABC'));
 
+INSERT INTO workbench_role(name, workflow_template_id) 
+SELECT 'CB Breeder', template_id from workbench_workflow_template WHERE name = 'CB'
+AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'CB Breeder' 
+                    AND workflow_template_id = (SELECT DISTINCT template_id 
+                                                FROM workbench_workflow_template WHERE name = 'CB'));                                            
 -- 
 --  The users/s associated to a workbench project
 -- 
