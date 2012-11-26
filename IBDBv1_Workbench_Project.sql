@@ -313,11 +313,11 @@ INSERT INTO workbench_workflow_step (step_id, name, title) VALUES
 ,(2, 'population_management', 'Population Management')
 ,(3, 'field_trial_management', 'Field Trial Management')
 ,(4, 'genotyping', 'Genotyping')
+,(5, 'phenotypic_analysis', 'Phenotypic Analysis')
 ,(5, 'qtl_analysis', 'QTL Analysis')
-,(6, 'ideotype_design', 'Ideotype Design')
-,(7, 'plant_selection', 'Plant Selection')
-,(8, 'population', 'Population')
-,(9, 'project_completion', 'Project Completion')
+,(6, 'qtl_selection', 'QTL Selection')
+,(7, 'recombination_cycle', 'Recombination Cycle')
+,(8, 'final_breeding_decision', 'Final Breeding Decision')
 ;
 
 INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id) VALUES
@@ -329,7 +329,6 @@ INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id)
 ,(1, 6, 6)
 ,(1, 7, 7)
 ,(1, 8, 8)
-,(1, 9, 9)
 ;
 
 -- Notes on paths:
