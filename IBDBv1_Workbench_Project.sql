@@ -314,10 +314,10 @@ INSERT INTO workbench_workflow_step (step_id, name, title) VALUES
 ,(3, 'field_trial_management', 'Field Trial Management')
 ,(4, 'genotyping', 'Genotyping')
 ,(5, 'phenotypic_analysis', 'Phenotypic Analysis')
-,(5, 'qtl_analysis', 'QTL Analysis')
-,(6, 'qtl_selection', 'QTL Selection')
-,(7, 'recombination_cycle', 'Recombination Cycle')
-,(8, 'final_breeding_decision', 'Final Breeding Decision')
+,(6, 'qtl_analysis', 'QTL Analysis')
+,(7, 'qtl_selection', 'QTL Selection')
+,(8, 'recombination_cycle', 'Recombination Cycle')
+,(9, 'final_breeding_decision', 'Final Breeding Decision')
 ;
 
 INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id) VALUES
