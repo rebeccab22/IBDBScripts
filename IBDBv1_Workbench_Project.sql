@@ -329,6 +329,7 @@ INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id)
 ,(1, 6, 6)
 ,(1, 7, 7)
 ,(1, 8, 8)
+,(1, 9, 9)
 ;
 
 -- Notes on paths:
@@ -697,6 +698,14 @@ CREATE TABLE workbench_project_user_role (
     ,CONSTRAINT fk_project_user_role_2 FOREIGN KEY(role_id) REFERENCES workbench_role(role_id) ON UPDATE CASCADE
 )
 ENGINE=InnoDB;
+
+-- Workbench Settings
+DROP TABLE IF EXISTS workbench_setting;
+CREATE TABLE workbench_setting (
+     setting_id                 INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,installation_directory     VARCHAR(255)
+    ,PRIMARY KEY(setting_id)
+) ENGINE=InnoDB;
 
 --
 -- Tool Configuration table
