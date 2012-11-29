@@ -344,7 +344,6 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path) VALUES
 ,('optimas', 'OptiMAS', '1.3', 'NATIVE', 'tools/optimas/optimas.exe')
 ,('breeding_manager', 'Breeding Manager', '2.0.0', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe')
 ,('breeding_view', 'Breeding View', 'Alpha Version', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe')
-,('mbdt', 'Molecular Breeding Design Tool', '1.0', 'NATIVE', 'tools/mbdt/MBDTversion1.0.exe')
 ;
 
 
