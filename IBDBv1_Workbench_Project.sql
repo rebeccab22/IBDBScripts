@@ -644,44 +644,52 @@ CREATE TABLE workbench_role (
      role_id INT UNSIGNED AUTO_INCREMENT
     ,name    VARCHAR(255)
     ,workflow_template_id INT UNSIGNED NOT NULL
+    ,role_label VARCHAR(255)
     ,CONSTRAINT workbench_role_pk PRIMARY KEY(role_id)
     ,CONSTRAINT fk_workbench_role_1 FOREIGN KEY(workflow_template_id) REFERENCES workbench_workflow_template(template_id) 
 )ENGINE=InnoDB;
 
-INSERT INTO workbench_role(name, workflow_template_id) 
-SELECT 'Manager', template_id from workbench_workflow_template WHERE name = 'Manager'
-AND NOT EXISTS (SELECT role_id FROM workbench_role 
-                WHERE name = 'Manager' 
-                    AND workflow_template_id = (SELECT DISTINCT template_id 
-                                                FROM workbench_workflow_template WHERE name = 'Manager'));
 
-INSERT INTO workbench_role(name, workflow_template_id) 
-SELECT 'MARS Breeder', template_id from workbench_workflow_template WHERE name = 'MARS'
-AND NOT EXISTS (SELECT role_id FROM workbench_role 
-                WHERE name = 'MARS Breeder' 
+INSERT INTO workbench_role(name, workflow_template_id, role_label) 
+SELECT 'CB Breeder', template_id, 'Conventional breeding (CB)' 
+FROM workbench_workflow_template WHERE name = 'CB'
+	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'CB Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
-                                                FROM workbench_workflow_template WHERE name = 'MARS'));
+                                                FROM workbench_workflow_template WHERE name = 'CB'));                                            
 
-INSERT INTO workbench_role(name, workflow_template_id) 
-SELECT 'MAS Breeder', template_id from workbench_workflow_template WHERE name = 'MAS'
-AND NOT EXISTS (SELECT role_id FROM workbench_role 
+INSERT INTO workbench_role(name, workflow_template_id, role_label) 
+SELECT 'MAS Breeder', template_id, 'Breeding with marker assisted selection (MAS)' 
+FROM workbench_workflow_template WHERE name = 'MAS'
+	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MAS Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MAS'));
 
-INSERT INTO workbench_role(name, workflow_template_id) 
-SELECT 'MABC Breeder', template_id from workbench_workflow_template WHERE name = 'MABC'
-AND NOT EXISTS (SELECT role_id FROM workbench_role 
+INSERT INTO workbench_role(name, workflow_template_id, role_label) 
+SELECT 'MABC Breeder', template_id, 'Marker assisted backcrossing (MABC)' 
+FROM workbench_workflow_template WHERE name = 'MABC'
+	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MABC Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MABC'));
 
-INSERT INTO workbench_role(name, workflow_template_id) 
-SELECT 'CB Breeder', template_id from workbench_workflow_template WHERE name = 'CB'
-AND NOT EXISTS (SELECT role_id FROM workbench_role 
-                WHERE name = 'CB Breeder' 
+INSERT INTO workbench_role(name, workflow_template_id, role_label) 
+SELECT 'MARS Breeder', template_id, 'Marker assisted recurrent selection (MARS)'
+FROM workbench_workflow_template WHERE name = 'MARS'
+	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'MARS Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
-                                                FROM workbench_workflow_template WHERE name = 'CB'));                                            
+                                                FROM workbench_workflow_template WHERE name = 'MARS'));
+
+INSERT INTO workbench_role(name, workflow_template_id, role_label) 
+SELECT 'Manager', template_id, 'Access all tools with a menu interface (MENU)' 
+FROM workbench_workflow_template WHERE name = 'Manager'
+	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+                WHERE name = 'Manager' 
+                    AND workflow_template_id = (SELECT DISTINCT template_id 
+                                                FROM workbench_workflow_template WHERE name = 'Manager'));
+                                                
 -- 
 --  The users/s associated to a workbench project
 -- 
