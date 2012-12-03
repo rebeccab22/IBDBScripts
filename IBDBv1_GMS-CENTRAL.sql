@@ -528,6 +528,3 @@ CREATE INDEX users_idx01 ON users (instalid);
 CREATE INDEX users_idx02 ON users (personid);
 CREATE INDEX users_idx03 on users (userid);	   -- added 20091103 mhabito: define regular index on column(s) with UNIQUE KEY constraint
 --
-
-
-
