@@ -645,45 +645,46 @@ CREATE TABLE workbench_role (
     ,name    VARCHAR(255)
     ,workflow_template_id INT UNSIGNED NOT NULL
     ,role_label VARCHAR(255)
+    ,label_order INT
     ,CONSTRAINT workbench_role_pk PRIMARY KEY(role_id)
     ,CONSTRAINT fk_workbench_role_1 FOREIGN KEY(workflow_template_id) REFERENCES workbench_workflow_template(template_id) 
 )ENGINE=InnoDB;
 
 
-INSERT INTO workbench_role(name, workflow_template_id, role_label) 
-SELECT 'CB Breeder', template_id, 'Conventional breeding (CB)' 
+INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
+SELECT 'CB Breeder', template_id, 'Conventional breeding (CB)', 1 
 FROM workbench_workflow_template WHERE name = 'CB'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'CB Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'CB'));                                            
 
-INSERT INTO workbench_role(name, workflow_template_id, role_label) 
-SELECT 'MAS Breeder', template_id, 'Breeding with marker assisted selection (MAS)' 
+INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
+SELECT 'MAS Breeder', template_id, 'Breeding with marker assisted selection (MAS)', 2 
 FROM workbench_workflow_template WHERE name = 'MAS'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MAS Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MAS'));
 
-INSERT INTO workbench_role(name, workflow_template_id, role_label) 
-SELECT 'MABC Breeder', template_id, 'Marker assisted backcrossing (MABC)' 
+INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
+SELECT 'MABC Breeder', template_id, 'Marker assisted backcrossing (MABC)', 3 
 FROM workbench_workflow_template WHERE name = 'MABC'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MABC Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MABC'));
 
-INSERT INTO workbench_role(name, workflow_template_id, role_label) 
-SELECT 'MARS Breeder', template_id, 'Marker assisted recurrent selection (MARS)'
+INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
+SELECT 'MARS Breeder', template_id, 'Marker assisted recurrent selection (MARS)', 4
 FROM workbench_workflow_template WHERE name = 'MARS'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MARS Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MARS'));
 
-INSERT INTO workbench_role(name, workflow_template_id, role_label) 
-SELECT 'Manager', template_id, 'Access all tools with a menu interface (MENU)' 
+INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
+SELECT 'Manager', template_id, 'Access all tools with a menu interface (MENU)', 5 
 FROM workbench_workflow_template WHERE name = 'Manager'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'Manager' 
