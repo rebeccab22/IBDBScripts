@@ -33,6 +33,26 @@ Generation Challenge Programme (GCP)
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+/*Table structure for table `gdms_dataset` */
+
+DROP TABLE IF EXISTS `gdms_dataset`;
+CREATE TABLE `gdms_dataset` (
+  `dataset_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dataset_name` char(30) NOT NULL,
+  `dataset_desc` varchar(255) DEFAULT NULL,
+  `dataset_type` char(10) NOT NULL,
+  `genus` char(25) NOT NULL,
+  `species` char(25) DEFAULT NULL,
+  `upload_template_date` date DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `datatype` enum('int','char','map') NOT NULL DEFAULT 'int',
+  `missing_data` varchar(20) DEFAULT NULL,
+  `method` varchar(25) DEFAULT NULL,
+  `score` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`dataset_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
 /*Table structure for table `gdms_acc_metadataset` */
 
 DROP TABLE IF EXISTS `gdms_acc_metadataset`;     
@@ -43,6 +63,30 @@ CREATE TABLE `gdms_acc_metadataset` (
   KEY `indaccdata` (`dataset_id`,`gid`),
   KEY `fk_accm_datasetid` (`dataset_id`),
   CONSTRAINT `fk_accm_datasetid` FOREIGN KEY (`dataset_id`) REFERENCES `gdms_dataset` (`dataset_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `gdms_marker` */
+
+DROP TABLE IF EXISTS `gdms_marker`;
+CREATE TABLE `gdms_marker` (
+  `marker_id` int(11) NOT NULL DEFAULT '0',
+  `marker_type` char(10) NOT NULL,
+  `marker_name` char(40) NOT NULL,
+  `species` char(25) NOT NULL,
+  `db_accession_id` varchar(50) DEFAULT NULL,
+  `reference` varchar(255) DEFAULT NULL,
+  `genotype` char(40) DEFAULT NULL,
+  `ploidy` varchar(25) DEFAULT NULL,
+  `primer_id` varchar(70) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `assay_type` varchar(50) DEFAULT NULL,
+  `motif` varchar(250) DEFAULT NULL,
+  `forward_primer` varchar(100) DEFAULT NULL,
+  `reverse_primer` varchar(100) DEFAULT NULL,
+  `product_size` varchar(20) DEFAULT NULL,
+  `annealing_temp` float DEFAULT NULL,
+  `amplification` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`marker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `gdms_allele_values` */
@@ -101,24 +145,6 @@ CREATE TABLE `gdms_dart_values` (
   CONSTRAINT `fk_dartval_markerid` FOREIGN KEY (`marker_id`) REFERENCES `gdms_marker` (`marker_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `gdms_dataset` */
-
-DROP TABLE IF EXISTS `gdms_dataset`;
-CREATE TABLE `gdms_dataset` (
-  `dataset_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dataset_name` char(30) NOT NULL,
-  `dataset_desc` varchar(255) DEFAULT NULL,
-  `dataset_type` char(10) NOT NULL,
-  `genus` char(25) NOT NULL,
-  `species` char(25) DEFAULT NULL,
-  `upload_template_date` date DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  `datatype` enum('int','char','map') NOT NULL DEFAULT 'int',
-  `missing_data` varchar(20) DEFAULT NULL,
-  `method` varchar(25) DEFAULT NULL,
-  `score` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`dataset_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `gdms_dataset_users` */
 
@@ -172,30 +198,6 @@ CREATE TABLE `gdms_mapping_pop_values` (
   KEY `fk_mappopval_markerid` (`marker_id`),
   CONSTRAINT `fk_mappopval_datasetid` FOREIGN KEY (`dataset_id`) REFERENCES `gdms_dataset` (`dataset_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mappopval_markerid` FOREIGN KEY (`marker_id`) REFERENCES `gdms_marker` (`marker_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Table structure for table `gdms_marker` */
-
-DROP TABLE IF EXISTS `gdms_marker`;
-CREATE TABLE `gdms_marker` (
-  `marker_id` int(11) NOT NULL DEFAULT '0',
-  `marker_type` char(10) NOT NULL,
-  `marker_name` char(40) NOT NULL,
-  `species` char(25) NOT NULL,
-  `db_accession_id` varchar(50) DEFAULT NULL,
-  `reference` varchar(255) DEFAULT NULL,
-  `genotype` char(40) DEFAULT NULL,
-  `ploidy` varchar(25) DEFAULT NULL,
-  `primer_id` varchar(70) DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  `assay_type` varchar(50) DEFAULT NULL,
-  `motif` varchar(250) DEFAULT NULL,
-  `forward_primer` varchar(100) DEFAULT NULL,
-  `reverse_primer` varchar(100) DEFAULT NULL,
-  `product_size` varchar(20) DEFAULT NULL,
-  `annealing_temp` float DEFAULT NULL,
-  `amplification` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`marker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `gdms_marker_alias` */
@@ -343,15 +345,6 @@ CREATE TABLE `gdms_qtl_details` (
   CONSTRAINT `fk_qtl_mapid` FOREIGN KEY (`map_id`) REFERENCES `gdms_map` (`map_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `gdms_track_acc` */
-
-DROP TABLE IF EXISTS `gdms_track_acc`;    
-CREATE TABLE `gdms_track_acc` (
-  `track_id` int(11) NOT NULL DEFAULT '0',
-  `gid` int(11) DEFAULT '0',
-  KEY `fk_trackacc_trackkid` (`track_id`),
-  CONSTRAINT `fk_trackacc_trackkid` FOREIGN KEY (`track_id`) REFERENCES `gdms_track_data` (`track_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `gdms_track_data` */
 
@@ -361,6 +354,16 @@ CREATE TABLE `gdms_track_data` (
   `track_name` char(30) NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`track_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `gdms_track_acc` */
+
+DROP TABLE IF EXISTS `gdms_track_acc`;    
+CREATE TABLE `gdms_track_acc` (
+  `track_id` int(11) NOT NULL DEFAULT '0',
+  `gid` int(11) DEFAULT '0',
+  KEY `fk_trackacc_trackkid` (`track_id`),
+  CONSTRAINT `fk_trackacc_trackkid` FOREIGN KEY (`track_id`) REFERENCES `gdms_track_data` (`track_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `gdms_track_markers` */
