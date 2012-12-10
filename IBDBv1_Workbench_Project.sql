@@ -707,6 +707,21 @@ CREATE TABLE workbench_project_user_role (
 )
 ENGINE=InnoDB;
 
+-- Mapping table of workbench users to their mysql username and password for each of their projects
+DROP TABLE IF EXISTS workbench_project_user_mysql_account;
+CREATE TABLE workbench_project_user_mysql_account (
+	 project_user_mysql_id		INT UNSIGNED AUTO_INCREMENT NOT NULL
+	,project_id                 INT UNSIGNED NOT NULL
+    ,user_id                    INT(11) NOT NULL
+    ,mysql_username				VARCHAR(16) NOT NULL
+    ,mysql_password				VARCHAR(16) NOT NULL
+    ,PRIMARY KEY(project_user_mysql_id)
+    ,UNIQUE(project_id, user_id)
+    ,CONSTRAINT fk_project_user_mysql_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
+    ,CONSTRAINT fk_project_user_mysql_2 FOREIGN KEY(user_id) REFERENCES users(userid) ON UPDATE CASCADE
+)
+ENGINE=InnoDB;
+
 -- Workbench Settings
 DROP TABLE IF EXISTS workbench_setting;
 CREATE TABLE workbench_setting (
