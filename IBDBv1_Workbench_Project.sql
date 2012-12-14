@@ -752,3 +752,15 @@ CREATE TABLE workbench_runtime_data (
     ,user_id                INT(11)
     ,PRIMARY KEY(id)
 ) ENGINE=InnoDB;
+
+-- Workbench user security questions
+DROP TABLE IF EXISTS workbench_security_question;
+CREATE TABLE workbench_security_question (
+     security_question_id   INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,user_id                INT NOT NULL
+    ,security_question      VARCHAR(255) NOT NULL
+    ,security_answer        VARCHAR(255) NOT NULL
+    ,PRIMARY KEY (security_question_id)
+    ,CONSTRAINT fk_security_question_1 FOREIGN KEY(user_id) REFERENCES users(userid) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
