@@ -343,7 +343,7 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path) VALUES
 ,('fieldbook', 'FieldBook', '2.0.0', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe')
 ,('optimas', 'OptiMAS', '1.3', 'NATIVE', 'tools/optimas/optimas.exe')
 ,('breeding_manager', 'Breeding Manager', '2.0.0', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe')
-,('breeding_view', 'Breeding View', 'Alpha Version', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe')
+,('breeding_view', 'Breeding View', '1.1.0.8904', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe')
 ;
 
 
