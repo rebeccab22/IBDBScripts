@@ -23,7 +23,7 @@
 -- Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -- =======================================================================================
 --
--- Authors - 
+-- Authors - -- MCDHabito
 -- 		* IRRI-CIMMYT CROP RESEARCH INFORMATICS LABORATORY
 --		* Generation Challenge Programme
 -- Description - create the icis DMS tables (ver 5.6) / IBDB DMS v1
@@ -481,6 +481,13 @@ CREATE INDEX project_idx04 ON project(projectdesc);
 
 
 
+
+
+
+
+
+
+
 --
 -- table structure for table 'represtn'
 --
@@ -498,6 +505,76 @@ CREATE INDEX represtn_idx01 on represtn (represno);
 --
 
 
+
+
+
+--
+-- table structure for table 'scale'
+--
+DROP TABLE IF EXISTS scale; 
+CREATE TABLE scale (
+  scaleid INT NOT NULL DEFAULT 0,
+  scname VARCHAR(50) NOT NULL DEFAULT '-',
+  traitid INT NOT NULL DEFAULT 0,
+  sctype VARCHAR(1) NOT NULL DEFAULT '-',
+  PRIMARY KEY (scaleid) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+CREATE INDEX scale_idx01 ON scale (traitid,scname);
+CREATE INDEX scale_idx02 ON scale (traitid);
+CREATE INDEX scale_idx03 ON scale (scaleid);
+--
+
+
+--
+-- table structure for table 'scalecon'
+--
+DROP TABLE IF EXISTS scalecon; 
+CREATE TABLE scalecon (
+  scaleid INT NOT NULL DEFAULT 0,
+  slevel DOUBLE PRECISION NOT NULL DEFAULT 0,
+  elevel DOUBLE PRECISION NOT NULL DEFAULT 0,
+  scaleconid INT NOT NULL AUTO_INCREMENT PRIMARY KEY           -- new column
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+CREATE INDEX scalecon_idx01 ON scalecon (scaleid);
+CREATE INDEX scalecon_idx02 on scalecon (scaleid,slevel,elevel); 
+--
+
+--
+-- table structure for table 'scaledis'
+--
+DROP TABLE IF EXISTS scaledis; 
+CREATE TABLE scaledis (
+  scaleid INT NOT NULL DEFAULT 0,
+  `value` VARCHAR(20) NOT NULL DEFAULT '-',
+  valdesc VARCHAR(255) NOT NULL DEFAULT '-',
+  scaledisid INT NOT NULL AUTO_INCREMENT PRIMARY KEY   		-- new column
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+CREATE INDEX scaledis_idx01 ON scaledis (scaleid);
+CREATE INDEX scaledis_idx02 ON scaledis (scaleid,value); 
+--
+
+
+
+--
+--
+-- table structure for table 'scaletab'
+--
+-- May2007: v5.4 - Rename column "sql" to "ssql": "sql" is a reserved word as of MySQL v5.0
+-- May2008: v5.5 - rename column "module" to "smodule"
+-- 
+DROP TABLE IF EXISTS scaletab; 
+CREATE TABLE scaletab (
+   scaleid INT NOT NULL DEFAULT 0,
+   ssql VARCHAR(250) NOT NULL DEFAULT '-',  
+   smodule VARCHAR(5) NOT NULL DEFAULT '-',
+   scaletabid INT NOT NULL AUTO_INCREMENT PRIMARY KEY          -- new column
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+CREATE INDEX scaletab_idx01 ON scaletab (scaleid);
+--
 
 
 
@@ -554,6 +631,55 @@ CREATE INDEX study_idx05 ON study (stype);
 CREATE INDEX study_idx06 ON study (sstatus);
 CREATE INDEX study_idx07 ON study (userid);
 CREATE INDEX study_idx08 on study (studyid); 
+--
+
+
+
+--
+-- table structure for table 'tmethod'
+--
+DROP TABLE IF EXISTS tmethod; 
+CREATE TABLE tmethod (
+  tmethid INT NOT NULL DEFAULT 0,
+  tmname VARCHAR(50) NOT NULL DEFAULT '-',
+  traitid INT NOT NULL DEFAULT 0,
+  tmabbr VARCHAR(6) DEFAULT '-',   
+  tmdesc VARCHAR(255) DEFAULT '-',
+  PRIMARY KEY (tmethid) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+CREATE INDEX tmethod_idx01 ON tmethod (traitid,tmname);
+CREATE INDEX tmethod_idx02 ON tmethod (traitid);
+CREATE INDEX tmethod_idx03 on tmethod (tmethid); 
+--
+
+
+
+
+--
+-- table structure for table 'trait'
+--
+DROP TABLE IF EXISTS trait; 
+CREATE TABLE trait (
+  tid INT NOT NULL DEFAULT 0,
+  traitid INT NOT NULL DEFAULT 0,
+  trname VARCHAR(50) NOT NULL DEFAULT '-',
+  trabbr VARCHAR(10) DEFAULT '-',   			-- increase length from 8 to 10
+  trdesc VARCHAR(255) DEFAULT '-',  
+  scaleid INT NOT NULL DEFAULT 0,
+  tmethid INT DEFAULT 0,
+  tnstat INT DEFAULT 0,
+  traitgroup VARCHAR(50) DEFAULT '-',
+  ontology VARCHAR(50) DEFAULT '-',
+  isolanguage VARCHAR(2) NOT NULL DEFAULT 'en',		-- new column, indicates language used      
+  PRIMARY KEY (tid) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+CREATE INDEX trait_idx01 ON trait (tmethid);
+CREATE INDEX trait_idx02 ON trait (scaleid);
+CREATE INDEX trait_idx03 ON trait (traitid);
+CREATE INDEX trait_idx04 ON trait (tid);
+CREATE INDEX trait_idx05 on trait (isolanguage);
 --
 
 
