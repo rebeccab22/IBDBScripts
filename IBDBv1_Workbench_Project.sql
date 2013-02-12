@@ -261,6 +261,7 @@ CREATE TABLE workbench_project (
     ,PRIMARY KEY(project_id)
     ,CONSTRAINT fk_project_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
     ,CONSTRAINT fk_project_2 FOREIGN KEY(crop_type) REFERENCES workbench_crop(crop_name) ON UPDATE CASCADE
+    ,CONSTRAINT uk_project_name UNIQUE(project_name)
 )
 ENGINE=InnoDB;
 
