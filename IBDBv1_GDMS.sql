@@ -268,8 +268,8 @@ DROP TABLE IF EXISTS `gdms_markers_onmap`;
 CREATE TABLE `gdms_markers_onmap` (
   `map_id` int(11) NOT NULL DEFAULT '0',
   `marker_id` int(11) NOT NULL DEFAULT '0',
-  `start_position` float DEFAULT NULL,
-  `end_position` float DEFAULT NULL,
+  `start_position` DOUBLE DEFAULT NULL,
+  `end_position` DOUBLE DEFAULT NULL,
   `map_unit` char(4) DEFAULT NULL,
   `linkage_group` varchar(50) DEFAULT NULL,
   KEY `fk_markerlm_markerid` (`marker_id`),
