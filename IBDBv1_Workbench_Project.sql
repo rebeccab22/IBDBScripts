@@ -766,3 +766,13 @@ CREATE TABLE workbench_security_question (
     ,CONSTRAINT fk_security_question_1 FOREIGN KEY(user_id) REFERENCES users(userid) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+-- Workbench Backup Project
+DROP TABLE IF EXISTS workbench_project_backup;
+CREATE TABLE workbench_project_backup (
+     project_backup_id          	  INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,project_id                    	INT UNSIGNED NOT NULL
+    ,backup_path                    TEXT NOT NULL
+    ,backup_time                    TIMESTAMP NOT NULL
+	  ,PRIMARY KEY(project_backup_id)
+) ENGINE=InnoDB;
+
