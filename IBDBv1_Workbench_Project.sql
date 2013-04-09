@@ -342,7 +342,7 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path) VALUES
 ,('germplasm_list_browser', 'Browse Germplasm Lists', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasmlist/')
 ,('gdms', 'GDMS', '1.0', 'WEB_WITH_LOGIN', 'http://localhost:18080/GDMS/login.do')
 ,('fieldbook', 'FieldBook', '3.0.0', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe')
-,('optimas', 'OptiMAS', '1.4', 'NATIVE', 'tools/optimas/optimas.exe')
+,('optimas', 'OptiMAS', '1.4', 'NATIVE', 'tools/optimas/optimas_gui.exe')
 ,('breeding_manager', 'Breeding Manager', '3.0.0 Beta 40', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe')
 ,('breeding_view', 'Breeding View', '1.1.0.9221', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe')
 ,('mbdt','MBDT','1.0.0','NATIVE','tools/mbdt/MBDTversion1.0.0.exe')
