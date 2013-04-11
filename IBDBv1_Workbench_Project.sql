@@ -435,7 +435,7 @@ CREATE TABLE workbench_project_activity (
     ,name					VARCHAR(128) NOT NULL
     ,description			TEXT
     ,user_id				INT(11) NOT NULL
-    ,date			DATE
+    ,date			        TIMESTAMP
     ,PRIMARY KEY(project_activity_id)
     ,CONSTRAINT fk_project_activity_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
     ,CONSTRAINT fk_project_activity_2 FOREIGN KEY(user_id) REFERENCES users(userid) ON UPDATE CASCADE
