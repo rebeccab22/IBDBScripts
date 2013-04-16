@@ -89,6 +89,8 @@ CREATE TABLE workbench_tool (
     ,version                VARCHAR(16) NOT NULL
     ,tool_type              ENUM('WEB', 'WEB_WITH_LOGIN', 'NATIVE')
     ,path                   TEXT
+    ,parameter				VARCHAR(255) NOT NULL
+    ,user_tool				BOOLEAN NOT NULL DEFAULT FALSE
     ,PRIMARY KEY(tool_id)
     ,UNIQUE(name)
 )
@@ -336,16 +338,16 @@ INSERT INTO workbench_workflow_template_step (template_id, step_number, step_id)
 -- Notes on paths:
 -- WEB tools should use the release port.
 -- NATIVE tools should use a path relative to IBWorkflowSystem installation directory.
-INSERT INTO workbench_tool (name, title, version, tool_type, path) VALUES
- ('germplasm_browser', 'Browse Germplasm Information', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasm/')
+INSERT INTO workbench_tool (name, title, version, tool_type, path,parameter,user_tool) VALUES
+ ('germplasm_browser', 'Browse Germplasm Information', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasm/','',0)
 ,('study_browser', 'Browse Studies and Datasets', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/study/')
-,('germplasm_list_browser', 'Browse Germplasm Lists', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasmlist/')
-,('gdms', 'GDMS', '1.0', 'WEB_WITH_LOGIN', 'http://localhost:18080/GDMS/login.do')
-,('fieldbook', 'FieldBook', '3.0.0', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe')
-,('optimas', 'OptiMAS', '1.4', 'NATIVE', 'tools/optimas/optimas_gui.exe')
-,('breeding_manager', 'Breeding Manager', '3.0.0 Beta 40', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe')
-,('breeding_view', 'Breeding View', '1.1.0.9221', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe')
-,('mbdt','MBDT','1.0.0','NATIVE','tools/mbdt/MBDTversion1.0.0.exe')
+,('germplasm_list_browser', 'Browse Germplasm Lists', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasmlist/','',0)
+,('gdms', 'GDMS', '1.0', 'WEB_WITH_LOGIN', 'http://localhost:18080/GDMS/login.do','',0)
+,('fieldbook', 'FieldBook', '3.0.0', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe','',0)
+,('optimas', 'OptiMAS', '1.4', 'NATIVE', 'tools/optimas/optimas_gui.exe','',0)
+,('breeding_manager', 'Breeding Manager', '3.0.0 Beta 40', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe','',0)
+,('breeding_view', 'Breeding View', '1.1.0.9221', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe','--ibpApplication=BreedingManager',0)
+,('mbdt','MBDT','1.0.0','NATIVE','tools/mbdt/MBDTversion1.0.0.exe','',0)
 ;
 
 
