@@ -778,3 +778,18 @@ CREATE TABLE workbench_project_backup (
 	  ,PRIMARY KEY(project_backup_id)
 ) ENGINE=InnoDB;
 
+
+-- Workbench Project User info
+DROP TABLE IF EXISTS workbench_project_user_info;
+CREATE TABLE workbench_project_user_info (
+  	user_info_id 			INT(10) unsigned NOT NULL AUTO_INCREMENT
+  	,project_id				INT(10) unsigned NOT NULL
+  	,user_id 				INT(11) NOT NULL
+  	,last_open_date 		TIMESTAMP NULL DEFAULT NULL
+  	,PRIMARY KEY (user_info_id),
+  	UNIQUE KEY `project_id` (project_id,user_id),
+  	KEY `fk_workbench_project_user_info_idx` (project_id),
+  	KEY `fk_workbench_project_user_info_2_idx` (user_id),
+  	CONSTRAINT `fk_workbench_project_user_info_1` FOREIGN KEY (project_id) REFERENCES `workbench_project` (project_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  	CONSTRAINT `fk_workbench_project_user_info_2` FOREIGN KEY (user_id) REFERENCES `users` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB;
