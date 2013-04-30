@@ -89,8 +89,8 @@ CREATE TABLE workbench_tool (
     ,version                VARCHAR(16) NOT NULL
     ,tool_type              ENUM('WEB', 'WEB_WITH_LOGIN', 'NATIVE')
     ,path                   TEXT
-    ,parameter				VARCHAR(255) NOT NULL DEFAULT ''
-    ,user_tool				BOOLEAN NOT NULL DEFAULT FALSE
+    ,parameter              VARCHAR(255) NOT NULL DEFAULT ''
+    ,user_tool              BOOLEAN NOT NULL DEFAULT FALSE
     ,PRIMARY KEY(tool_id)
     ,UNIQUE(name)
 )
@@ -343,10 +343,10 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path,parameter,user
 ,('study_browser', 'Browse Studies and Datasets', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/study/','',0)
 ,('germplasm_list_browser', 'Browse Germplasm Lists', '1.1.2.6', 'WEB', 'http://localhost:18080/GermplasmStudyBrowser/main/germplasmlist/','',0)
 ,('gdms', 'GDMS', '1.0', 'WEB_WITH_LOGIN', 'http://localhost:18080/GDMS/login.do','',0)
-,('fieldbook', 'FieldBook', '3.0.0', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe','',0)
+,('fieldbook', 'FieldBook', '3.0.0 Beta 41', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe','',0)
 ,('optimas', 'OptiMAS', '1.4', 'NATIVE', 'tools/optimas/optimas_gui.exe','',0)
-,('breeding_manager', 'Breeding Manager', '3.0.0 Beta 40', 'NATIVE', 'tools/breeding_manager/IBFb/bin/ibfb.exe','',0)
-,('breeding_view', 'Breeding View', '1.1.0.9221', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe','--ibpApplication=BreedingManager',0)
+,('breeding_manager', 'Breeding Manager', '3.0.0 Beta 41', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=BreedingManager',0)
+,('breeding_view', 'Breeding View', '1.1.0.9221', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe','',0)
 ,('mbdt','MBDT','1.0.0','NATIVE','tools/mbdt/MBDTversion1.0.0.exe','',0)
 ;
 
@@ -432,12 +432,12 @@ CREATE TABLE workbench_project_loc_map (
 
 DROP TABLE IF EXISTS workbench_project_activity; 
 CREATE TABLE workbench_project_activity (
-     project_activity_id	INT UNSIGNED AUTO_INCREMENT NOT NULL 
-    ,project_id				INT UNSIGNED NOT NULL
-    ,name					VARCHAR(128) NOT NULL
-    ,description			TEXT
-    ,user_id				INT(11) NOT NULL
-    ,date			        TIMESTAMP
+     project_activity_id    INT UNSIGNED AUTO_INCREMENT NOT NULL 
+    ,project_id             INT UNSIGNED NOT NULL
+    ,name                   VARCHAR(128) NOT NULL
+    ,description            TEXT
+    ,user_id                INT(11) NOT NULL
+    ,date                   TIMESTAMP
     ,PRIMARY KEY(project_activity_id)
     ,CONSTRAINT fk_project_activity_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
     ,CONSTRAINT fk_project_activity_2 FOREIGN KEY(user_id) REFERENCES users(userid) ON UPDATE CASCADE
@@ -658,7 +658,7 @@ CREATE TABLE workbench_role (
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
 SELECT 'CB Breeder', template_id, 'Conventional breeding (CB)', 1 
 FROM workbench_workflow_template WHERE name = 'CB'
-	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+    AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'CB Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'CB'));                                            
@@ -666,7 +666,7 @@ FROM workbench_workflow_template WHERE name = 'CB'
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
 SELECT 'MAS Breeder', template_id, 'Breeding with marker assisted selection (MAS)', 2 
 FROM workbench_workflow_template WHERE name = 'MAS'
-	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+    AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MAS Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MAS'));
@@ -674,7 +674,7 @@ FROM workbench_workflow_template WHERE name = 'MAS'
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
 SELECT 'MABC Breeder', template_id, 'Marker assisted backcrossing (MABC)', 3 
 FROM workbench_workflow_template WHERE name = 'MABC'
-	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+    AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MABC Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MABC'));
@@ -682,7 +682,7 @@ FROM workbench_workflow_template WHERE name = 'MABC'
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
 SELECT 'MARS Breeder', template_id, 'Marker assisted recurrent selection (MARS)', 4
 FROM workbench_workflow_template WHERE name = 'MARS'
-	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+    AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MARS Breeder' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'MARS'));
@@ -690,7 +690,7 @@ FROM workbench_workflow_template WHERE name = 'MARS'
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
 SELECT 'Manager', template_id, 'Access all tools with a menu interface (MENU)', 5 
 FROM workbench_workflow_template WHERE name = 'Manager'
-	AND NOT EXISTS (SELECT role_id FROM workbench_role 
+    AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'Manager' 
                     AND workflow_template_id = (SELECT DISTINCT template_id 
                                                 FROM workbench_workflow_template WHERE name = 'Manager'));
@@ -703,7 +703,7 @@ CREATE TABLE workbench_project_user_role (
      project_user_id            INT UNSIGNED AUTO_INCREMENT NOT NULL 
     ,project_id                 INT UNSIGNED NOT NULL
     ,user_id                    INT(11) NOT NULL
-    ,role_id 					INT UNSIGNED NOT NULL
+    ,role_id                     INT UNSIGNED NOT NULL
     ,PRIMARY KEY(project_user_id)
     ,UNIQUE(project_id, user_id, role_id)
     ,CONSTRAINT fk_project_user_role_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
@@ -714,11 +714,11 @@ ENGINE=InnoDB;
 -- Mapping table of workbench users to their mysql username and password for each of their projects
 DROP TABLE IF EXISTS workbench_project_user_mysql_account;
 CREATE TABLE workbench_project_user_mysql_account (
-	 project_user_mysql_id		INT UNSIGNED AUTO_INCREMENT NOT NULL
-	,project_id                 INT UNSIGNED NOT NULL
+     project_user_mysql_id        INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,project_id                 INT UNSIGNED NOT NULL
     ,user_id                    INT(11) NOT NULL
-    ,mysql_username				VARCHAR(16) NOT NULL
-    ,mysql_password				VARCHAR(16) NOT NULL
+    ,mysql_username                VARCHAR(16) NOT NULL
+    ,mysql_password                VARCHAR(16) NOT NULL
     ,PRIMARY KEY(project_user_mysql_id)
     ,UNIQUE(project_id, user_id)
     ,CONSTRAINT fk_project_user_mysql_1 FOREIGN KEY(project_id) REFERENCES workbench_project(project_id) ON UPDATE CASCADE
@@ -771,25 +771,25 @@ CREATE TABLE workbench_security_question (
 -- Workbench Backup Project
 DROP TABLE IF EXISTS workbench_project_backup;
 CREATE TABLE workbench_project_backup (
-     project_backup_id          	  INT UNSIGNED AUTO_INCREMENT NOT NULL
-    ,project_id                    	INT UNSIGNED NOT NULL
+     project_backup_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,project_id                        INT UNSIGNED NOT NULL
     ,backup_path                    TEXT NOT NULL
     ,backup_time                    TIMESTAMP NOT NULL
-	  ,PRIMARY KEY(project_backup_id)
+      ,PRIMARY KEY(project_backup_id)
 ) ENGINE=InnoDB;
 
 
 -- Workbench Project User info
 DROP TABLE IF EXISTS workbench_project_user_info;
 CREATE TABLE workbench_project_user_info (
-  	user_info_id 			INT(10) unsigned NOT NULL AUTO_INCREMENT
-  	,project_id				INT(10) unsigned NOT NULL
-  	,user_id 				INT(11) NOT NULL
-  	,last_open_date 		TIMESTAMP NULL DEFAULT NULL
-  	,PRIMARY KEY (user_info_id),
-  	UNIQUE KEY `project_id` (project_id,user_id),
-  	KEY `fk_workbench_project_user_info_idx` (project_id),
-  	KEY `fk_workbench_project_user_info_2_idx` (user_id),
-  	CONSTRAINT `fk_workbench_project_user_info_1` FOREIGN KEY (project_id) REFERENCES `workbench_project` (project_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  	CONSTRAINT `fk_workbench_project_user_info_2` FOREIGN KEY (user_id) REFERENCES `users` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+      user_info_id             INT(10) unsigned NOT NULL AUTO_INCREMENT
+      ,project_id                INT(10) unsigned NOT NULL
+      ,user_id                 INT(11) NOT NULL
+      ,last_open_date         TIMESTAMP NULL DEFAULT NULL
+      ,PRIMARY KEY (user_info_id),
+      UNIQUE KEY `project_id` (project_id,user_id),
+      KEY `fk_workbench_project_user_info_idx` (project_id),
+      KEY `fk_workbench_project_user_info_2_idx` (user_id),
+      CONSTRAINT `fk_workbench_project_user_info_1` FOREIGN KEY (project_id) REFERENCES `workbench_project` (project_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+      CONSTRAINT `fk_workbench_project_user_info_2` FOREIGN KEY (user_id) REFERENCES `users` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB;
