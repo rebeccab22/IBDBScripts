@@ -89,7 +89,7 @@ CREATE TABLE workbench_tool (
     ,version                VARCHAR(16) NOT NULL
     ,tool_type              ENUM('WEB', 'WEB_WITH_LOGIN', 'NATIVE')
     ,path                   TEXT
-    ,parameter				VARCHAR(255) NOT NULL
+    ,parameter				VARCHAR(255) NOT NULL DEFAULT ''
     ,user_tool				BOOLEAN NOT NULL DEFAULT FALSE
     ,PRIMARY KEY(tool_id)
     ,UNIQUE(name)
