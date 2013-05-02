@@ -793,3 +793,12 @@ CREATE TABLE workbench_project_user_info (
       CONSTRAINT `fk_workbench_project_user_info_1` FOREIGN KEY (project_id) REFERENCES `workbench_project` (project_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
       CONSTRAINT `fk_workbench_project_user_info_2` FOREIGN KEY (user_id) REFERENCES `users` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB;
+
+-- Workbench user details
+DROP TABLE IF EXISTS userdetails; 
+CREATE TABLE userdetails (
+  userdetailsid INT NOT NULL AUTO_INCREMENT,
+  uname VARCHAR(30) NOT NULL DEFAULT '-',
+  ulogincnt INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (userdetailsid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
