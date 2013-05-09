@@ -267,6 +267,7 @@ CREATE TABLE `project` (
   PRIMARY KEY (`project_id`),
   UNIQUE KEY `project_idx1` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert  into `project`(`project_id`,`name`,`description`) values (1, 'SYSTEM FOLDER', 'Contains all root folders');
 
 /*Data for the table `project` */
 
