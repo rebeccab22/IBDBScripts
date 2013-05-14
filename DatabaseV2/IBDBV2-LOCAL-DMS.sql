@@ -260,7 +260,7 @@ CREATE TABLE `project` (
   PRIMARY KEY (`project_id`),
   UNIQUE KEY `project_idx1` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT IGNORE INTO `project`(`project_id`,`name`,`description`) VALUES (1, 'SYSTEM', 'SYSTEM Root Folder');
+INSERT IGNORE INTO `project`(`project_id`,`name`,`description`) VALUES (1, 'STUDYIES', 'Root study folder');
 
 /*Data for the table `project` */
 
