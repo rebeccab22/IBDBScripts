@@ -43,8 +43,7 @@ CREATE TABLE `cvterm` (
   UNIQUE KEY `cvterm_idx1` (`name`,`cv_id`,`is_obsolete`),
   UNIQUE KEY `cvterm_idx2` (`dbxref_id`),
   KEY `cvterm_idx3` (`cv_id`),
-  KEY `cvterm_idx4` (`name`),
-  CONSTRAINT `cvterm_fk1` FOREIGN KEY (`cv_id`) REFERENCES `cv` (`cv_id`) ON DELETE CASCADE
+  KEY `cvterm_idx4` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19241 DEFAULT CHARSET=utf8;
 
 
@@ -61,10 +60,7 @@ CREATE TABLE `cvterm_relationship` (
   UNIQUE KEY `cvterm_relationship_c1` (`subject_id`,`object_id`,`type_id`),
   KEY `cvterm_relationship_idx1` (`type_id`),
   KEY `cvterm_relationship_idx2` (`subject_id`),
-  KEY `cvterm_relationship_idx3` (`object_id`),
-  CONSTRAINT `cvterm_relationship_fk1` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE,
-  CONSTRAINT `cvterm_relationship_fk2` FOREIGN KEY (`subject_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE,
-  CONSTRAINT `cvterm_relationship_fk3` FOREIGN KEY (`object_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  KEY `cvterm_relationship_idx3` (`object_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19241 DEFAULT CHARSET=utf8;
 
 
@@ -72,6 +68,7 @@ CREATE TABLE `cvterm_relationship` (
 
 DROP TABLE IF EXISTS `cvtermprop`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `cvtermprop` (
   `cvtermprop_id` int(11) NOT NULL AUTO_INCREMENT,
   `cvterm_id` int(11) NOT NULL,
@@ -81,15 +78,15 @@ CREATE TABLE `cvtermprop` (
   PRIMARY KEY (`cvtermprop_id`),
   UNIQUE KEY `cvtermprop_c1` (`cvterm_id`,`type_id`,`value`,`rank`),
   KEY `cvtermprop_idx1` (`cvterm_id`),
-  KEY `cvtermprop_idx2` (`type_id`),
-  CONSTRAINT `cvtermprop_ibfk_1` FOREIGN KEY (`cvterm_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE,
-  CONSTRAINT `cvtermprop_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  KEY `cvtermprop_idx2` (`type_id`), 
+  CONSTRAINT `cvtermprop_ibfk_1` FOREIGN KEY (`cvterm_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8011 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cvtermsynonym` */
 
 DROP TABLE IF EXISTS `cvtermsynonym`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `cvtermsynonym` (
   `cvtermsynonym_id` int(11) NOT NULL AUTO_INCREMENT,
   `cvterm_id` int(11) NOT NULL,
@@ -98,16 +95,16 @@ CREATE TABLE `cvtermsynonym` (
   PRIMARY KEY (`cvtermsynonym_id`),
   UNIQUE KEY `cvtermsynonym_c1` (`cvterm_id`,`synonym`),
   KEY `cvtermsynonym_fk2` (`type_id`),
-  KEY `cvtermsynonym_idx1` (`cvterm_id`),
-  CONSTRAINT `cvtermsynonym_fk1` FOREIGN KEY (`cvterm_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE,
-  CONSTRAINT `cvtermsynonym_fk2` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  KEY `cvtermsynonym_idx1` (`cvterm_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2721 DEFAULT CHARSET=utf8;
+
 
 
 /*Table structure for table `nd_experiment` */
 
 DROP TABLE IF EXISTS `nd_experiment`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `nd_experiment` (
   `nd_experiment_id` int(11) NOT NULL AUTO_INCREMENT,
   `nd_geolocation_id` int(11) NOT NULL,
@@ -115,8 +112,7 @@ CREATE TABLE `nd_experiment` (
   PRIMARY KEY (`nd_experiment_id`),
   KEY `nd_experiment_idx1` (`nd_geolocation_id`),
   KEY `nd_experiment_idx2` (`type_id`),
-  CONSTRAINT `nd_experiment_fk1` FOREIGN KEY (`nd_geolocation_id`) REFERENCES `nd_geolocation` (`nd_geolocation_id`) ON DELETE CASCADE,
-  CONSTRAINT `nd_experiment_fk2` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  CONSTRAINT `nd_experiment_fk1` FOREIGN KEY (`nd_geolocation_id`) REFERENCES `nd_geolocation` (`nd_geolocation_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `nd_experiment` */
@@ -159,6 +155,7 @@ CREATE TABLE `nd_experiment_project` (
 
 DROP TABLE IF EXISTS `nd_experiment_stock`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `nd_experiment_stock` (
   `nd_experiment_stock_id` int(11) NOT NULL AUTO_INCREMENT,
   `nd_experiment_id` int(11) NOT NULL,
@@ -169,8 +166,7 @@ CREATE TABLE `nd_experiment_stock` (
   KEY `nd_experiment_stock_idx2` (`stock_id`),
   KEY `nd_experiment_stock_idx3` (`type_id`),
   CONSTRAINT `nd_experiment_stock_fk1` FOREIGN KEY (`nd_experiment_id`) REFERENCES `nd_experiment` (`nd_experiment_id`) ON DELETE CASCADE,
-  CONSTRAINT `nd_experiment_stock_fk2` FOREIGN KEY (`stock_id`) REFERENCES `stock` (`stock_id`) ON DELETE CASCADE,
-  CONSTRAINT `nd_experiment_stock_fk3` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  CONSTRAINT `nd_experiment_stock_fk2` FOREIGN KEY (`stock_id`) REFERENCES `stock` (`stock_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `nd_experiment_stock` */
@@ -179,6 +175,7 @@ CREATE TABLE `nd_experiment_stock` (
 
 DROP TABLE IF EXISTS `nd_experimentprop`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `nd_experimentprop` (
   `nd_experimentprop_id` int(11) NOT NULL AUTO_INCREMENT,
   `nd_experiment_id` int(11) NOT NULL,
@@ -188,8 +185,7 @@ CREATE TABLE `nd_experimentprop` (
   PRIMARY KEY (`nd_experimentprop_id`),
   UNIQUE KEY `nd_experimentprop_idx1` (`nd_experiment_id`,`type_id`,`rank`),
   KEY `nd_experimentprop_idx2` (`type_id`),
-  CONSTRAINT `nd_experimentprop_fk1` FOREIGN KEY (`nd_experiment_id`) REFERENCES `nd_experiment` (`nd_experiment_id`) ON DELETE CASCADE,
-  CONSTRAINT `nd_experimentprop_fk2` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  CONSTRAINT `nd_experimentprop_fk1` FOREIGN KEY (`nd_experiment_id`) REFERENCES `nd_experiment` (`nd_experiment_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `nd_experimentprop` */
@@ -214,6 +210,7 @@ CREATE TABLE `nd_geolocation` (
 
 DROP TABLE IF EXISTS `nd_geolocationprop`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `nd_geolocationprop` (
   `nd_geolocationprop_id` int(11) NOT NULL AUTO_INCREMENT,
   `nd_geolocation_id` int(11) NOT NULL,
@@ -223,8 +220,7 @@ CREATE TABLE `nd_geolocationprop` (
   PRIMARY KEY (`nd_geolocationprop_id`),
   UNIQUE KEY `nd_geolocationprop_idx1` (`nd_geolocation_id`,`type_id`,`rank`),
   KEY `nd_geolocationprop_idx2` (`type_id`),
-  CONSTRAINT `nd_geolocationprop_fk1` FOREIGN KEY (`nd_geolocation_id`) REFERENCES `nd_geolocation` (`nd_geolocation_id`) ON DELETE CASCADE,
-  CONSTRAINT `nd_geolocationprop_fk2` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  CONSTRAINT `nd_geolocationprop_fk1` FOREIGN KEY (`nd_geolocation_id`) REFERENCES `nd_geolocation` (`nd_geolocation_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `nd_geolocationprop` */
@@ -233,6 +229,7 @@ CREATE TABLE `nd_geolocationprop` (
 
 DROP TABLE IF EXISTS `phenotype`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `phenotype` (
   `phenotype_id` int(11) NOT NULL AUTO_INCREMENT,
   `uniquename` varchar(255) NOT NULL,
@@ -247,11 +244,7 @@ CREATE TABLE `phenotype` (
   KEY `phenotype_idx2` (`assay_id`),
   KEY `phenotype_idx3` (`cvalue_id`),
   KEY `phenotype_idx4` (`observable_id`),
-  KEY `phenotype_idx5` (`attr_id`),
-  CONSTRAINT `phenotype_fk1` FOREIGN KEY (`observable_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE,
-  CONSTRAINT `phenotype_fk2` FOREIGN KEY (`attr_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE SET NULL,
-  CONSTRAINT `phenotype_fk3` FOREIGN KEY (`cvalue_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE SET NULL,
-  CONSTRAINT `phenotype_fk4` FOREIGN KEY (`assay_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE SET NULL
+  KEY `phenotype_idx5` (`attr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `phenotype` */
@@ -267,7 +260,7 @@ CREATE TABLE `project` (
   PRIMARY KEY (`project_id`),
   UNIQUE KEY `project_idx1` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert  into `project`(`project_id`,`name`,`description`) values (1, 'SYSTEM FOLDER', 'Contains all root folders');
+INSERT IGNORE INTO `project`(`project_id`,`name`,`description`) VALUES (1, 'SYSTEM', 'SYSTEM Root Folder');
 
 /*Data for the table `project` */
 
@@ -275,6 +268,7 @@ insert  into `project`(`project_id`,`name`,`description`) values (1, 'SYSTEM FOL
 
 DROP TABLE IF EXISTS `project_relationship`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `project_relationship` (
   `project_relationship_id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_project_id` int(11) NOT NULL,
@@ -285,8 +279,7 @@ CREATE TABLE `project_relationship` (
   KEY `project_relationship_idx2` (`object_project_id`),
   KEY `project_relationship_idx3` (`type_id`),
   CONSTRAINT `project_relationship_fk1` FOREIGN KEY (`subject_project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE,
-  CONSTRAINT `project_relationship_fk2` FOREIGN KEY (`object_project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE,
-  CONSTRAINT `project_relationship_fk3` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`)
+  CONSTRAINT `project_relationship_fk2` FOREIGN KEY (`object_project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `project_relationship` */
@@ -295,6 +288,7 @@ CREATE TABLE `project_relationship` (
 
 DROP TABLE IF EXISTS `projectprop`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `projectprop` (
   `projectprop_id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
@@ -304,8 +298,7 @@ CREATE TABLE `projectprop` (
   PRIMARY KEY (`projectprop_id`),
   UNIQUE KEY `projectprop_idx1` (`project_id`,`type_id`,`rank`),
   KEY `projectprop_idx2` (`type_id`),
-  CONSTRAINT `projectprop_fk1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE,
-  CONSTRAINT `projectprop_fk2` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  CONSTRAINT `projectprop_fk1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `projectprop` */
@@ -314,6 +307,7 @@ CREATE TABLE `projectprop` (
 
 DROP TABLE IF EXISTS `stock`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `stock` (
   `stock_id` int(11) NOT NULL AUTO_INCREMENT,
   `dbxref_id` int(11) DEFAULT NULL,
@@ -330,10 +324,8 @@ CREATE TABLE `stock` (
   KEY `stock_idx3` (`dbxref_id`),
   KEY `stock_idx4` (`organism_id`),
   KEY `stock_idx5` (`type_id`),
-  KEY `stock_idx6` (`uniquename`),
-  CONSTRAINT `stock_fk2` FOREIGN KEY (`organism_id`) REFERENCES `organism` (`organism_id`) ON DELETE CASCADE,
-  CONSTRAINT `stock_fk3` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `stock_idx6` (`uniquename`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `stock` */
 
@@ -341,6 +333,7 @@ CREATE TABLE `stock` (
 
 DROP TABLE IF EXISTS `stockprop`;
 
+/*JIRA-1368 changes on Foreign Key*/
 CREATE TABLE `stockprop` (
   `stockprop_id` int(11) NOT NULL AUTO_INCREMENT,
   `stock_id` int(11) NOT NULL,
@@ -351,8 +344,7 @@ CREATE TABLE `stockprop` (
   UNIQUE KEY `stockprop_idx1` (`stock_id`,`type_id`,`rank`),
   KEY `stockprop_idx2` (`stock_id`),
   KEY `stockprop_idx3` (`type_id`),
-  CONSTRAINT `stockprop_fk1` FOREIGN KEY (`stock_id`) REFERENCES `stock` (`stock_id`) ON DELETE CASCADE,
-  CONSTRAINT `stockprop_fk2` FOREIGN KEY (`type_id`) REFERENCES `cvterm` (`cvterm_id`) ON DELETE CASCADE
+  CONSTRAINT `stockprop_fk1` FOREIGN KEY (`stock_id`) REFERENCES `stock` (`stock_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `stockprop` */
@@ -361,3 +353,4 @@ CREATE TABLE `stockprop` (
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
