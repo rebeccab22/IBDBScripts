@@ -491,12 +491,11 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
 -- Workbench user details
 --
-DROP TABLE IF EXISTS userdetails; 
-CREATE TABLE userdetails (
-  userdetailsid INT NOT NULL AUTO_INCREMENT,
-  uname VARCHAR(30) NOT NULL DEFAULT '-',
-  ulogincnt INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (userdetailsid)
+DROP TABLE IF EXISTS workbench_user_info; 
+CREATE TABLE workbench_user_info (
+  user_id INT NOT NULL,
+  login_count INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (user_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
