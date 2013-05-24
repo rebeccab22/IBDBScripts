@@ -94,8 +94,8 @@ CREATE TABLE `cvtermsynonym` (
   `type_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`cvtermsynonym_id`),
   UNIQUE KEY `cvtermsynonym_c1` (`cvterm_id`,`synonym`),
-  KEY `cvtermsynonym_fk2` (`type_id`),
-  KEY `cvtermsynonym_idx1` (`cvterm_id`)
+  KEY `cvtermsynonym_idx1` (`type_id`),
+  KEY `cvtermsynonym_idx2` (`cvterm_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2721 DEFAULT CHARSET=utf8;
 
 
