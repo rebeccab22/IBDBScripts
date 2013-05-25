@@ -1,5 +1,5 @@
 -- Add Schema Version
-INSERT INTO schema_version (version) VALUES ('20130510');
+INSERT INTO schema_version (version) VALUES ('20130519');
 
 -- Add Workflow Template Data.
 -- Add any new workflow here.
