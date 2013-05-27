@@ -124,12 +124,12 @@ CREATE TABLE `persons` (
 DROP TABLE IF EXISTS `cv`;
 
 CREATE TABLE `cv` (
-  `cv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cv_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `definition` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`cv_id`),
   UNIQUE KEY `cv_idx1` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3031 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*Table structure for table `cvterm` */
@@ -137,7 +137,7 @@ CREATE TABLE `cv` (
 DROP TABLE IF EXISTS `cvterm`;
 
 CREATE TABLE `cvterm` (
-  `cvterm_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cvterm_id` int(11) NOT NULL,
   `cv_id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `definition` varchar(255) DEFAULT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `cvterm` (
   UNIQUE KEY `cvterm_idx2` (`dbxref_id`),
   KEY `cvterm_idx3` (`cv_id`),
   KEY `cvterm_idx4` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=19241 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*Table structure for table `cvterm_relationship` */
@@ -208,7 +208,7 @@ CREATE TABLE `cvtermsynonym` (
 DROP TABLE IF EXISTS `nd_experiment`;
 
 CREATE TABLE `nd_experiment` (
-  `nd_experiment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nd_experiment_id` int(11) NOT NULL,
   `nd_geolocation_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   PRIMARY KEY (`nd_experiment_id`),
@@ -295,7 +295,7 @@ CREATE TABLE `nd_experimentprop` (
 DROP TABLE IF EXISTS `nd_geolocation`;
 
 CREATE TABLE `nd_geolocation` (
-  `nd_geolocation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nd_geolocation_id` int(11) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
@@ -329,7 +329,7 @@ CREATE TABLE `nd_geolocationprop` (
 DROP TABLE IF EXISTS `phenotype`;
 
 CREATE TABLE `phenotype` (
-  `phenotype_id` int(11) NOT NULL AUTO_INCREMENT,
+  `phenotype_id` int(11) NOT NULL,
   `uniquename` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `observable_id` int(11) DEFAULT NULL,
@@ -352,7 +352,7 @@ CREATE TABLE `phenotype` (
 DROP TABLE IF EXISTS `project`;
 
 CREATE TABLE `project` (
-  `project_id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`project_id`),
@@ -404,7 +404,7 @@ CREATE TABLE `projectprop` (
 DROP TABLE IF EXISTS `stock`;
 
 CREATE TABLE `stock` (
-  `stock_id` int(11) NOT NULL AUTO_INCREMENT,
+  `stock_id` int(11) NOT NULL,
   `dbxref_id` int(11) DEFAULT NULL,
   `organism_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
