@@ -26,6 +26,99 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+/*Table structure for table `address` */ 
+
+DROP TABLE IF EXISTS `address`; 
+
+CREATE TABLE `address` ( 
+  `addrid` int(11) NOT NULL, 
+  `addrtab` varchar(40) DEFAULT NULL, 
+  `addrrec` int(11) NOT NULL, 
+  `addrtype` int(11) DEFAULT NULL, 
+  `addr1` varchar(125) NOT NULL, 
+  `addr2` varchar(125) DEFAULT NULL, 
+  `cityid` int(11) DEFAULT NULL, 
+  `stateid` int(11) DEFAULT NULL, 
+  `cpostal` varchar(10) NOT NULL, 
+  `cntryid` int(11) NOT NULL, 
+  `aphone` varchar(25) NOT NULL, 
+  `afax` varchar(25) NOT NULL, 
+  `aemail` varchar(255) NOT NULL, 
+  `addrstat` int(11) DEFAULT NULL, 
+  PRIMARY KEY (`addrid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+/*Table structure for table `institut` */
+
+DROP TABLE IF EXISTS `institut`; 
+
+CREATE TABLE `institut` ( 
+  `institid` int(11) NOT NULL DEFAULT '0', 
+  `pinsid` int(11) DEFAULT NULL, 
+  `insname` varchar(150) DEFAULT NULL, 
+  `insacr` varchar(20) DEFAULT NULL, 
+  `instype` int(11) DEFAULT NULL, 
+  `weburl` varchar(255) DEFAULT NULL, 
+  `sins` int(11) DEFAULT NULL, 
+  `eins` int(11) DEFAULT NULL, 
+  `ichange` int(11) DEFAULT NULL, 
+  `faocode` varchar(10) DEFAULT NULL, 
+  `inslocid` int(11) NOT NULL DEFAULT '0', 
+  PRIMARY KEY (`institid`), 
+  KEY `institut_idx02` (`faocode`), 
+  KEY `institut_idx03` (`institid`), 
+  KEY `institut_idx04` (`pinsid`), 
+  KEY `institut_idx05` (`inslocid`) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+/*Table structure for table `personlist` */ 
+
+DROP TABLE IF EXISTS `personlist`; 
+
+CREATE TABLE `personlist` ( 
+  `personlistid` int(11) NOT NULL DEFAULT '0', 
+  `ownertab` varchar(40) DEFAULT NULL, 
+  `ownerrec` int(11) DEFAULT NULL, 
+  `sortorder` int(11) DEFAULT NULL, 
+  `personid` int(11) DEFAULT NULL, 
+  `personname` varchar(64) DEFAULT NULL, 
+  `pliststatus` int(11) DEFAULT '1', 
+  KEY `personlist_idx01` (`personlistid`), 
+  KEY `personlist_idx02` (`sortorder`), 
+  KEY `personlist_idx03` (`personid`), 
+  KEY `personlist_idx04` (`personname`), 
+  KEY `personlist_idx05` (`pliststatus`) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+/*Table structure for table `persons` */ 
+
+DROP TABLE IF EXISTS `persons`; 
+
+CREATE TABLE `persons` ( 
+  `personid` int(11) NOT NULL DEFAULT '0', 
+  `fname` varchar(20) NOT NULL DEFAULT '-', 
+  `lname` varchar(50) NOT NULL DEFAULT '-', 
+  `ioname` varchar(15) NOT NULL DEFAULT '-', 
+  `institid` int(11) NOT NULL DEFAULT '0', 
+  `ptitle` varchar(25) NOT NULL DEFAULT '-', 
+  `poname` varchar(50) NOT NULL DEFAULT '-', 
+  `plangu` int(11) NOT NULL DEFAULT '0', 
+  `pphone` varchar(20) NOT NULL DEFAULT '-', 
+  `pextent` varchar(20) NOT NULL DEFAULT '-', 
+  `pfax` varchar(20) NOT NULL DEFAULT '-', 
+  `pemail` varchar(40) NOT NULL DEFAULT '-', 
+  `prole` int(11) NOT NULL DEFAULT '0', 
+  `sperson` int(11) NOT NULL DEFAULT '0', 
+  `eperson` int(11) NOT NULL DEFAULT '0', 
+  `pstatus` int(11) NOT NULL DEFAULT '0', 
+  `pnotes` varchar(255) NOT NULL DEFAULT '-', 
+  `contact` varchar(255) NOT NULL DEFAULT '-', 
+  PRIMARY KEY (`personid`), 
+  KEY `persons_idx01` (`institid`), 
+  KEY `persons_idx02` (`personid`) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+
 /*Table structure for table `cv` */
 
 DROP TABLE IF EXISTS `cv`;
