@@ -1,8 +1,20 @@
-/*
-SQLyog Enterprise v11.01 (32 bit)
-MySQL - 5.5.23-log : Database - ibdbv2-local-dms
-*********************************************************************
-*/
+-- ===================================================================================== 
+-- IBDB V2.0 DMS Schema (Phenotyping Data Management System) 
+-- This schema is adapted from the CHADO core module and the 
+-- CHADO Natural Diversity Module which are products of the 
+-- Generic Model Organism Database (GMOD) Project: 
+-- http://gmod.org/wiki/Main_Page 
+-- http://gmod.org/wiki/Chado_-_Getting_Started 
+-- ======================================================================================= 
+-- 
+-- Description - create the Local IBDB DMS tables (ver 2.0) 
+-- 
+-- Modifications to the original schema have been carried out by the database team 
+-- of the Integrated Breeding Platform project of the Generation Challenge Program 
+-- Description of the use and business rules for the database are at: 
+-- http://wiki.cimmyt.org/confluence/display/MBP/Application+2.2.1+Tool+2.10+-+Database 
+-- 
+-- storage ENGINE=InnoDB DEFAULT CHARSET=utf8 
 
 
 /*!40101 SET NAMES utf8 */;
