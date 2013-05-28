@@ -1,4 +1,4 @@
-DROP FUNCTION GetNumberInName;
+DROP FUNCTION IF EXISTS GetNumberInName;
 
 delimiter $$
 
