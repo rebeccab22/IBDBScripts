@@ -14,4 +14,6 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path,parameter,user
 ,('breeding_manager', 'Breeding Manager', '3.0.0 Beta 41', 'NATIVE', 'tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=BreedingManager',0)
 ,('breeding_view', 'Breeding View', '1.1.0.9221', 'NATIVE', 'tools/breeding_view/Bin/BreedingView.exe','',0)
 ,('mbdt','MBDT','1.0.0','NATIVE','tools/mbdt/MBDTversion1.0.0.exe','',0)
+,('breeding_planner','Breeding Planner','1.0 April 2013 Release','NATIVE','tools/Breeding Planner/Breeding Planner.exe','',0)
+,('germplasm_import','Fieldbook Germplasm Import','4.0.0','NATIVE','tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=GermplasmImport',0)
 ;
