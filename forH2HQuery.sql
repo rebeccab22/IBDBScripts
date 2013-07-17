@@ -26,19 +26,42 @@ delimiter $$
 CREATE PROCEDURE `h2h_traitXenv`(germplasm1 varchar(100), germplasm2 varchar(100))
 begin
 
-
 	drop temporary table if exists h2h_temp;
 	CREATE TEMPORARY TABLE h2h_temp AS (
-		select trait_name, location_id
+		select distinct trait_name, entry_designation, location_id
 		from h2h_details
-		where entry_designation in (germplasm1, germplasm2)
-		group by trait_name, location_id
-		having count(distinct entry_designation) > 1
-		order by trait_name, location_id);
+		where entry_designation in (germplasm1, germplasm2));
+
+		select distinct location_id, trait_name, 1
+		from h2h_temp h2h
+		group by location_id, trait_name, 1
+		having count(*) > 1
+		order by trait_name, location_id;
+
+end$$
+delimiter ;
+
+drop procedure if exists h2h_traitXenv_summary;
+
+delimiter $$
+CREATE PROCEDURE `h2h_traitXenv_summary`(germplasm1 varchar(100), germplasm2 varchar(100))
+begin
+
+
+	drop temporary table if exists h2h_temp;
+
+	CREATE TEMPORARY TABLE h2h_temp AS (
+		select distinct trait_name, entry_designation, location_id
+		from h2h_details
+		where entry_designation in (germplasm1, germplasm2));
 
 		select trait_name, count(*)
-		from h2h_temp
-		group by trait_name
-		order by 2 desc;
+		from (	select distinct trait_name, location_id, count(*)
+				from h2h_temp
+				group by trait_name, location_id
+				having count(location_id) > 1) as h2h_temp2
+		group by trait_name;
+
+
 end$$
 delimiter ;
