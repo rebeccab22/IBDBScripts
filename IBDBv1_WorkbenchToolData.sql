@@ -16,4 +16,5 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path,parameter,user
 ,('mbdt','MBDT','1.0.0','NATIVE','tools/mbdt/MBDTversion1.0.0.exe','',0)
 ,('breeding_planner','Breeding Planner','1.0 April 2013 Release','NATIVE','tools/Breeding Planner/Breeding Planner.exe','',0)
 ,('germplasm_import','Fieldbook Germplasm Import','4.0.0','NATIVE','tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=GermplasmImport',0)
+,('germplasm_headtohead','Fieldbook Germplasm Head To Head','4.0.0','WEB','localhost:18080/GermplasmStudyBrowser/main/h2h-query','',0)
 ;
