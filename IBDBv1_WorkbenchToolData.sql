@@ -19,4 +19,5 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path,parameter,user
 ,('germplasm_import','Germplasm Import','1.0.0','WEB','http://localhost:18080/BreedingManager/main/germplasm-import','',0)
 ,('germplasm_headtohead','Fieldbook Germplasm Head To Head','4.0.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/h2h-query','',0)
 ,('germplasm_mainheadtohead','Fieldbook Germplasm MAIN Head To Head','4.0.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/Head_to_head_comparison','',0)
+,('DatasetImporter', 'Data Import Tool', '1.0', 'WEB', 'http://localhost:18080/DatasetImporter/','',0)
 ;
