@@ -20,5 +20,6 @@ INSERT INTO workbench_tool (name, title, version, tool_type, path,parameter,user
 ,('ibfb_germplasm_import','Fieldbook Germplasm Import','4.0.0','NATIVE','tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=GermplasmImport',0)
 ,('germplasm_mainheadtohead','Fieldbook Germplasm MAIN Head To Head','4.0.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/Head_to_head_comparison','',0)
 ,('dataset_importer', 'Data Import Tool', '1.0', 'WEB', 'http://localhost:18080/DatasetImporter/','',0)
+,('query_for_adapted_germplasm', 'Query For Adapted Germplasm', '1.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/Query_For_Adapted_Germplasm','',0)
 ;
 
