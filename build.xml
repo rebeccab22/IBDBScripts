@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<project name="IBDBLoader" default="loadDatabase" basedir=".">
+
+	<property environment="env"/>
+	<property file="build.properties"/>
+	<property name="lib.dir" location="lib" />
+
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.dir}/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
+	
+	<target name="loadDatabase" depends="downloadDBInstaller,setupWorkbenchDatabase,setupCropDatabases" description="Do everything required to install all DBs"/>
+	
+	<target name="setupDirectories">
+		<mkdir dir="${crop.database.dir}"/>
+        <mkdir dir="${crop.database.dir}/temp"/>
+        <mkdir dir="${crop.database.dir}/central/${database}"/>
+        <mkdir dir="${crop.database.dir}/local/${database}"/>
+        <mkdir dir="${crop.database.dir}/updates/${database}"/>
+        <copy file="run_script.sh" todir="${crop.database.dir}"/>
+        <chmod file="${crop.database.dir}/run_script.sh" perm="770"/>       
+        <copy file="unZipExe2.sh" todir="${crop.database.dir}"/>
+        <chmod file="${crop.database.dir}/unZipExe2.sh" perm="770"/>       
+	</target>
+	
+	<target name="downloadDBInstaller" description="Downloads Installers from iPlant and stores them in temp directory">
+		<get dest="${crop.database.dir}/temp">
+		  <url url="http://dgz0ok12gu1wq.cloudfront.net/Efficio/${db.date}/ibdbv2_${database}_central_database_${DBversion}.exe"/> 
+		</get>
+		<exec dir="${crop.database.dir}" executable="${unzip.exe.file}"></exec>
+	</target>
+	
+	<target name="setupWorkbenchDatabase">
+	
+		<echo>Initializing workbench database</echo>
+
+		<!-- Create the central and local database -->
+		<sql userid="root" password="" url="jdbc:mysql://localhost:13306/" driver="com.mysql.jdbc.Driver" classpathref="project.classpath">		
+            DROP DATABASE IF EXISTS workbench;
+            CREATE DATABASE workbench;
+            
+            GRANT ALL ON workbench.* TO 'workbench'@'localhost' IDENTIFIED BY 'workbench';
+            FLUSH PRIVILEGES;
+			
+        </sql>	
+        <!-- Initialize the workbench database -->
+        <foreach target="run_script_workbench" param="sqlFile">
+            <path>
+                <fileset dir="${IBDBScripts.dir}">
+                    <include name="IBDBv1_Workbench.sql"/>
+                    <include name="IBDBv1_WorkbenchCropData.sql"/>
+                    <include name="IBDBv1_WorkbenchData.sql"/>
+                    <include name="IBDBv1_WorkbenchToolData.sql"/>
+                </fileset>
+            </path>
+        </foreach> 
+		
+	</target>
+
+	<target name="setupCropDatabases" description="Initializes the database with necessary data based on the 'database' parameter.">
+		<echo>Initializing with database: ${database}</echo>
+
+		<!-- Create the central and local database -->
+		<sql userid="root" password="" url="jdbc:mysql://localhost:13306/" driver="com.mysql.jdbc.Driver" classpathref="project.classpath">
+            DROP DATABASE IF EXISTS ibdbv2_${database}_central;
+            CREATE DATABASE ibdbv2_${database}_central;
+            
+            DROP DATABASE IF EXISTS ibdbv2_${database}_local;
+            CREATE DATABASE ibdbv2_${database}_local;
+            
+            GRANT ALL ON ibdbv2_${database}_central.* TO 'central'@'localhost' IDENTIFIED BY 'central';
+            GRANT ALL ON ibdbv2_${database}_local.* TO 'local'@'localhost' IDENTIFIED BY 'local';
+            FLUSH PRIVILEGES;
+			
+        </sql>
+
+        <!-- Initialize the local database -->
+        <foreach target="run_script_local" param="sqlFile">
+            <path>
+                <fileset dir="${IBDBScripts.dir}">
+                    <include name="AA_IBDBV2-LOCAL-DMS.sql"/>
+                    <include name="BB_IBDBv2_GMS-LOCAL_20130521.sql"/>
+                    <include name="CC_IBDBv2_GDMS_LOCAL_20130521.sql"/>
+                    <include name="DD_IBDBv2_IMS_20130521.sql"/>
+                    <include name="EE_IBDBV2-DMS-Views_20130520.sql"/>
+                    <include name="FF_forH2HQuery.sql"/>
+                    <!-- <include name="LOCAL_GMS_location_storage.sql"/> -->
+                </fileset>
+                <fileset dir="${crop.database.dir}/local/${database}">
+                    <include name="**/*.sql"/>
+                </fileset>
+            </path>
+        </foreach> 
+
+        <!-- Initialize the central database -->
+        <foreach target="run_script_central" param="sqlFile">
+            <path>
+                <fileset dir="${IBDBScripts.dir}">
+                    <include name="AA_IBDBv2_DMS_CENTRAL_20130521.sql"/>
+                    <include name="BB_IBDBv2_GMS-CENTRAL_20130521.sql"/>
+                    <include name="CC_IBDBv2_GDMS_CENTRAL_20130521.sql"/>
+                    <include name="DD_IBDBv2_IMS_20130521.sql"/>
+                    <include name="EE_IBDBV2-DMS-Views_20130520.sql"/>
+                    <include name="FF_forH2HQuery.sql"/>
+                </fileset>
+                <fileset dir="${crop.database.dir}/central/${database}/full">
+                    <include name="**/*.sql"/>
+                </fileset>
+            </path>
+        </foreach> 
+		
+		<!-- <echo>---------------------------------</echo>
+		<echo>Inserting : ${database} central DB location into workbench_crop</echo>
+		<echo>---------------------------------</echo>
+		
+		<sql userid="root" password="" url="jdbc:mysql://localhost:13306/" driver="com.mysql.jdbc.Driver" classpathref="project.classpath">
+			USE workbench;
+			INSERT INTO workbench_crop(crop_name, central_db_name) values ('${database}', 'ibdb_${database}_central');
+        </sql> -->
+		
+    </target>
+    
+    <target name="run_script_central" description="Run SQL script on the local database">
+    	<echo>"Loading to central : ${database} : ${sqlFile}"</echo>
+        <exec dir="${crop.database.dir}" executable="${run.script.file}" spawn="false">
+            <arg value="${mysql.port}"/>
+            <arg value="ibdbv2_${database}_central"/>
+            <arg value="${sqlFile}"/>
+        </exec>
+    </target>
+    
+    <target name="run_script_local" description="Run SQL script on the central database">
+    	<echo>"Loading to local : ${database} : ${sqlFile}"</echo>
+        <exec dir="${crop.database.dir}" executable="${run.script.file}" spawn="false">
+            <arg value="${mysql.port}"/>
+            <arg value="ibdbv2_${database}_local"/>
+            <arg value="${sqlFile}"/>
+        </exec>
+	</target>
+	
+    <target name="run_script_workbench" description="Run SQL script on the workbench database">
+    	<echo>"Loading to workbench : ${sqlFile}"</echo>
+        <exec dir="${crop.database.dir}" executable="${run.script.file}" spawn="false">
+            <arg value="${mysql.port}"/>
+            <arg value="workbench"/>
+            <arg value="${sqlFile}"/>
+        </exec>
+	</target>
+
+</project>
