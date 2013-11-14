@@ -117,11 +117,11 @@
             </path>
         </foreach> 
 		
-		<!-- <echo>---------------------------------</echo>
+		<echo>---------------------------------</echo>
 		<echo>Inserting : ${database} central DB location into workbench_crop</echo>
 		<echo>---------------------------------</echo>
 		
-		<sql userid="root" password="" url="jdbc:mysql://localhost:13306/" driver="com.mysql.jdbc.Driver" classpathref="project.classpath">
+		<!-- <sql userid="root" password="" url="jdbc:mysql://localhost:13306/" driver="com.mysql.jdbc.Driver" classpathref="project.classpath">
 			USE workbench;
 			INSERT INTO workbench_crop(crop_name, central_db_name) values ('${database}', 'ibdb_${database}_central');
         </sql> -->
