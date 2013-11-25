@@ -30,5 +30,6 @@ INSERT INTO `workbench_tool` VALUES
 ,(19,'query_for_adapted_germplasm','Query For Adapted Germplasm','1.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/Query_For_Adapted_Germplasm','',0)
 ,(20,'breeding_view_wb','Single-Site Analysis','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/breeding_view','',0)
 ,(21,'breeding_gxe','Multi-Site Analysis','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/BreedingGxE','',0)
+,(22,'bm_list_manager', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/BreedingManager/main/list-manager/','',0)
 ;
 
