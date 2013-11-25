@@ -136,7 +136,7 @@ CREATE TABLE workbench_tool (
     ,name                   VARCHAR(128) NOT NULL
     ,title                  VARCHAR(255) NOT NULL
     ,version                VARCHAR(16) NOT NULL
-    ,tool_type              ENUM('WEB', 'WEB_WITH_LOGIN', 'NATIVE')
+    ,tool_type              ENUM('WEB', 'WEB_WITH_LOGIN', 'NATIVE','WORKBENCH','ADMIN')
     ,path                   TEXT
     ,parameter              VARCHAR(255) NOT NULL DEFAULT ''
     ,user_tool              BOOLEAN NOT NULL DEFAULT FALSE
