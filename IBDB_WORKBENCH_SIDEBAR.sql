@@ -38,7 +38,10 @@ CREATE TABLE `workbench_sidebar_category` (
 
 LOCK TABLES `workbench_sidebar_category` WRITE;
 /*!40000 ALTER TABLE `workbench_sidebar_category` DISABLE KEYS */;
-INSERT INTO `workbench_sidebar_category` VALUES (1,'activities','Activities'),(2,'information_mgt','Information Management'),(3,'queries_analysis','Queries & Analysis'),(4,'more_tools','More Tools'),(5,'workflows','Workflows'),(6,'admin','Admin & Settings');
+INSERT INTO `workbench_sidebar_category` VALUES 
+(1,'activities','Activities'),(2,'information_mgt','Information Management')
+,(3,'queries_analysis','Queries & Analysis'),(4,'more_tools','More Tools')
+,(5,'workflows','Workflows'),(6,'admin','Admin & Settings');
 /*!40000 ALTER TABLE `workbench_sidebar_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +72,24 @@ CREATE TABLE `workbench_sidebar_category_link` (
 
 LOCK TABLES `workbench_sidebar_category_link` WRITE;
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` DISABLE KEYS */;
-INSERT INTO `workbench_sidebar_category_link` VALUES (1,10,1,'manage_list','Manage List'),(2,11,1,'manage_crosses','Manage Crosses'),(3,12,1,'manage_nurseries','Manage Nurseries'),(4,3,1,'manage_trials','Manage Trials'),(5,14,2,'ibfb_germlasm_import','IBFB Germplasm Import'),(6,15,2,'germplasm_import','Germplasm Import'),(7,9,2,'gdms','Genotypic Data Mgmt. System (GDMS)'),(8,6,2,'germplasm_browser','Germplasm Browser'),(9,7,2,'study_browser','Study Browser'),(10,20,3,'breeding_view_wb','Single-Site Analysis'),(11,21,3,'breeding_gxe','Multi-Site Analysis'),(12,4,3,'breeding_view','Breeding View Standalone'),(13,16,3,'simple_hxh','Simple Head to Head Query'),(14,17,3,'main_hxh','Main Head to Head Query'),(15,19,3,'adopted_query','Adopted Germplasm Query'),(16,1,4,'mbdt','Molecular Breeding Decision Tool (MBDT)'),(17,2,4,'optimas','Optimas'),(18,13,4,'mbp','Molecular Breeding Planner (MBDT)');
+INSERT INTO `workbench_sidebar_category_link` VALUES 
+(1,10,1,'manage_list','Manage List')
+,(2,11,1,'manage_crosses','Manage Crosses')
+,(3,12,1,'manage_nurseries','Manage Nurseries')
+,(4,3,1,'manage_trials','Manage Trials')
+,(5,14,2,'ibfb_germlasm_import','IBFB Germplasm Import')
+,(6,15,2,'germplasm_import','Germplasm Import')
+,(7,9,2,'gdms','Genotyping Data Mgmt. System (GDMS)')
+,(8,6,2,'germplasm_browser','Germplasm Browser')
+,(9,7,2,'study_browser','Study Browser')
+,(10,20,3,'breeding_view_wb','Single-Site Analysis')
+,(11,21,3,'breeding_gxe','Multi-Site Analysis')
+,(12,4,3,'breeding_view','Breeding View Standalone')
+,(13,16,3,'simple_hxh','Simple Head to Head Query')
+,(14,17,3,'main_hxh','Main Head to Head Query')
+,(15,19,3,'adopted_query','Adapted Germplasm Query')
+,(16,1,4,'mbdt','Molecular Breeding Decision Tool (MBDT)')
+,(17,2,4,'optimas','Optimas'),(18,13,4,'mbp','Molecular Breeding Planner (MBP)');
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
