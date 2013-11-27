@@ -89,7 +89,7 @@ INSERT INTO `workbench_sidebar_category_link` VALUES
 ,(14,17,3,'main_hxh','Main Head to Head Query')
 ,(15,19,3,'adopted_query','Adapted Germplasm Query')
 ,(16,1,4,'mbdt','Molecular Breeding Decision Tool (MBDT)')
-,(17,2,4,'optimas','optiMAS')
+,(17,2,4,'optimas','OptiMAS')
 ,(18,13,4,'mbp','Molecular Breeding Planner (MBP)');
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` ENABLE KEYS */;
 UNLOCK TABLES;
