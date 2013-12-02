@@ -31,5 +31,9 @@ INSERT INTO `workbench_tool` VALUES
 ,(20,'breeding_view_wb','Single-Site Analysis','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/breeding_view','',0)
 ,(21,'breeding_gxe','Multi-Site Analysis','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/BreedingGxE','',0)
 ,(22,'bm_list_manager', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/BreedingManager/main/list-manager/','',0)
+,(23,'fieldbook_web', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/Fieldbook','',0)
+,(24,'nursery_manager_fieldbook_web', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/Fieldbook/NurseryManager','',0)
+,(25,'trial_manager_fieldbook_web', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/Fieldbook/TrialManager ','',0)
+,(26,'ontology_browser_fieldbook_web', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/Fieldbook/OntologyBrowser','',0)
+,(27,'bv_meta_analysis','Meta Analysis of Field Trials','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/bv_meta_analysis','',0)
 ;
-

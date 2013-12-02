@@ -73,24 +73,26 @@ CREATE TABLE `workbench_sidebar_category_link` (
 LOCK TABLES `workbench_sidebar_category_link` WRITE;
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` DISABLE KEYS */;
 INSERT INTO `workbench_sidebar_category_link` VALUES 
-(1,10,1,'manage_list','Manage List')
+(1,10,1,'manage_list','Manage Lists')
 ,(2,11,1,'manage_crosses','Manage Crosses')
-,(3,12,1,'manage_nurseries','Manage Nurseries')
-,(4,3,1,'manage_trials','Manage Trials')
-,(5,14,2,'ibfb_germlasm_import','IBFB Germplasm Import')
-,(6,15,2,'germplasm_import','Germplasm Import')
-,(7,9,2,'gdms','Genotyping Data Mgmt. System (GDMS)')
-,(8,6,2,'germplasm_browser','Germplasm Browser')
+,(3,24,1,'manage_nurseries','Manage Nurseries')
+,(4,25,1,'manage_trials','Manage Trials')
+,(5,22,2,'bm_list_manager','List Manager')
+,(6,14,2,'ibfb_germlasm_import','IBFB Germplasm Import')
+,(7,15,2,'germplasm_import','Germplasm Import')
+,(8,9,2,'gdms','Genotyping Data Mgmt. System (GDMS)')
 ,(9,7,2,'study_browser','Study Browser')
-,(10,20,3,'breeding_view_wb','Single-Site Analysis')
-,(11,21,3,'breeding_gxe','Multi-Site Analysis')
-,(12,4,3,'breeding_view','Breeding View Standalone')
-,(13,16,3,'simple_hxh','Simple Head to Head Query')
-,(14,17,3,'main_hxh','Main Head to Head Query')
-,(15,19,3,'adopted_query','Adapted Germplasm Query')
-,(16,1,4,'mbdt','Molecular Breeding Decision Tool (MBDT)')
-,(17,2,4,'optimas','OptiMAS')
-,(18,13,4,'mbp','Molecular Breeding Planner (MBP)');
+,(10,26,2,'ontology_browser_fieldbook_web','Ontology Browser')
+,(11,20,3,'breeding_view_wb','Single-Site Analysis')
+,(12,21,3,'breeding_gxe','Multi-Site Analysis')
+,(13,4,3,'breeding_view','Breeding View Standalone')
+,(14,27,3,'bv_meta_analysis','Meta Analysis of Field Trials')
+,(15,16,3,'simple_hxh','Simple Head to Head Query')
+,(16,17,3,'main_hxh','Main Head to Head Query')
+,(17,19,3,'adopted_query','Adapted Germplasm Query')
+,(18,1,4,'mbdt','Molecular Breeding Decision Tool (MBDT)')
+,(19,2,4,'optimas','OptiMAS')
+,(20,13,4,'mbp','Molecular Breeding Planner (MBP)');
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
