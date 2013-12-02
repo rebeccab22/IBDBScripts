@@ -204,7 +204,7 @@ WHERE template.name = 'Manager' AND step.name = 'decision_support';
 -- workbench_role data
 -- 
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
-SELECT 'CB Breeder', template_id, 'Conventional breeding (CB)', 1 
+SELECT 'CB Breeder', template_id, 'Conventional Breeding (CB)', 1 
 FROM workbench_workflow_template WHERE name = 'CB'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'CB Breeder' 
@@ -212,7 +212,7 @@ FROM workbench_workflow_template WHERE name = 'CB'
                                                 FROM workbench_workflow_template WHERE name = 'CB'));
 
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
-SELECT 'MAS Breeder', template_id, 'Breeding with marker assisted selection (MAS)', 2 
+SELECT 'MAS Breeder', template_id, 'Breeding with Marker Assisted Selection (MAS)', 2 
 FROM workbench_workflow_template WHERE name = 'MAS'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MAS Breeder' 
@@ -220,7 +220,7 @@ FROM workbench_workflow_template WHERE name = 'MAS'
                                                 FROM workbench_workflow_template WHERE name = 'MAS'));
 
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
-SELECT 'MABC Breeder', template_id, 'Marker assisted backcrossing (MABC)', 3 
+SELECT 'MABC Breeder', template_id, 'Marker Assisted Backcrossing (MABC)', 3 
 FROM workbench_workflow_template WHERE name = 'MABC'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MABC Breeder' 
@@ -228,7 +228,7 @@ FROM workbench_workflow_template WHERE name = 'MABC'
                                                 FROM workbench_workflow_template WHERE name = 'MABC'));
 
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
-SELECT 'MARS Breeder', template_id, 'Marker assisted recurrent selection (MARS)', 4
+SELECT 'MARS Breeder', template_id, 'Marker Assisted Recurrent Selection (MARS)', 4
 FROM workbench_workflow_template WHERE name = 'MARS'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MARS Breeder' 
