@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS `listdataprops`; 
+DROP TABLE IF EXISTS `listdataprops`;
+
 CREATE TABLE `listdataprops` ( 
   `listdataprop_id` int(11) NOT NULL AUTO_INCREMENT, 
   `listdata_id` int(11) NOT NULL DEFAULT '0', 
