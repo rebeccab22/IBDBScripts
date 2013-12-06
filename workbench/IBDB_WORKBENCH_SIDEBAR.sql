@@ -71,7 +71,7 @@ CREATE TABLE `workbench_sidebar_category_link` (
 LOCK TABLES `workbench_sidebar_category_link` WRITE;
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` DISABLE KEYS */;
 INSERT INTO `workbench_sidebar_category_link` VALUES 
-(1,10,1,'manage_list','Manage Lists')
+(1,22,1,'manage_list','Manage Lists')
 ,(2,11,1,'manage_crosses','Manage Crosses')
 ,(3,24,1,'manage_nurseries','Manage Nurseries')
 ,(4,25,1,'manage_trials','Manage Trials')
@@ -85,12 +85,11 @@ INSERT INTO `workbench_sidebar_category_link` VALUES
 ,(12,21,3,'breeding_gxe','Multi-Site Analysis')
 ,(13,4,3,'breeding_view','Breeding View Standalone')
 ,(14,27,3,'bv_meta_analysis','Meta Analysis of Field Trials')
-,(15,16,3,'simple_hxh','Simple Head to Head Query')
-,(16,17,3,'main_hxh','Main Head to Head Query')
-,(17,19,3,'adopted_query','Adapted Germplasm Query')
-,(18,1,4,'mbdt','Molecular Breeding Decision Tool (MBDT)')
-,(19,2,4,'optimas','OptiMAS')
-,(20,13,4,'mbp','Molecular Breeding Planner (MBP)');
+,(15,17,3,'main_hxh','Main Head to Head Query')
+,(16,19,3,'adopted_query','Adapted Germplasm Query')
+,(17,1,4,'mbdt','Molecular Breeding Decision Tool (MBDT)')
+,(18,2,4,'optimas','OptiMAS')
+,(19,13,4,'mbp','Molecular Breeding Planner (MBP)');
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
