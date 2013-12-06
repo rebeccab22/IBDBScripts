@@ -7,3 +7,7 @@ CREATE TABLE `listdataprops` (
   `value` varchar(255), 
   PRIMARY KEY (`listdataprop_id`) 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `listnms` ADD COLUMN(
+  `notes` TEXT
+);
