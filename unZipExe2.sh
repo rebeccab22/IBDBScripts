@@ -7,10 +7,12 @@ for f in *.exe
 	echo "Crop is $crop"
 	unzip $f
 	
-	cd database
-	mv central ../../
-	mv local ../../
-	mv update ../../
+	cd database/central
+	mv $crop ../../../central/
+	cd ../local
+	mv $crop ../../../local
+	cd ../update
+	mv $crop ../../../update
 
   done
 
