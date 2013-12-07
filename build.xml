@@ -17,9 +17,13 @@
 		</classpath>
 	</taskdef>
 	
-	<target name="loadDatabase" depends="downloadDBInstaller,setupWorkbenchDatabase,setupCropDatabases" description="Do everything required to install all DBs"/>
+	<target name="loadDatabase" depends="clean,setupDirectories,downloadDBInstaller,setupWorkbenchDatabase,setupCropDatabases" description="Do everything required to install all DBs"/>
 	
-	<target name="setupDirectories">
+    <target name="clean" description="Remove crop directories to clean working area">
+        <delete dir="${crop.database.dir}"/>
+    </target>
+    
+    <target name="setupDirectories">
 		<mkdir dir="${crop.database.dir}"/>
         <mkdir dir="${crop.database.dir}/temp"/>
         <mkdir dir="${crop.database.dir}/central/${database}"/>
