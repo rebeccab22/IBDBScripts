@@ -5,10 +5,12 @@
 ALTER TABLE `workbench`.`workbench_tool` 
 CHANGE COLUMN `tool_type` `tool_type` ENUM('WEB','WEB_WITH_LOGIN','NATIVE','WORKBENCH','ADMIN') NULL DEFAULT NULL ;
 
+SET FOREIGN_KEY_CHECKS=0;
+
 -- Notes on paths:
 -- WEB tools should use the release port.
 -- NATIVE tools should have an absolute path
-INSERT INTO `workbench_tool` VALUES 
+REPLACE INTO `workbench_tool` VALUES 
 (1,'mbdt','MBDT','1.0.3','NATIVE','C:\\IBWorkflowSystem\\tools/mbdt/MBDT.exe','',0)
 ,(2,'optimas','OptiMAS','1.4','NATIVE','C:\\IBWorkflowSystem\\tools/optimas/optimas_gui.exe','',0)
 ,(3,'fieldbook','FieldBook Native','4.0.2','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=IBFieldbookTools',0)
@@ -31,9 +33,12 @@ INSERT INTO `workbench_tool` VALUES
 ,(20,'breeding_view_wb','Single-Site Analysis','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/breeding_view','',0)
 ,(21,'breeding_gxe','Multi-Site Analysis','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/BreedingGxE','',0)
 ,(22,'bm_list_manager', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/BreedingManager/main/listmanager','',0)
-,(23,'fieldbook_web', 'Fieldbook Web', '1.0', 'WEB', 'http://localhost:18080/Fieldbook','',0)
-,(24,'nursery_manager_fieldbook_web', 'Fieldbook Web - Nursery Manager', '1.0', 'WEB', 'http://localhost:18080/Fieldbook/NurseryManager','',0)
-,(25,'trial_manager_fieldbook_web', 'Fieldbook Web - Trial Manager', '1.0', 'WEB', 'http://localhost:18080/Fieldbook/TrialManager ','',0)
-,(26,'ontology_browser_fieldbook_web', 'Fieldbook Web - Ontology Browser', '1.0', 'WEB', 'http://localhost:18080/Fieldbook/OntologyBrowser','',0)
-,(27,'bv_meta_analysis','Meta Analysis of Field Trials','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/bv_meta_analysis','',0)
+,(23,'bm_list_manager_main', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/BreedingManager/main/list-manager','',0)
+,(24,'fieldbook_web', 'Fieldbook Web', '1.0', 'WEB', 'http://localhost:18080/Fieldbook','',0)
+,(25,'nursery_manager_fieldbook_web', 'Fieldbook Web - Nursery Manager', '1.0', 'WEB', 'http://localhost:18080/Fieldbook/NurseryManager','',0)
+,(26,'trial_manager_fieldbook_web', 'Fieldbook Web - Trial Manager', '1.0', 'WEB', 'http://localhost:18080/Fieldbook/TrialManager ','',0)
+,(27,'ontology_browser_fieldbook_web', 'Fieldbook Web - Ontology Browser', '1.0', 'WEB', 'http://localhost:18080/Fieldbook/OntologyBrowser','',0)
+,(28,'bv_meta_analysis','Meta Analysis of Field Trials','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/bv_meta_analysis','',0)
 ;
+
+SET FOREIGN_KEY_CHECKS=1;
