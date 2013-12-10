@@ -71,11 +71,11 @@ CREATE TABLE `workbench_sidebar_category_link` (
 LOCK TABLES `workbench_sidebar_category_link` WRITE;
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` DISABLE KEYS */;
 INSERT INTO `workbench_sidebar_category_link` VALUES 
-(1,22,1,'manage_list','Manage Lists')
+(1,28,1,'manage_list','Manage Lists')
 ,(2,11,1,'manage_crosses','Manage Crosses')
 ,(3,24,1,'manage_nurseries','Manage Nurseries')
 ,(4,25,1,'manage_trials','Manage Trials')
-,(5,22,2,'bm_list_manager','List Manager')
+,(5,28,2,'bm_list_manager','List Manager')
 ,(6,14,2,'ibfb_germlasm_import','IBFB Germplasm Import')
 ,(7,15,2,'germplasm_import','Germplasm Import')
 ,(8,9,2,'gdms','Genotyping Data Mgmt. System (GDMS)')
