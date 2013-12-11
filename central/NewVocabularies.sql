@@ -1,10 +1,10 @@
 -- execute in CENTRAL database ONLY
 
-INSERT INTO cv(cv_id, name, definition)
+INSERT IGNORE INTO cv(cv_id, name, definition)
 VALUES(30360, '32774', 'Planting Order')
 ;
 
-INSERT INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
+INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
 VALUES
   (32769, 1040, 'FIELDMAP COLUMN', 'FIELDMAP COLUMN', 0, 0)
 , (32770, 1040, 'FIELDMAP RANGE', 'FIELDMAP RANGE', 0, 0)
@@ -26,7 +26,7 @@ VALUES
 , (32788, 1010, 'ROW CAPACITY OF MACHINE PROP', 'ROW CAPACITY OF MACHINE PROP', 0, 0)
 ;
 
-INSERT INTO cvterm_relationship (cvterm_relationship_id, subject_id, type_id, object_id)
+INSERT IGNORE INTO cvterm_relationship (cvterm_relationship_id, subject_id, type_id, object_id)
 VALUES
   (35350, 32772, 1044, 1030)
 , (35351, 32772, 1105, 1110)
