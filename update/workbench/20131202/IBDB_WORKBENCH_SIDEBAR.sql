@@ -73,7 +73,7 @@ LOCK TABLES `workbench_sidebar_category_link` WRITE;
 INSERT INTO `workbench_sidebar_category_link` VALUES 
 (1,10,1,'manage_list','Manage Lists')
 ,(2,11,1,'manage_crosses','Manage Crosses')
-,(3,24,1,'manage_nurseries','Manage Nurseries')
+,(3,24,1,'manage_nurseries','Make Nurseries')
 ,(4,25,1,'manage_trials','Manage Trials')
 ,(5,22,2,'bm_list_manager','List Manager')
 ,(6,14,2,'ibfb_germlasm_import','IBFB Germplasm Import')
