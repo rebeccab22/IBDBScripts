@@ -14,7 +14,7 @@ REPLACE INTO `workbench_tool` VALUES
 (1,'mbdt','MBDT','1.0.3','NATIVE','C:\\IBWorkflowSystem\\tools/mbdt/MBDT.exe','',0)
 ,(2,'optimas','OptiMAS','1.4','NATIVE','C:\\IBWorkflowSystem\\tools/optimas/optimas_gui.exe','',0)
 ,(3,'fieldbook','Fieldbook Native','4.0.2','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=IBFieldbookTools',0)
-,(4,'breeding_view','Breeding View','1.1.0.10749','NATIVE','C:\\IBWorkflowSystem\\tools/breeding_view/Bin/BreedingView.exe','',0)
+,(4,'breeding_view','Breeding View','1.1.0.11849','NATIVE','C:\\IBWorkflowSystem\\tools/breeding_view/Bin/BreedingView.exe','',0)
 ,(5,'breeding_manager','Fieldbook Native - Breeding Manager','4.0.2','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=BreedingManager',0)
 ,(6,'germplasm_browser','Browse Germplasm Information','1.2.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/germplasm/','',0)
 ,(7,'study_browser','Browse Studies and Datasets','1.2.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/study/','',0)
