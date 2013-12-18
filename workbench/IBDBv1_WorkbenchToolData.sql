@@ -39,6 +39,7 @@ REPLACE INTO `workbench_tool` VALUES
 ,(26,'ontology_browser_fieldbook_web', 'Fieldbook Web - Ontology Browser', '1.0', 'WEB', 'http://localhost:18080/Fieldbook/OntologyBrowser','',0)
 ,(27,'bv_meta_analysis','Meta Analysis of Field Trials','1.0','WORKBENCH','http://localhost:18080/ibpworkbench/main/#/bv_meta_analysis','',0)
 ,(28,'bm_list_manager_main', 'List Manager', '1.1.1.0', 'WEB', 'http://localhost:18080/BreedingManager/main/list-manager','',0)
+,(29,'study_browser_with_id','Browse Studies and Datasets','1.2.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/studybrowser/','',0)
 ;
 
 SET FOREIGN_KEY_CHECKS=1;
