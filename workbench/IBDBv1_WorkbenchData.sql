@@ -212,7 +212,7 @@ FROM workbench_workflow_template WHERE name = 'CB'
                                                 FROM workbench_workflow_template WHERE name = 'CB'));
 
 INSERT INTO workbench_role(name, workflow_template_id, role_label, label_order) 
-SELECT 'MAS Breeder', template_id, 'Breeding with Marker Assisted Selection (MAS)', 2 
+SELECT 'MAS Breeder', template_id, 'Marker Assisted Selection (MAS)', 2 
 FROM workbench_workflow_template WHERE name = 'MAS'
 	AND NOT EXISTS (SELECT role_id FROM workbench_role 
                 WHERE name = 'MAS Breeder' 

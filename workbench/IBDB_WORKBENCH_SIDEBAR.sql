@@ -1,4 +1,6 @@
+DROP TABLE IF EXISTS workbench_sidebar_category_link;
 DROP TABLE IF EXISTS workbench_sidebar_category;
+
 CREATE TABLE workbench_sidebar_category (
     sidebar_category_id             INT(11) NOT NULL AUTO_INCREMENT,
     sidebar_category_name           VARCHAR(255) NOT NULL,
@@ -11,18 +13,19 @@ CREATE TABLE workbench_sidebar_category (
 --
 LOCK TABLES workbench_sidebar_category WRITE;
 INSERT INTO workbench_sidebar_category VALUES 
- (1,'activities','Activities')
+ (1,'activities','Breeding Activities')
 ,(2,'information_mgt','Information Management')
-,(3,'queries_analysis','Queries & Analysis')
-,(4,'more_tools','More Tools')
-,(5,'workflows','Workflows')
-,(6,'admin','Admin & Settings');
+,(3,'statistical_analysis','Statistical Analysis')
+,(4,'marker_assisted_breeding','Marker Assisted Breeding')
+,(5,'additional_tools','Additional Tools')
+,(6,'workflows','Workflows')
+,(7,'admin','Program Administration');
 UNLOCK TABLES;
 
 --
 -- Table structure for table workbench_sidebar_category_link
 --
-DROP TABLE IF EXISTS workbench_sidebar_category_link;
+
 CREATE TABLE workbench_sidebar_category_link (
     sidebar_category_link_id        INT(11) NOT NULL AUTO_INCREMENT,
     tool_name                       VARCHAR(128) NOT NULL,
@@ -42,19 +45,21 @@ INSERT INTO workbench_sidebar_category_link VALUES
 ,(2,'crossing_manager',1,'manage_crosses','Make Crosses')
 ,(3,'nursery_manager_fieldbook_web',1,'manage_nurseries','Manage Nurseries')
 ,(4,'trial_manager_fieldbook_web',1,'manage_trials','Manage Trials')
-,(5,'bm_list_manager_main',2,'bm_list_manager','List Manager')
-,(6,'ibfb_germplasm_import',2,'ibfb_germlasm_import','IBFB Germplasm Import')
-,(7,'germplasm_import',2,'germplasm_import','Germplasm Import')
-,(8,'gdms',2,'gdms','Genotyping Data Mgmt. System (GDMS)')
-,(9,'study_browser',2,'study_browser','Study Browser')
-,(10,'ontology_browser_fieldbook_web',2,'ontology_browser_fieldbook_web','Ontology Browser')
-,(11,'breeding_view_wb',3,'breeding_view_wb','Single-Site Analysis')
-,(12,'breeding_gxe',3,'breeding_gxe','Multi-Site Analysis')
-,(13,'breeding_view',3,'breeding_view','Breeding View Standalone')
-,(14,'bv_meta_analysis',3,'bv_meta_analysis','Meta Analysis of Field Trials')
-,(15,'germplasm_mainheadtohead',3,'main_hxh','Main Head to Head Query')
-,(16,'query_for_adapted_germplasm',3,'adopted_query','Adapted Germplasm Query')
-,(17,'mbdt',4,'mbdt','Molecular Breeding Decision Tool (MBDT)')
-,(18,'optimas',4,'optimas','OptiMAS')
-,(19,'breeding_planner',4,'mbp','Molecular Breeding Planner (MBP)');
+/*,(5,'bm_list_manager_main',2,'bm_list_manager','List Manager')*/
+,(5,'ibfb_germplasm_import',2,'ibfb_germlasm_import','IBFB Germplasm Import')
+,(6,'germplasm_import',2,'germplasm_import','Import Germplasm')
+,(7,'germplasm_browser',2,'germplasm_import','Browse Germplasm')
+,(8,'gdms',2,'gdms','Manage Genotyping Data')
+,(9,'study_browser',2,'study_browser','Browse Studies')
+,(10,'germplasm_mainheadtohead',2,'main_hxh','Head to Head Query')
+,(11,'query_for_adapted_germplasm',2,'adopted_query','Adapted Germplasm Query')
+/*,(10,'ontology_browser_fieldbook_web',2,'ontology_browser_fieldbook_web','Ontology Browser')*/
+,(12,'breeding_view_wb',3,'breeding_view_wb','Single-Site Analysis')
+,(13,'breeding_gxe',3,'breeding_gxe','Multi-Site Analysis')
+,(14,'bv_meta_analysis',3,'bv_meta_analysis','Multi-Year Multi-Site Analysis')
+,(15,'breeding_view',3,'breeding_view','Breeding View Standalone for QTL')
+,(16,'mbdt',4,'mbdt','Molecular Breeding Decision Tool')
+,(17,'optimas',4,'optimas','Molecular Breeding Decision Tool: OptiMAS')
+,(18,'breeding_planner',4,'mbp','Molecular Breeding Planner');
+
 UNLOCK TABLES;
