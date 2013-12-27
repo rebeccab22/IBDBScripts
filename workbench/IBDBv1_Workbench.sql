@@ -134,6 +134,7 @@ DROP TABLE IF EXISTS workbench_tool;
 CREATE TABLE workbench_tool (
      tool_id                INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,name                   VARCHAR(128) NOT NULL
+    ,group_name             VARCHAR(128) NOT NULL
     ,title                  VARCHAR(255) NOT NULL
     ,version                VARCHAR(16) NOT NULL
     ,tool_type              ENUM('WEB', 'WEB_WITH_LOGIN', 'NATIVE','WORKBENCH','ADMIN')
