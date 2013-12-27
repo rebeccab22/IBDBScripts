@@ -53,13 +53,13 @@ INSERT INTO workbench_sidebar_category_link VALUES
 ,(9,'study_browser',2,'study_browser','Browse Studies')
 ,(10,'germplasm_mainheadtohead',2,'main_hxh','Head to Head Query')
 ,(11,'query_for_adapted_germplasm',2,'adopted_query','Adapted Germplasm Query')
-/*,(10,'ontology_browser_fieldbook_web',2,'ontology_browser_fieldbook_web','Ontology Browser')*/
-,(12,'breeding_view_wb',3,'breeding_view_wb','Single-Site Analysis')
-,(13,'breeding_gxe',3,'breeding_gxe','Multi-Site Analysis')
-,(14,'bv_meta_analysis',3,'bv_meta_analysis','Multi-Year Multi-Site Analysis')
-,(15,'breeding_view',3,'breeding_view','Breeding View Standalone for QTL')
-,(16,'mbdt',4,'mbdt','Molecular Breeding Decision Tool')
-,(17,'optimas',4,'optimas','Molecular Breeding Decision Tool: OptiMAS')
-,(18,'breeding_planner',4,'mbp','Molecular Breeding Planner');
+,(12,'ontology_browser_fieldbook_web',2,'ontology_browser_fieldbook_web','Ontology Browser')
+,(13,'breeding_view_wb',3,'breeding_view_wb','Single-Site Analysis')
+,(14,'breeding_gxe',3,'breeding_gxe','Multi-Site Analysis')
+,(15,'bv_meta_analysis',3,'bv_meta_analysis','Multi-Year Multi-Site Analysis')
+,(16,'breeding_view',3,'breeding_view','Breeding View Standalone for QTL')
+,(17,'mbdt',4,'mbdt','Molecular Breeding Decision Tool')
+,(18,'optimas',4,'optimas','Molecular Breeding Decision Tool: OptiMAS')
+,(19,'breeding_planner',4,'mbp','Molecular Breeding Planner');
 
 UNLOCK TABLES;
