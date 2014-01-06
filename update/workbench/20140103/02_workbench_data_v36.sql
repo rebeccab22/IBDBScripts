@@ -11,6 +11,12 @@ SET
     version = '20131227'
 ;
 
+UPDATE workbench_crop
+SET schema_version = '20140103';
+
+UPDATE workbench_project
+SET local_schema_version = '20140103';
+
 
 REPLACE INTO `workbench_tool` VALUES 
 (1,'mbdt','MBDT','1.0.3','NATIVE','C:\\IBWorkflowSystem\\tools/mbdt/MBDT.exe','',0)
@@ -151,10 +157,6 @@ REPLACE INTO `workbench_sidebar_category_link` VALUES
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` ENABLE KEYS */;
 
 UNLOCK TABLES;
-
-
-
-
 
 SET FOREIGN_KEY_CHECKS=@ORIGINAL_FOREIGN_KEY_CHECKS;
 

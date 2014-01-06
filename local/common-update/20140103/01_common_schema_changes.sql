@@ -33,59 +33,17 @@ CREATE TABLE `listdataprops` (
 
 
 
--- ----------------------------
+-- ----------------------
 
 
--- -- ALTER TABLE `listnms`
+
+ALTER TABLE `listnms`
   
--- -- ADD COLUMN `notes` text NULL;
-
--- ----------------------------
-
-
-
-DROP PROCEDURE IF EXISTS alter_listnms_add_notes;
-
-DELIMITER $$
-
-
-CREATE DEFINER=CURRENT_USER PROCEDURE alter_listnms_add_notes( ) 
-
-BEGIN
-
-SELECT IFNULL(column_name, '') INTO @colName
-
-FROM information_schema.columns 
-
-WHERE table_name = 'listnms'
- AND column_name = 'notes'
-LIMIT 1;
-
-IF @colName = '' THEN 
-	
-	ALTER IGNORE TABLE listnms	
-	ADD COLUMN  `notes` text NULL;
-
-END IF;
-
-
-END$$
-
-
-DELIMITER ;
-
-
-
-CALL alter_listnms_add_notes;
-
-DROP PROCEDURE alter_listnms_add_notes;
-
--- ----------------------------
-
-
+ADD COLUMN `notes` text NULL;
 
 
 -- ----------------------
+
 
 
 DELIMITER $$

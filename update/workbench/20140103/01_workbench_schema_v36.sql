@@ -109,6 +109,12 @@ CREATE TABLE workbench_sidebar_category_link (
 
 
 
+ALTER TABLE workbench_crop
+ADD COLUMN schema_version VARCHAR(32);
+
+ALTER TABLE workbench_project
+ADD COLUMN local_schema_version VARCHAR(32);
+
 
 SET FOREIGN_KEY_CHECKS=@ORIGINAL_FOREIGN_KEY_CHECKS;
 
