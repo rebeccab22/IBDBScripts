@@ -46,9 +46,9 @@ INSERT INTO workbench_sidebar_category_link VALUES
 ,(3,'nursery_manager_fieldbook_web',1,'manage_nurseries','Manage Nurseries')
 ,(4,'trial_manager_fieldbook_web',1,'manage_trials','Manage Trials')
 /*,(5,'bm_list_manager_main',2,'bm_list_manager','List Manager')*/
-,(5,'ibfb_germplasm_import',2,'ibfb_germlasm_import','IBFB Germplasm Import')
+/*,(5,'ibfb_germplasm_import',2,'ibfb_germlasm_import','IBFB Germplasm Import')*/
 ,(6,'germplasm_import',2,'germplasm_import','Import Germplasm')
-,(7,'germplasm_browser',2,'germplasm_import','Browse Germplasm')
+/*,(7,'germplasm_browser',2,'germplasm_import','Browse Germplasm')*/
 ,(8,'gdms',2,'gdms','Manage Genotyping Data')
 ,(9,'study_browser',2,'study_browser','Browse Studies')
 ,(10,'germplasm_mainheadtohead',2,'main_hxh','Head to Head Query')
