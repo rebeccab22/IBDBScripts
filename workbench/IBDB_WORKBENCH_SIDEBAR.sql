@@ -47,19 +47,19 @@ INSERT INTO workbench_sidebar_category_link VALUES
 ,(4,'trial_manager_fieldbook_web',1,'manage_trials','Manage Trials')
 /*,(5,'bm_list_manager_main',2,'bm_list_manager','List Manager')*/
 /*,(5,'ibfb_germplasm_import',2,'ibfb_germlasm_import','IBFB Germplasm Import')*/
-,(6,'germplasm_import',2,'germplasm_import','Import Germplasm')
+,(5,'germplasm_import',2,'germplasm_import','Import Germplasm')
 /*,(7,'germplasm_browser',2,'germplasm_import','Browse Germplasm')*/
-,(8,'gdms',2,'gdms','Manage Genotyping Data')
-,(9,'study_browser',2,'study_browser','Browse Studies')
-,(10,'germplasm_mainheadtohead',2,'main_hxh','Head to Head Query')
-,(11,'query_for_adapted_germplasm',2,'adopted_query','Adapted Germplasm Query')
-,(12,'ontology_browser_fieldbook_web',2,'ontology_browser_fieldbook_web','Manage Ontologies')
-,(13,'breeding_view_wb',3,'breeding_view_wb','Single-Site Analysis')
-,(14,'breeding_gxe',3,'breeding_gxe','Multi-Site Analysis')
-,(15,'bv_meta_analysis',3,'bv_meta_analysis','Multi-Year Multi-Site Analysis')
-,(16,'breeding_view',3,'breeding_view','Breeding View Standalone for QTL')
-,(17,'mbdt',4,'mbdt','Molecular Breeding Design Tool')
-,(18,'optimas',4,'optimas','Molecular Breeding Decision Tool: OptiMAS')
-,(19,'breeding_planner',4,'mbp','Molecular Breeding Planner');
+,(6,'gdms',2,'gdms','Manage Genotyping Data')
+,(7,'study_browser',2,'study_browser','Browse Studies')
+,(8,'germplasm_mainheadtohead',2,'main_hxh','Head to Head Query')
+,(9,'query_for_adapted_germplasm',2,'adopted_query','Adapted Germplasm Query')
+,(10,'ontology_browser_fieldbook_web',2,'ontology_browser_fieldbook_web','Manage Ontologies')
+,(11,'breeding_view_wb',3,'breeding_view_wb','Single-Site Analysis')
+,(12,'breeding_gxe',3,'breeding_gxe','Multi-Site Analysis')
+,(13,'bv_meta_analysis',3,'bv_meta_analysis','Multi-Year Multi-Site Analysis')
+,(14,'breeding_view',3,'breeding_view','Breeding View Standalone for QTL')
+,(15,'mbdt',4,'mbdt','Molecular Breeding Design Tool')
+,(16,'optimas',4,'optimas','Molecular Breeding Decision Tool: OptiMAS')
+,(17,'breeding_planner',4,'mbp','Molecular Breeding Planner');
 
 UNLOCK TABLES;
