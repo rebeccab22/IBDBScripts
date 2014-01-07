@@ -134,11 +134,14 @@ LOCK TABLES `workbench_sidebar_category_link` WRITE;
 /*!40000 ALTER TABLE `workbench_sidebar_category_link` DISABLE KEYS */;
 
 REPLACE INTO `workbench_sidebar_category_link` VALUES 
-(1,'bm_list_manager_main',1,'manage_list','Manage Lists')
+ (1,'bm_list_manager_main',1,'manage_list','Manage Lists')
 ,(2,'crossing_manager',1,'manage_crosses','Make Crosses')
 ,(3,'nursery_manager_fieldbook_web',1,'manage_nurseries','Manage Nurseries')
 ,(4,'trial_manager_fieldbook_web',1,'manage_trials','Manage Trials')
+/*,(5,'bm_list_manager_main',2,'bm_list_manager','List Manager')*/
+/*,(5,'ibfb_germplasm_import',2,'ibfb_germlasm_import','IBFB Germplasm Import')*/
 ,(5,'germplasm_import',2,'germplasm_import','Import Germplasm')
+/*,(7,'germplasm_browser',2,'germplasm_import','Browse Germplasm')*/
 ,(6,'gdms',2,'gdms','Manage Genotyping Data')
 ,(7,'study_browser',2,'study_browser','Browse Studies')
 ,(8,'germplasm_mainheadtohead',2,'main_hxh','Head to Head Query')
@@ -148,7 +151,7 @@ REPLACE INTO `workbench_sidebar_category_link` VALUES
 ,(12,'breeding_gxe',3,'breeding_gxe','Multi-Site Analysis')
 ,(13,'bv_meta_analysis',3,'bv_meta_analysis','Multi-Year Multi-Site Analysis')
 ,(14,'breeding_view',3,'breeding_view','Breeding View Standalone for QTL')
-,(15,'mbdt',4,'mbdt','Molecular Breeding Decision Tool')
+,(15,'mbdt',4,'mbdt','Molecular Breeding Design Tool')
 ,(16,'optimas',4,'optimas','Molecular Breeding Decision Tool: OptiMAS')
 ,(17,'breeding_planner',4,'mbp','Molecular Breeding Planner');
 
