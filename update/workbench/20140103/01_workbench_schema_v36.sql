@@ -28,11 +28,25 @@ PRIMARY KEY (`sidebar_category_id`)
 
 ) ENGINE=InnoDB;
 
+START TRANSACTION;
+
 
 
 ALTER TABLE `workbench`.`workbench_tool`
   
 MODIFY COLUMN `tool_type` enum('WEB','WEB_WITH_LOGIN','NATIVE','WORKBENCH','ADMIN') NULL;
+
+ALTER TABLE workbench.workbench_tool
+ADD COLUMN group_name VARCHAR(128) AFTER name
+;
+
+ALTER TABLE workbench_crop
+ADD COLUMN schema_version VARCHAR(32);
+
+ALTER TABLE workbench_project
+ADD COLUMN local_schema_version VARCHAR(32);
+
+COMMIT;
 
 -- ----------------------------
 
@@ -107,13 +121,6 @@ CREATE TABLE workbench_sidebar_category_link (
 
 
 
-
-
-ALTER TABLE workbench_crop
-ADD COLUMN schema_version VARCHAR(32);
-
-ALTER TABLE workbench_project
-ADD COLUMN local_schema_version VARCHAR(32);
 
 
 SET FOREIGN_KEY_CHECKS=@ORIGINAL_FOREIGN_KEY_CHECKS;
