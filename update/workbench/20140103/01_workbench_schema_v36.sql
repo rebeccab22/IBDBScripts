@@ -36,10 +36,6 @@ ALTER TABLE `workbench`.`workbench_tool`
   
 MODIFY COLUMN `tool_type` enum('WEB','WEB_WITH_LOGIN','NATIVE','WORKBENCH','ADMIN') NULL;
 
-ALTER TABLE workbench.workbench_tool
-ADD COLUMN group_name VARCHAR(128) AFTER name
-;
-
 ALTER TABLE workbench_crop
 ADD COLUMN schema_version VARCHAR(32);
 
