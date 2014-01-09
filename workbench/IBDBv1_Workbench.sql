@@ -247,6 +247,7 @@ CREATE TABLE workbench_project (
     ,local_db_name              VARCHAR(64)
     ,central_db_name            VARCHAR(64)
     ,last_open_date             TIMESTAMP NULL
+    ,local_schema_version       VARCHAR(32)
     ,PRIMARY KEY(project_id)
     ,CONSTRAINT fk_project_1 FOREIGN KEY(template_id) REFERENCES workbench_workflow_template(template_id) ON UPDATE CASCADE
     ,CONSTRAINT fk_project_2 FOREIGN KEY(crop_type) REFERENCES workbench_crop(crop_name) ON UPDATE CASCADE
@@ -456,6 +457,7 @@ DROP TABLE IF EXISTS workbench_crop;
 CREATE TABLE IF NOT EXISTS workbench_crop(
      crop_name VARCHAR(32) NOT NULL
     ,central_db_name VARCHAR(64)
+	,schema_version VARCHAR(32)
     ,PRIMARY KEY(crop_name)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8;
