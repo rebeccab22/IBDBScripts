@@ -16,7 +16,8 @@ SET schema_version = '20140103';
 
 UPDATE workbench_project
 SET local_schema_version = '20140103';
-
+
+
 
 REPLACE INTO `workbench_tool` VALUES 
 (1,'mbdt','MBDT','1.0.3','NATIVE','C:\\IBWorkflowSystem\\tools/mbdt/MBDT.exe','',0)
@@ -112,7 +113,7 @@ REPLACE INTO `workbench_sidebar_category` VALUES
 (1,'activities','Breeding Activities')
 ,(2,'information_mgt','Information Management')
 ,(3,'statistical_analysis','Statistical Analysis')
-,(4,'marker_assisted_breeding','Marker Assisted Breeding')
+,(4,'marker_assisted_breeding','Marker-Assisted Breeding')
 ,(5,'additional_tools','Additional Tools')
 ,(6,'workflows','Workflows')
 ,(7,'admin','Program Administration');
