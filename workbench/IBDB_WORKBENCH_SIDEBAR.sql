@@ -16,7 +16,7 @@ INSERT INTO workbench_sidebar_category VALUES
  (1,'activities','Breeding Activities')
 ,(2,'information_mgt','Information Management')
 ,(3,'statistical_analysis','Statistical Analysis')
-,(4,'marker_assisted_breeding','Marker Assisted Breeding')
+,(4,'marker_assisted_breeding','Marker-Assisted Breeding')
 ,(5,'additional_tools','Additional Tools')
 ,(6,'workflows','Workflows')
 ,(7,'admin','Program Administration');
