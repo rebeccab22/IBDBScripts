@@ -31,4 +31,4 @@ REPLACE INTO cvterm(cvterm_id,cv_id,name,definition,dbxref_id,is_obsolete,is_rel
 ;
 
 REPLACE INTO nd_geolocation (nd_geolocation_id, description) VALUES
-(1, '0');
+(1, '1');
