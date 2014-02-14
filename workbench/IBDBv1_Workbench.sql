@@ -502,4 +502,21 @@ CREATE TABLE workbench_user_info (
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 
+--  Stores configuration of applications (e.g. Nursery Manager)
+-- 
+DROP TABLE IF EXISTS template_setting;
+CREATE TABLE template_setting (
+     template_setting_id         INT UNSIGNED AUTO_INCREMENT NOT NULL
+    ,project_id		INT NOT NULL
+    ,tool_id		INT UNSIGNED NOT NULL
+    ,name		VARCHAR(64) NOT NULL
+    ,configuration	TEXT NOT NULL
+    ,is_default		TINYINT(1)
+    ,PRIMARY KEY (template_setting_id)
+    ,UNIQUE KEY (project_id, tool_id, name)
+    ,UNIQUE KEY (project_id, tool_id, is_default)
+    ,CONSTRAINT fk_templatesetting_workbench_tool_1 FOREIGN KEY(tool_id) REFERENCES workbench_tool(tool_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 SET foreign_key_checks = @OLD_FOREIGN_KEY_CHECKS;
