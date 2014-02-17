@@ -8,9 +8,9 @@ INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_r
 VALUES
   (77777, 1040, 'NURSERY TYPE', 'NURSERY TYPE', 0, 0)
 , (77778, 1010, 'NURSERY TYPE PROP', 'NURSERY TYPE PROP', 0, 0)
-, (77779, 88888, 'F1 NURSERY', 'F1 NURSERY', 0, 0)
-, (77780, 88888, 'F2 NURSERY', 'F2 NURSERY', 0, 0)
-, (77781, 88888, 'PEDIGREE NURSERY', 'PEDIGREE NURSERY', 0, 0)
+, (77779, 88888, 'F1', 'F1 NURSERY', 0, 0)
+, (77780, 88888, 'F2', 'F2 NURSERY', 0, 0)
+, (77781, 88888, 'PEDIGREE', 'PEDIGREE NURSERY', 0, 0)
 ;
 
 INSERT IGNORE INTO cvterm_relationship (cvterm_relationship_id, subject_id, type_id, object_id)
