@@ -513,9 +513,8 @@ CREATE TABLE template_setting (
     ,name		VARCHAR(64) NOT NULL
     ,configuration	TEXT NOT NULL
     ,is_default		TINYINT(1)
-    ,PRIMARY KEY (template_setting_id)
-    ,UNIQUE KEY (project_id, tool_id, name)
-    ,UNIQUE KEY (project_id, tool_id, is_default)
+    ,PRIMARY KEY template_setting_pk (template_setting_id)
+    ,UNIQUE KEY template_setting_uk1 (project_id, tool_id, name)
     ,CONSTRAINT fk_templatesetting_workbench_tool_1 FOREIGN KEY(tool_id) REFERENCES workbench_tool(tool_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
