@@ -1,4 +1,4 @@
-SELECT @fldno := max(fldno) + 1 from udflds;
+SELECT @fldno := max(fldno) from udflds;
 
 INSERT IGNORE INTO udflds (fldno, ftable, ftype, fcode, fname)
 VALUES (@fldno+1, 'LOCATION', 'LTYPE', 'FIELD', 'EXPERIMENTAL FIELD'),
