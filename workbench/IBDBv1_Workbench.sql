@@ -510,7 +510,7 @@ CREATE TABLE template_setting (
      template_setting_id         INT UNSIGNED AUTO_INCREMENT NOT NULL
     ,project_id		INT NOT NULL
     ,tool_id		INT UNSIGNED NOT NULL
-    ,name		VARCHAR(64) NOT NULL
+    ,name		VARCHAR(75) NOT NULL
     ,configuration	TEXT NOT NULL
     ,is_default		TINYINT(1)
     ,PRIMARY KEY template_setting_pk (template_setting_id)
