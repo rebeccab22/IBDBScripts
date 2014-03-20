@@ -1,25 +1,46 @@
---
--- Make sure that workbench_tool supports new enum types
---
+START TRANSACTION;
 
-ALTER TABLE `workbench`.`workbench_tool` 
-CHANGE COLUMN `tool_type` `tool_type` ENUM('WEB','WEB_WITH_LOGIN','NATIVE','WORKBENCH','ADMIN') NULL DEFAULT NULL ;
-
-ALTER TABLE `workbench`.`workbench_tool`
-ADD COLUMN group_name VARCHAR(128) AFTER name
+UPDATE schema_version SET
+    version = '20140103'
 ;
 
-SET FOREIGN_KEY_CHECKS=0;
+ALTER IGNORE TABLE `workbench`.`workbench_tool` 
+CHANGE COLUMN `tool_type` `tool_type` ENUM('WEB','WEB_WITH_LOGIN','NATIVE','WORKBENCH','ADMIN') NULL DEFAULT NULL ;
 
--- Notes on paths:
--- WEB tools should use the release port.
--- NATIVE tools should have an absolute path
-REPLACE INTO `workbench_tool` VALUES 
+ALTER TABLE workbench.workbench_tool
+ADD COLUMN group_name VARCHAR(128) NOT NULL AFTER name
+;
+
+UPDATE workbench_role SET
+    role_label = 'Conventional Breeding (CB)'
+WHERE
+    name = 'CB Breeder'
+;
+
+UPDATE workbench_role SET
+    role_label = 'Breeding with Marker Assisted Selection (MAS)'
+WHERE
+    name = 'MAS Breeder'
+;
+
+UPDATE workbench_role SET
+    role_label = 'Marker Assisted Backcrossing (MABC)'
+WHERE
+    name = 'MABC Breeder'
+;
+
+UPDATE workbench_role SET
+    role_label = 'Marker Assisted Recurrent Selection (MARS)'
+WHERE
+    name = 'MARS Breeder'
+;
+
+REPLACE INTO workbench.workbench_tool VALUES 
 (1,'mbdt','mbdt','MBDT','1.0.3','NATIVE','C:\\IBWorkflowSystem\\tools/mbdt/MBDT.exe','',0)
 ,(2,'optimas','optimas','OptiMAS','1.4','NATIVE','C:\\IBWorkflowSystem\\tools/optimas/optimas_gui.exe','',0)
-,(3,'fieldbook','fieldbook','Fieldbook Native','4.0.8','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=IBFieldbookTools',0)
-,(4,'breeding_view','breeding_view','Breeding View','1.1.0.12243','NATIVE','C:\\IBWorkflowSystem\\tools/breeding_view/Bin/BreedingView.exe','',0)
-,(5,'breeding_manager','breeding_manager','Fieldbook Native - Breeding Manager','4.0.8','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=BreedingManager',0)
+,(3,'fieldbook','fieldbook','Fieldbook Native','4.0.2','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=IBFieldbookTools',0)
+,(4,'breeding_view','breeding_view','Breeding View','1.1.0.11849','NATIVE','C:\\IBWorkflowSystem\\tools/breeding_view/Bin/BreedingView.exe','',0)
+,(5,'breeding_manager','breeding_manager','Fieldbook Native - Breeding Manager','4.0.2','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=BreedingManager',0)
 ,(6,'germplasm_browser','germplasm_browser','Browse Germplasm Information','1.2.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/germplasm/','',0)
 ,(7,'study_browser','study_browser','Browse Studies and Datasets','1.2.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/study/','',0)
 ,(8,'germplasm_list_browser','germplasm_list_browser','Browse Germplasm Lists','1.2.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/germplasmlist/','',0)
@@ -28,7 +49,9 @@ REPLACE INTO `workbench_tool` VALUES
 ,(11,'crossing_manager','crossing_manager','Crossing Manager','1.2.0','WEB','http://localhost:18080/BreedingManager/main/crosses/','',0)
 ,(12,'nursery_template_wizard','nursery_template_wizard','Nursery Template Wizard','1.1.1.0','WEB','http://localhost:18080/BreedingManager/main/nursery-template/?restartApplication','',0)
 ,(13,'breeding_planner','breeding_planner','Breeding Planner','1.0','NATIVE','C:\\IBWorkflowSystem\\tools/breeding_planner/breeding_planner.exe','',0)
+,(14,'ibfb_germplasm_import','ibfb_germplasm_import','Fieldbook Native - Germplasm Import','4.0.0','NATIVE','C:\\IBWorkflowSystem\\tools/fieldbook/IBFb/bin/ibfb.exe','--ibpApplication=GermplasmImport',0)
 ,(15,'germplasm_import','germplasm_import','Breeding Manager - Germplasm Import','1.1.1.0','WEB','http://localhost:18080/BreedingManager/main/germplasm-import/','',0)
+,(16,'germplasm_headtohead','germplasm_headtohead','Fieldbook Germplasm Head To Head','1.0.0-BETA','WEB','http://localhost:18080/GermplasmStudyBrowser/main/h2h-query?restartApplication','',0)
 ,(17,'germplasm_mainheadtohead','germplasm_mainheadtohead','Fieldbook Germplasm MAIN Head To Head','4.0.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/Head_to_head_comparison','',0)
 ,(18,'dataset_importer','dataset_importer','Data Import Tool','1.0','WEB','http://localhost:18080/DatasetImporter/','',0)
 ,(19,'query_for_adapted_germplasm','query_for_adapted_germplasm','Query For Adapted Germplasm','1.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/Query_For_Adapted_Germplasm','',0)
@@ -44,4 +67,4 @@ REPLACE INTO `workbench_tool` VALUES
 ,(29,'study_browser_with_id','study_browser_with_id','Browse Studies and Datasets','1.2.0','WEB','http://localhost:18080/GermplasmStudyBrowser/main/studybrowser/','',0)
 ;
 
-SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
