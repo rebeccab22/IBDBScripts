@@ -3,7 +3,7 @@ SELECT @fldno := max(fldno) from udflds;
 INSERT IGNORE INTO udflds (fldno, ftable, ftype, fcode, fname)
 VALUES (@fldno+1, 'LOCATION', 'LTYPE', 'FIELD', 'EXPERIMENTAL FIELD'),
 (@fldno+2, 'LOCATION', 'LTYPE', 'BLOCK', 'FIELD BLOCK'),
-(@fldno+3, 'LOCDES', 'DTYPE', 'COL_IN_BLK', 'NUMBER OF COLUMNS IN THE BLOCK'),
+(@fldno+3, 'LOCDES', 'DTYPE', 'COL_IN_BLK', 'NUMBER OF ROWS IN THE BLOCK'),
 (@fldno+4, 'LOCDES', 'DTYPE', 'RANGE_IN_BLK', 'NUMBER OF RANGES IN THE BLOCK'),
 (@fldno+5, 'LOCDES', 'DTYPE', 'ROWS_IN_PLOT', 'NUMBER OF ROWS PER PLOT'),
 (@fldno+6, 'LOCDES', 'DTYPE', 'PLOT_LYOUT', 'PLOT LAYOUT ORDER'),
