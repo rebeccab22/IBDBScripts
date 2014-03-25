@@ -8,7 +8,7 @@ VALUES
 
 INSERT IGNORE INTO cvterm_relationship (cvterm_relationship_id, subject_id, type_id, object_id)
 VALUES
-(35398, 32791, 1044, 1048)
+(35398, 32791, 1044, 1040)
 , (35399, 32791, 1105, 1130)
 , (35400, 32791, 1200, 32790)
 , (35401, 32791, 1210, 4030)
