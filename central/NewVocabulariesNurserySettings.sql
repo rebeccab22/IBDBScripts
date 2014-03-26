@@ -1,9 +1,16 @@
 -- execute in CENTRAL database ONLY
 
+INSERT IGNORE INTO cv(cv_id, name, definition)
+VALUES(88888, '77777', 'Nursery Type')
+, (88889, '32791', 'Check Factor')
+;
+
 INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
 VALUES
 (32790, 1010, 'CHECK', 'CHECK', 0, 0)
 , (32791, 1040, 'CHECK', 'CHECK', 0, 0)
+, (77790, 88889, 'CHECK', 'CHECK', 0, 0)
+, (77791, 88889, 'TEST', 'TEST', 0, 0)
 ;
 
 INSERT IGNORE INTO cvterm_relationship (cvterm_relationship_id, subject_id, type_id, object_id)
@@ -13,10 +20,8 @@ VALUES
 , (35400, 32791, 1200, 32790)
 , (35401, 32791, 1210, 4030)
 , (35402, 32791, 1220, 6050)
-;
-
-INSERT IGNORE INTO cv(cv_id, name, definition)
-VALUES(88888, '77777', 'Nursery Type')
+, (80000, 32791, 1190, 77790)
+, (80001, 32791, 1190, 77791)
 ;
 
 INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
