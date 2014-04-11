@@ -22,6 +22,7 @@ VALUES
 , (35402, 32791, 1220, 6050)
 , (80000, 32791, 1190, 77790)
 , (80001, 32791, 1190, 77791)
+, (80002, 32790, 1225, 1045)
 ;
 
 INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
