@@ -27,4 +27,4 @@ CALL create_index_if_not_exists('index_list_status','listnms','liststatus');
 
 CALL create_index_if_not_exists('index_listname','listnms','listname');
 
-CALL create_index_if_not_exists('index_desig','listnms','desig');
+CALL create_index_if_not_exists('index_desig','listdata','desig');
