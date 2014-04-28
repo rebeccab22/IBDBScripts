@@ -2,16 +2,11 @@
 
 INSERT IGNORE INTO cv(cv_id, name, definition)
 VALUES(88888, '77777', 'Nursery Type')
-, (88889, '32791', 'Check Factor')
 ;
 
 INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
 VALUES
-(32790, 1010, 'CHECK', 'CHECK', 0, 0)
-, (32791, 1040, 'CHECK', 'CHECK', 0, 0)
-, (77790, 88889, 'CHECK', 'CHECK', 0, 0)
-, (77791, 88889, 'TEST', 'TEST', 0, 0)
-, (77792, 1010, 'NUMBER OF REPLICATES PROPERTY', 'NUMBER OF REPLICATES PROPERTY', 0, 0)
+  (77792, 1010, 'NUMBER OF REPLICATES PROPERTY', 'NUMBER OF REPLICATES PROPERTY', 0, 0)
 , (77793, 1040, 'NUMBER OF REPLICATES', 'NUMBER OF REPLICATES', 0, 0)
 , (77794, 1010, 'BLOCK SIZE PROP', 'BLOCK SIZE PROP', 0, 0)
 , (77795, 1040, 'BLOCK SIZE', 'BLOCK SIZE', 0, 0)
@@ -21,15 +16,7 @@ VALUES
 
 INSERT IGNORE INTO cvterm_relationship (cvterm_relationship_id, subject_id, type_id, object_id)
 VALUES
-(35398, 32791, 1044, 1040)
-, (35399, 32791, 1105, 1130)
-, (35400, 32791, 1200, 32790)
-, (35401, 32791, 1210, 4030)
-, (35402, 32791, 1220, 6050)
-, (80000, 32791, 1190, 77790)
-, (80001, 32791, 1190, 77791)
-, (80002, 32790, 1225, 1045)
-, (80003, 77792, 1225, 1100)
+  (80003, 77792, 1225, 1100)
 , (80004, 77794, 1225, 1100)
 , (80005, 77796, 1225, 1100)
 , (80006, 77793, 1044, 1020)
@@ -49,6 +36,7 @@ VALUES
 , (80020, 77797, 1220, 6040)
 ;
 
+-- this is in the mockup, for verification if this is still needed
 INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
 VALUES
   (77777, 1040, 'NURSERY TYPE', 'NURSERY TYPE', 0, 0)
@@ -69,3 +57,28 @@ VALUES
 , (77776, 77777, 1190, 77780)
 , (77777, 77777, 1190, 77781)
 ;
+
+-- no longer needed, we will be using the existing check factor 8255 (aka ENTRY_TYPE)
+
+-- INSERT IGNORE INTO cv(cv_id, name, definition)
+-- VALUES(88889, '32791', 'Check Factor');
+
+-- INSERT IGNORE INTO cvterm (cvterm_id, cv_id, name, definition, is_obsolete, is_relationshiptype)
+-- VALUES
+-- (32790, 1010, 'CHECK', 'CHECK', 0, 0)
+-- , (32791, 1040, 'CHECK', 'CHECK', 0, 0)
+-- , (77790, 88889, 'CHECK', 'CHECK', 0, 0)
+-- , (77791, 88889, 'TEST', 'TEST', 0, 0)
+-- ;
+
+-- INSERT IGNORE INTO cvterm_relationship (cvterm_relationship_id, subject_id, type_id, object_id)
+-- VALUES
+-- (35398, 32791, 1044, 1040)
+-- , (35399, 32791, 1105, 1130)
+-- , (35400, 32791, 1200, 32790)
+-- , (35401, 32791, 1210, 4030)
+-- , (35402, 32791, 1220, 6050)
+-- , (80000, 32791, 1190, 77790)
+-- , (80001, 32791, 1190, 77791)
+-- , (80002, 32790, 1225, 1045)
+-- ;
