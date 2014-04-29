@@ -1,5 +1,3 @@
-12_Breeders_Query_Views.sql
-
 drop view if exists trial_study_locations;
 
 CREATE VIEW `trial_study_locations` AS 
