@@ -31,6 +31,8 @@ CREATE VIEW `germplasm_trial_details` AS
         `e`.`nd_experiment_id` AS `experiment_id`,
         `p`.`phenotype_id` AS `phenotype_id`,
         `td`.`trait_name` AS `trait_name`,
+        `svd`.`cvterm_id` AS `stdvar_id`,
+        `svd`.`stdvar_name` AS `stdvar_name`,
         `p`.`value` AS `observed_value`,
         `s`.`stock_id` AS `stock_id`,
         `s`.`name` AS `entry_designation`,
